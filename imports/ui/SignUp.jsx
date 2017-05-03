@@ -2,6 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 import {Accounts} from 'meteor/accounts-base';
 
+import {addresses} from '../../addresses.js';
+console.log('------------------------------------------');
+console.log('addresses ',addresses);
+console.log('------------------------------------------');
+
 class SignUp extends Component {
 
     constructor(props, context){
@@ -17,9 +22,9 @@ class SignUp extends Component {
         let email = this.refs.email.value.trim();
         let password = this.refs.password.value.trim();
 
-        if (password.length < 9) {
+        if (password.length < 8) {
             return this.setState({
-                error:'Password must be more than 8 chars long'
+                error:'Password must be at least 8 chars long'
             });
         }
 
