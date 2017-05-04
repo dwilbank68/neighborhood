@@ -1,4 +1,4 @@
-export const addresses = {
+export const data = {
     "city":     "Hawthorne",
     "state":    "California",
     "zipcode":  "90250",

@@ -1,20 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 import {Accounts} from 'meteor/accounts-base';
+import Select from 'react-select';
 
-import {addresses} from '../../addresses.js';
-console.log('------------------------------------------');
-console.log('addresses ',addresses);
-console.log('------------------------------------------');
+import {data} from '../../addresses.js';
 
 class SignUp extends Component {
 
     constructor(props, context){
         super(props, context);
         this.state = {
-            error:''
+            error: '',
+            address: ''
         }
        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onAddressChange(val){
+        this.setState({address:val.value})
     }
 
     onSubmit(e){
@@ -30,7 +33,7 @@ class SignUp extends Component {
 
         Accounts
             .createUser(
-                {email, password},
+                {email, password, address: this.state.address},
                 (err) => {
                     if (err) {
                         this.setState({error: err.reason});
@@ -45,6 +48,11 @@ class SignUp extends Component {
     // <div className="boxed-view__box">
 
     render() {
+
+        const options = data.addresses.map((a) => {
+            return {value:a, label:a}
+        })
+
         return (
             <div className="sign-up boxed-view">
                 <div className="boxed-view__box">
@@ -55,6 +63,12 @@ class SignUp extends Component {
                     <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
                         <input type="email"     ref="email"     name="email"    placeholder="Email"/>
                         <input type="password"  ref="password"  name="password" placeholder="Password"/>
+                        <Select className="address"
+                                clearable={false}
+                                placeholder="Choose Your Address"
+                                options={options}
+                                onChange={ val => this.onAddressChange(val) }/>
+                        <p>{this.state.address}</p>
                         <button className="button">Create Account</button>
                     </form>
 
