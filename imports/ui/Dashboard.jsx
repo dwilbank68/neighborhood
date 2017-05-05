@@ -33,6 +33,7 @@ export class Dashboard extends Component {
                 <PrivateHeader title="Dashboard"/>
                 <div className="page-content">
                     Dashboard page content
+                    <pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>
                 </div>
             </div>
         );
@@ -64,10 +65,10 @@ export class Dashboard extends Component {
 // (lets you do 'this.context.router.push('/wherever');
 
 const mapToProps = (props) => {
-    Meteor.subscribe('users');
-    // const {binId} = props.params;
+    Meteor.subscribe('allUsers');
+    const allUsers = Meteor.users.find().fetch();
     return {
-        // users: Users.find({}).fetch()
+        allUsers
         // links: Links.find({}).fetch(),
         // meteorCall: Meteor.call
     }
