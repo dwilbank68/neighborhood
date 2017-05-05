@@ -32,8 +32,16 @@ export class Dashboard extends Component {
             <div className="dashboard">
                 <PrivateHeader title="Dashboard"/>
                 <div className="page-content">
-                    Dashboard page content
-                    <pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>
+                    <div className="row">
+                        <div className="col-xs-6">
+                            all users
+                            <pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>
+                        </div>
+                        <div className="col-xs-6">
+                            online users
+                            <pre><code>{JSON.stringify(this.props.onlineUsers, null, 2)}</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -66,10 +74,22 @@ export class Dashboard extends Component {
 
 const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
+    Meteor.subscribe('onlineUsers');
     const allUsers = Meteor.users.find().fetch();
+    const onlineUsers = Meteor.users.find({ "status.online": true }).fetch();
     return {
         allUsers: allUsers.map(u => {
             return {
+                email: u.emails[0].address,
+                screenname:u.screenname,
+                fullname:u.fullname,
+                address: u.address,
+                id: u._id
+            }
+        }),
+        onlineUsers: onlineUsers.map(u => {
+            return {
+                email: u.emails[0].address,
                 screenname:u.screenname,
                 fullname:u.fullname,
                 address: u.address,

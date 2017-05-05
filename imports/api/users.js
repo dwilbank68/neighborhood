@@ -61,8 +61,20 @@ Meteor.publish("allUsers", function () {
             emails: 1,
             address: 1,
             fullname: 1,
+            screenname: 1,
+            'status.online': 1
+        }}
+    );
+});
+
+Meteor.publish("onlineUsers", function () {
+    return Meteor.users.find(
+        {"status.online":true},
+        { fields: {
+            emails: 1,
+            address: 1,
+            fullname: 1,
             screenname: 1
         }}
     );
-    // return Meteor.users.find({});
 });
