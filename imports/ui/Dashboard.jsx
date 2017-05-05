@@ -68,7 +68,14 @@ const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
     const allUsers = Meteor.users.find().fetch();
     return {
-        allUsers
+        allUsers: allUsers.map(u => {
+            return {
+                screenname:u.screenname,
+                fullname:u.fullname,
+                address: u.address,
+                id: u._id
+            }
+        })
         // links: Links.find({}).fetch(),
         // meteorCall: Meteor.call
     }

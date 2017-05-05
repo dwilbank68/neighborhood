@@ -14,6 +14,8 @@ import {data} from '../../addresses.js';
 export const validateNewUser = (user) => {
     const email = user.emails[0].address;
     const address = user.address;
+    const screenname = user.screenname;
+    const fullname = user.fullname;
 
     new SimpleSchema({
         email: {
@@ -22,8 +24,14 @@ export const validateNewUser = (user) => {
         },
         address: {
             type: String, min: 4
+        },
+        screenname: {
+            type: String, min: 2, max: 12
+        },
+        fullname: {
+            type: String, max: 50, optional: true
         }
-    }).validate({email, address});
+    }).validate({email, address, screenname, fullname});
 
     return true;
 }
@@ -33,10 +41,13 @@ if (Meteor.isServer) {
     Accounts
         .onCreateUser((options, user) => {
             const {city, state, zipcode} = data;
-            user.address = options.address;
+            const {address, screenname, fullname} = options;
+            user.address = address;
             user.city = city;
             user.state = state;
             user.zipcode = zipcode;
+            user.fullname = fullname;
+            user.screenname = screenname;
             return user;
         })
 
@@ -44,6 +55,14 @@ if (Meteor.isServer) {
 }
 
 Meteor.publish("allUsers", function () {
-    return Meteor.users.find({},{fields: {emails: 1, address: 1}});
+    return Meteor.users.find(
+        {},
+        { fields: {
+            emails: 1,
+            address: 1,
+            fullname: 1,
+            screenname: 1
+        }}
+    );
     // return Meteor.users.find({});
 });
