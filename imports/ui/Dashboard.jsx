@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
@@ -12,13 +13,13 @@ import PrivateHeader from './PrivateHeader';
 // import {Dashboard} from './Dashboard.jsx';
 export class Dashboard extends Component {
 
-    // constructor(props, context){
-    //     super(props, context);
-    //     this.state = {
-    //         whatever:{}
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    // }
+    constructor(props, context){
+        super(props, context);
+        this.state = {
+            isOpen:false
+        }
+       // this.handleClick = this.handleClick.bind(this)
+    }
 
     // handleClick(e) {
     //
