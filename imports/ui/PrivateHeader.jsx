@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'react-modal';
 
 import {Accounts} from 'meteor/accounts-base';
+
+import EditProfile from './EditProfile';
 
 // import PrivateHeader from './PrivateHeader.jsx';
 class PrivateHeader extends Component {
@@ -30,44 +31,23 @@ class PrivateHeader extends Component {
 
     render() {
 
-        const modalStyle = {
-            overlay: {
-                backgroundColor   : 'rgba(0, 0, 0, 0.5)'
-            }
-        }
-
         return (
             <div className="private-header header">
                 <div className="header__content">
                     <h1 className="header__title">{this.props.title}</h1>
 
-                    <button className="button"
-                            onClick={() => this.setState({modalOpen:true})}>
-                        Update My Info
-                    </button>
+                    <EditProfile/>
+                    {/*<button className="button"*/}
+                            {/*onClick={() => this.setState({modalOpen:true})}>*/}
+                        {/*Update My Info*/}
+                    {/*</button>*/}
 
                     <button onClick={() => Accounts.logout()}
                             className="button button--link">
                         Log Out
                     </button>
                 </div>
-                <Modal  closeTimeoutMS={200}
-                        isOpen={this.state.modalOpen}
-                        contentLabel="Add link"
-                        style={modalStyle}>
 
-                    <p>Add Link</p>
-                    <form onSubmit={this.onSubmit}>
-                        <input  type="text"
-                                onChange={this.onChange}
-                                placeholder="URL"
-                                value={this.state.url}/>
-                        <button>Add Link</button>
-                    </form>
-
-                    <button onClick={() => this.setState({modalOpen:false, url:''})}>cancel</button>
-
-                </Modal>
             </div>
         );
     }
