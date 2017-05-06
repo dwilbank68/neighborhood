@@ -5,16 +5,28 @@ import Modal from 'react-modal';
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 
+import {Profiles} from '../api/profiles';
+
 // import EditProfile from './EditProfile.jsx';
 // import {EditProfile} from './EditProfile.jsx';
 export class EditProfile extends Component {
 
+    componentWillMount() {
+        Slingshot.fileRestrictions("avatar", {
+            allowedFileTypes: ["image/png", "image/jpeg", "image/gif"],
+            maxSize: 2 * 500 * 500
+        });
+    }
+
+
     constructor(props, context){
         super(props, context);
         this.state = {
+            // avatar: this.props.profile.avatar ? this.props.profile.avatar : 'http://www.avatarsdb.com/avatars/cat_comp.gif',
             modalOpen:false
         }
-       // this.handleClick = this.handleClick.bind(this)
+        this.formSubmit = this.formSubmit.bind(this)
+        this.upload = this.upload.bind(this)
     }
 
     // handleClick(e) {
@@ -23,6 +35,14 @@ export class EditProfile extends Component {
     //
     //    })
     // }
+
+    formSubmit(){
+        // Ofcourse you'll have other fields...
+        let avatarUrl = this.state.avatar;
+        Meteor.users.update( { _id: Meteor.userId() }, {
+            $set: {profile: avatarUrl}
+        });
+    }
 
     render() {
 
@@ -42,25 +62,70 @@ export class EditProfile extends Component {
 
                 <Modal  closeTimeoutMS={200}
                         isOpen={this.state.modalOpen}
-                        contentLabel="Add link"
+                        contentLabel="Update Your User Info"
                         style={modalStyle}>
 
-                    <p>Add Link</p>
+                    <p>Update Your User Info</p>
                     <form onSubmit={this.onSubmit}>
-                        <input  type="text"
-                                onChange={this.onChange}
-                                placeholder="URL"
-                                value={this.state.url}/>
-                        <button>Add Link</button>
+                        <div className="row well">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputFile">File input</label>
+                                    <input type="file" id="input"
+                                           onChange={this.upload} />
+                                    <p className="help-block">Image max restriction: 2MB, 500x500. Cropped: 200x200</p>
+                                </div>
+                            </div>
+                            <div className="col-md-6 utar-r">
+                                <img src={this.state.avatar}
+                                     height="200"
+                                     width="200" alt="..."
+                                     className="img-rounded" />
+                            </div>
+                            <div className="form-group">
+                                <button className="btn btn-lg btn-primary btn-block"
+                                        type="submit"
+                                        onClick={this.formSubmit}>
+                                    Update Profile
+                                </button>
+                            </div>
+                        </div>
+                        {/*<input  type="text"*/}
+                                {/*onChange={this.onChange}*/}
+                                {/*placeholder="URL"*/}
+                                {/*value={this.state.url}/>*/}
+                        {/*<button>Add Link</button>*/}
                     </form>
 
-                    <button onClick={() => this.setState({modalOpen:false, url:''})}>cancel</button>
+                    <button onClick={() => this.setState({modalOpen:false, url:''})}>
+                        cancel
+                    </button>
 
                 </Modal>
 
             </div>
         );
     }
+
+    upload(){
+        var userId = Meteor.user()._id;
+        var metaContext = {avatarId: userId};
+        var uploader = new Slingshot.Upload("UsersAvatar", metaContext);
+        uploader.send(document.getElementById('input').files[0], function (error, downloadUrl) { // you can use refs if you like
+            if (error) {
+                // Log service detailed response
+                console.error('Error uploading', uploader.xhr.response);
+                alert(error); // you may want to fancy this up when you're ready instead of a popup.
+            }
+            else {
+                // we use $set because the user can change their avatar so it overwrites the url :)
+                Meteor.users.update(Meteor.userId(), {$set: {"profile.avatar": downloadUrl}});
+            }
+            // you will need this in the event the user hit the update button because it will remove the avatar url
+            this.setState({avatar: downloadUrl});
+        }.bind(this));
+    }
+
 }
 
 // EditProfile.defaultProps = {};
@@ -80,24 +145,18 @@ export class EditProfile extends Component {
 //
 // -> this.props.actions.loadCourses();
 
-///////////////////////////// context //////////////////////////////
-
-// ManageCoursePage.contextTypes = {
-//     router: React.PropTypes.object.isRequired
-// }
-// (lets you do 'this.context.router.push('/wherever');
 
 const mapToProps = (props) => {
     // Meteor.subscribe('bins');
     // const {binId} = props.params;
     return {
-        // links: Links.find({}).fetch(),
+        myProfile: Profiles.find({id:Meteor.userId()}).fetch(),
         // meteorCall: Meteor.call
     }
 }
 
-// export default createContainer( mapToProps, EditProfile );
-export default EditProfile;
+export default createContainer( mapToProps, EditProfile );
+// export default EditProfile;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

@@ -7,7 +7,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
 
-// import {Users} from '../api/users';
+import {Profiles} from '../api/profiles';
 
 // import Dashboard from './Dashboard.jsx';
 // import {Dashboard} from './Dashboard.jsx';
@@ -41,6 +41,10 @@ export class Dashboard extends Component {
                         <div className="col-xs-6">
                             online users
                             <pre><code>{JSON.stringify(this.props.onlineUsers, null, 2)}</code></pre>
+                        </div>
+                        <div className="col-xs-6">
+                            profiles
+                            <pre><code>{JSON.stringify(this.props.profiles, null, 2)}</code></pre>
                         </div>
                     </div>
                 </div>
@@ -76,27 +80,24 @@ export class Dashboard extends Component {
 const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
     Meteor.subscribe('onlineUsers');
+    Meteor.subscribe('profiles');
     const allUsers = Meteor.users.find().fetch();
     const onlineUsers = Meteor.users.find({ "status.online": true }).fetch();
+    const profiles = Profiles.find({}).fetch();
     return {
         allUsers: allUsers.map(u => {
             return {
                 email: u.emails[0].address,
-                screenname:u.screenname,
-                fullname:u.fullname,
-                address: u.address,
                 id: u._id
             }
         }),
         onlineUsers: onlineUsers.map(u => {
             return {
                 email: u.emails[0].address,
-                screenname:u.screenname,
-                fullname:u.fullname,
-                address: u.address,
                 id: u._id
             }
-        })
+        }),
+        profiles
         // links: Links.find({}).fetch(),
         // meteorCall: Meteor.call
     }

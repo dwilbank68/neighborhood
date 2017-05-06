@@ -24,8 +24,8 @@ class SignUp extends Component {
         e.preventDefault();
         let email = this.refs.email.value.trim();
         let password = this.refs.password.value.trim();
-        let fullname = this.refs.fullname.value.trim();
-        let screenname = this.refs.screenname.value.trim();
+        let fullName = this.refs.fullName.value.trim();
+        let screenName = this.refs.screenName.value.trim();
 
 
         if (password.length < 8) {
@@ -36,7 +36,7 @@ class SignUp extends Component {
 
         Accounts
             .createUser(
-                {email, password, address: this.state.address, fullname, screenname},
+                {email, password, address: this.state.address, fullName, screenName},
                 (err) => {
                     if (err) {
                         this.setState({error: err.reason});
@@ -64,8 +64,8 @@ class SignUp extends Component {
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 
                     <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
-                        <input type="text"      ref="screenname"      name="screenname"     placeholder="Screen Name (Short)"/>
-                        <input type="text"      ref="fullname"        name="fullname"       placeholder="Full Name (optional)"/>
+                        <input type="text"      ref="screenName"      name="screenName"     placeholder="Screen Name (Short)"/>
+                        <input type="text"      ref="fullName"        name="fullName"       placeholder="Full Name (optional)"/>
                         <input type="email"     ref="email"     name="email"    placeholder="Email"/>
                         <input type="password"  ref="password"  name="password" placeholder="Password"/>
                         <Select className="address"
