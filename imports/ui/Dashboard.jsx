@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
+import _ from 'lodash';
 
 import PrivateHeader from './PrivateHeader';
 
@@ -13,12 +14,12 @@ import {Profiles} from '../api/profiles';
 // import {Dashboard} from './Dashboard.jsx';
 export class Dashboard extends Component {
 
-    constructor(props, context){
+    constructor(props, context) {
         super(props, context);
         this.state = {
-            isOpen:false
+            isOpen: false
         }
-       // this.handleClick = this.handleClick.bind(this)
+        // this.handleClick = this.handleClick.bind(this)
     }
 
     // handleClick(e) {
@@ -36,21 +37,36 @@ export class Dashboard extends Component {
                     <div className="row">
                         <div className="col-xs-6">
                             all users
-                            <pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>
+                            <pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>
+                            {/*<pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>*/}
                         </div>
-                        <div className="col-xs-6">
-                            online users
-                            <pre><code>{JSON.stringify(this.props.onlineUsers, null, 2)}</code></pre>
-                        </div>
-                        <div className="col-xs-6">
-                            profiles
-                            <pre><code>{JSON.stringify(this.props.profiles, null, 2)}</code></pre>
-                        </div>
+                        {/*<div className="col-xs-6">*/}
+                            {/*online users*/}
+                            {/*<pre><code>{JSON.stringify(this.props.onlineUsers, null, 2)}</code></pre>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-xs-6">*/}
+                            {/*profiles*/}
+                            {/*<pre><code>{JSON.stringify(this.props.profiles, null, 2)}</code></pre>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
         );
     }
+
+    renderUsers() {
+        const usersRaw = this.props.allUsers;
+        const profiles = this.props.profiles;
+        let profile;
+        return usersRaw.map(user => {
+            profile = _.omit(profiles[user.id], 'userId', '_id');
+            return _.merge(user, profile);
+        })
+        // console.log('------------------------------------------');
+        // console.log('users in renderUsers',users);
+        // console.log('------------------------------------------');
+    }
+
 }
 
 // Dashboard.defaultProps = {};
@@ -82,7 +98,7 @@ const mapToProps = (props) => {
     Meteor.subscribe('onlineUsers');
     Meteor.subscribe('profiles');
     const allUsers = Meteor.users.find().fetch();
-    const onlineUsers = Meteor.users.find({ "status.online": true }).fetch();
+    const onlineUsers = Meteor.users.find({"status.online": true}).fetch();
     const profiles = Profiles.find({}).fetch();
     return {
         allUsers: allUsers.map(u => {
@@ -97,13 +113,13 @@ const mapToProps = (props) => {
                 id: u._id
             }
         }),
-        profiles
+        profiles: _.mapKeys(profiles, 'userId')
         // links: Links.find({}).fetch(),
         // meteorCall: Meteor.call
     }
 }
 
-export default createContainer( mapToProps, Dashboard );
+export default createContainer(mapToProps, Dashboard);
 // export default Dashboard;
 
 // remember to use 'this' binding now (choose one, #1 is best)
