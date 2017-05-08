@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
@@ -30,9 +31,13 @@ export class Dashboard extends Component {
     // }
 
     render() {
+        let user = _.omit(Meteor.user(), 'status');
+        const profile = _.omit(this.props.profiles[Meteor.userId()], 'userId', '_id', 'status');
+        user = _.merge(user, profile);
+        Session.set('user',user);
         return (
             <div className="dashboard">
-                <PrivateHeader title="Dashboard"/>
+                <PrivateHeader title="Dashboard" user={user}/>
                 <div className="page-content">
                     <div className="row">
                         <div className="col-xs-6">

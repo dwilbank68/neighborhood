@@ -14,38 +14,78 @@ if (Meteor.isServer) {
                 address: 1, city: 1, state: 1, zipcode: 1,
                 avatar: 1,
                 screenName: 1, fullName: 1,
-                phone: 1
+                phone: 1,
+                emailVisible: 1
             }}
         );
     })
+    Meteor.publish('currentProfile', function() {
+        return Profiles.find(
+            {userId: this.userId},
+            { fields: {
+                userId: 1,
+                address: 1, city: 1, state: 1, zipcode: 1,
+                avatar: 1,
+                screenName: 1, fullName: 1,
+                phone: 1,
+                emailVisible: 1
+            }}
+        )
+    })
 }
 
-export const createProfile = (userId, options) => {
-
-    const {city, state, zipcode} = data;
-    const {address, screenName, fullName} = options;
-    const avatar = '';
-    const phone = '';
+export const validateProfile = (userId, profileObj) => {
+    const {address, avatar, emailVisible, fullName, screenName, phone} = profileObj;
+    console.log('------------------------------------------');
+    console.log('profileObj inside validateProfile',profileObj);
+    console.log('------------------------------------------');
     new SimpleSchema({
         userId: {type: String},
         address: {
             type: String, min: 4
         },
         avatar: {type: String},
+        emailVisible: {type: Boolean},
         screenName: {
             type: String, min: 2, max: 12
         },
         fullName: {
-            type: String, max: 50, optional: true
+            type: String, max: 30, optional: true
         },
         phone: {type: String, optional: true}
-    }).validate({address, screenName, fullName, userId, avatar, phone});
+    })
+    .validate({address, avatar, emailVisible, fullName, screenName, userId, phone});
+    return true;
+}
+
+export const createProfile = (userId, options) => {
+
+    const {city, state, zipcode} = data;
+    const {address, screenName, fullName} = options;
+    options.avatar = '';
+    options.emailVisible = false;
+    options.phone = '';
+
+    validateProfile(userId, options);
 
     Profiles.insert({
         userId,
         screenName, fullName,
         address, city, state, zipcode,
-        avatar,
-        phone
+        avatar: options.avatar,
+        phone: options.phone,
+        emailVisible: options.emailVisible
     })
 }
+
+Meteor.methods({
+    'profileUpdate': function(userId, updatesObj){
+
+        validateProfile(userId, updatesObj);
+
+        return Profiles.update(
+            {userId: Meteor.userId()},
+            {$set:{...updatesObj}}
+        )
+    }
+})

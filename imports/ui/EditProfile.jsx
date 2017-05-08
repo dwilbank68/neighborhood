@@ -5,6 +5,8 @@ import Modal from 'react-modal';
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 
+import Toggle from 'react-toggle'
+
 import {Profiles} from '../api/profiles';
 
 // import EditProfile from './EditProfile.jsx';
@@ -22,11 +24,21 @@ export class EditProfile extends Component {
     constructor(props, context){
         super(props, context);
         this.state = {
+            error: '',
             // avatar: this.props.profile.avatar ? this.props.profile.avatar : 'http://www.avatarsdb.com/avatars/cat_comp.gif',
-            modalOpen:false
+            // emailVisible: user.emailVisible,
+            avatar:'',
+            fullName:'',
+            modalOpen:false,
+            phone:'',
+            screenName:''
         }
-        this.formSubmit = this.formSubmit.bind(this)
-        this.upload = this.upload.bind(this)
+        this.formSubmit =               this.formSubmit.bind(this)
+        this.upload =                   this.upload.bind(this)
+        this.handleFullNameChange =     this.handleFullNameChange.bind(this)
+        this.handleOpenModal =          this.handleOpenModal.bind(this)
+        this.handlePhoneChange =        this.handlePhoneChange.bind(this)
+        this.handleScreenNameChange =   this.handleScreenNameChange.bind(this)
     }
 
     // handleClick(e) {
@@ -36,12 +48,54 @@ export class EditProfile extends Component {
     //    })
     // }
 
-    formSubmit(){
-        // Ofcourse you'll have other fields...
-        let avatarUrl = this.state.avatar;
-        Meteor.users.update( { _id: Meteor.userId() }, {
-            $set: {profile: avatarUrl}
-        });
+    formSubmit(e){
+        e.preventDefault();
+        let userId = Meteor.userId();
+        Meteor.call(
+            'profileUpdate',
+            userId,
+            {
+                address:        this.state.address,
+                avatar:         this.state.avatar,
+                fullName:       this.state.fullName,
+                phone:          this.state.phone,
+                screenName:     this.state.screenName,
+                emailVisible:   this.state.emailVisible
+            },
+            (err, res) => {
+                if (!err) {
+                    this.setState({
+                        error: '',
+                        modalOpen:false
+                    })
+                } else {
+                    this.setState({
+                        error: err.reason
+                    });
+                }
+            }
+        )
+    }
+
+    handleFullNameChange(e){
+        const fullName = e.target.value;
+        this.setState({fullName});
+    }
+
+    handleOpenModal(){
+        const {address, fullName, screenName, avatar, phone, emailVisible} = this.props.prof;
+        this.setState({address, fullName, screenName, avatar, phone, emailVisible});
+        this.setState({modalOpen:true});
+    }
+
+    handlePhoneChange(e){
+        const phone = e.target.value;
+        this.setState({phone});
+    }
+
+    handleScreenNameChange(e){
+        const screenName = e.target.value;
+        this.setState({screenName});
     }
 
     render() {
@@ -51,12 +105,13 @@ export class EditProfile extends Component {
                 backgroundColor: 'rgba(0, 0, 0, 0.5)'
             }
         }
+        // const {fullName, screenName, avatar, phone} = this.props.prof;
 
         return (
             <div className="edit-profile">
 
                 <button className="button"
-                        onClick={() => this.setState({modalOpen:true})}>
+                        onClick={this.handleOpenModal}>
                     Update My Info
                 </button>
 
@@ -66,14 +121,46 @@ export class EditProfile extends Component {
                         style={modalStyle}>
 
                     <p>Update Your User Info</p>
+
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+
                     <form onSubmit={this.onSubmit}>
+                        <div className="row">
+                            <input  type="text" ref="screenName" name="screenName"
+                                    onChange={this.handleScreenNameChange}
+                                    placeholder="Screen Name"
+                                    value={this.state.screenName}/>
+                        </div>
+                        <div className="row">
+                            <input  type="text" ref="fullName" name="fullName"
+                                    onChange={this.handleFullNameChange}
+                                    placeholder="Full Name (Optional)"
+                                    value={this.state.fullName}/>
+                        </div>
+                        <div className="row">
+                            <input  type="text" ref="phone" name="phone"
+                                    onChange={this.handlePhoneChange}
+                                    placeholder="Phone (Optional)"
+                                    value={this.state.phone}/>
+                        </div>
+                        {/*<Switch onClick={() => this.setState({emailVisible: !this.state.emailVisible})}>*/}
+                            {/*{this.state.emailVisible ? 'Show My Email' : 'Hide My Email'}*/}
+                        {/*</Switch>*/}
+                        <label>
+                            <Toggle checked={this.state.emailVisible}
+                                    icons={false}
+                                    onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
+                            <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
+                        </label>
                         <div className="row well">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label htmlFor="exampleInputFile">File input</label>
                                     <input type="file" id="input"
                                            onChange={this.upload} />
-                                    <p className="help-block">Image max restriction: 2MB, 500x500. Cropped: 200x200</p>
+                                    <p className="help-block">
+                                        Image max restriction: 2MB, 500x500. Cropped: 200x200
+                                    </p>
                                 </div>
                             </div>
                             <div className="col-md-6 utar-r">
@@ -97,7 +184,7 @@ export class EditProfile extends Component {
                         {/*<button>Add Link</button>*/}
                     </form>
 
-                    <button onClick={() => this.setState({modalOpen:false, url:''})}>
+                    <button onClick={() => this.setState({modalOpen:false})}>
                         cancel
                     </button>
 
@@ -108,7 +195,7 @@ export class EditProfile extends Component {
     }
 
     upload(){
-        var userId = Meteor.user()._id;
+        var userId = Meteor.userId();
         var metaContext = {avatarId: userId};
         var uploader = new Slingshot.Upload("UsersAvatar", metaContext);
         uploader.send(document.getElementById('input').files[0], function (error, downloadUrl) { // you can use refs if you like
@@ -147,10 +234,10 @@ export class EditProfile extends Component {
 
 
 const mapToProps = (props) => {
-    // Meteor.subscribe('bins');
-    // const {binId} = props.params;
+    Meteor.subscribe('currentProfile');
+    const myProfile = Profiles.find({userId:Meteor.userId()}).fetch();
     return {
-        myProfile: Profiles.find({id:Meteor.userId()}).fetch(),
+        prof: myProfile[0]
         // meteorCall: Meteor.call
     }
 }

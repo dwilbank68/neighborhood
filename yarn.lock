@@ -143,7 +143,7 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   dependencies:
     inherits "^2.0.1"
 
-classnames@^2.2.4:
+classnames@^2.2.4, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -768,6 +768,12 @@ react-select@^1.0.0-rc.3:
   dependencies:
     classnames "^2.2.4"
     react-input-autosize "^1.1.0"
+
+react-toggle@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-toggle/-/react-toggle-3.0.1.tgz#60d462007ea52ad13442eee4fef262fa53c5ec6f"
+  dependencies:
+    classnames "^2.2.5"
 
 react@^15.4.1:
   version "15.5.4"

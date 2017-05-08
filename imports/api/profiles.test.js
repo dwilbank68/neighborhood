@@ -1,10 +1,10 @@
 import {Meteor} from 'meteor/meteor';
 import expect from 'expect';
 
-import {validateNewUser} from './users';
+import {validateProfile} from './profiles';
 
 if (Meteor.isServer) {
-    describe('users', function() {
+    describe('profiles', function() {
 
         const validUser = {
             address: '1234 Happy Street',

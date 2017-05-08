@@ -55,7 +55,8 @@ class PrivateHeader extends Component {
 
 // PrivateHeader.defaultProps = {};
 PrivateHeader.propTypes = {
-    title: PropTypes.string.isRequired
+    title:  PropTypes.string.isRequired,
+    user:   PropTypes.object.isRequired
 };
 // PrivateHeader.propTypes = {
 //     name:        PropTypes.string.isRequired,
