@@ -198,15 +198,17 @@ export class EditProfile extends Component {
         var userId = Meteor.userId();
         var metaContext = {avatarId: userId};
         var uploader = new Slingshot.Upload("UsersAvatar", metaContext);
-        uploader.send(document.getElementById('input').files[0], function (error, downloadUrl) { // you can use refs if you like
+        uploader.send(document.getElementById('input').files[0], function (error, downloadUrl) {
             if (error) {
                 // Log service detailed response
                 console.error('Error uploading', uploader.xhr.response);
                 alert(error); // you may want to fancy this up when you're ready instead of a popup.
             }
             else {
+                alert(downloadUrl);
+                this.setState({avatar: downloadUrl});
                 // we use $set because the user can change their avatar so it overwrites the url :)
-                Meteor.users.update(Meteor.userId(), {$set: {"profile.avatar": downloadUrl}});
+                // Meteor.users.update(Meteor.userId(), {$set: {"profile.avatar": downloadUrl}});
             }
             // you will need this in the event the user hit the update button because it will remove the avatar url
             this.setState({avatar: downloadUrl});

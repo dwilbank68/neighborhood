@@ -7,27 +7,18 @@ if (Meteor.isServer) {
     describe('users', function() {
 
         const validUser = {
-            address: '1234 Happy Street',
             emails: [
                 {address:'validemail@example.com'}
             ]
         }
 
         const userBadEmail = {
-            address: '1234 Happy Street',
             emails: [
                 {address:'bleh'}
             ]
         }
 
-        const userBadAddress = {
-            address: '',
-            emails: [
-                {address:'validemail@example.com'}
-            ]
-        }
-
-        it('should allow valid email and street address', function () {
+        it('should allow valid email', function () {
             const result = validateNewUser(validUser)
             expect(result).toBe(true);
         });
@@ -36,9 +27,7 @@ if (Meteor.isServer) {
             expect(() => {validateNewUser(userBadEmail)}).toThrow();
         });
 
-        it('should reject invalid address', function () {
-            expect(() => {validateNewUser(userBadAddress)}).toThrow();
-        });
+
 
     });
 }

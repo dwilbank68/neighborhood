@@ -36,9 +36,6 @@ if (Meteor.isServer) {
 
 export const validateProfile = (userId, profileObj) => {
     const {address, avatar, emailVisible, fullName, screenName, phone} = profileObj;
-    console.log('------------------------------------------');
-    console.log('profileObj inside validateProfile',profileObj);
-    console.log('------------------------------------------');
     new SimpleSchema({
         userId: {type: String},
         address: {
@@ -80,11 +77,13 @@ export const createProfile = (userId, options) => {
 
 Meteor.methods({
     'profileUpdate': function(userId, updatesObj){
-
+        console.log('------------------------------------------');
+        console.log('userId in profileUpdate',userId);
+        console.log('------------------------------------------');
         validateProfile(userId, updatesObj);
 
         return Profiles.update(
-            {userId: Meteor.userId()},
+            {userId},
             {$set:{...updatesObj}}
         )
     }

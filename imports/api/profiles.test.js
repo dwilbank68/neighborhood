@@ -6,38 +6,45 @@ import {validateProfile} from './profiles';
 if (Meteor.isServer) {
     describe('profiles', function() {
 
-        const validUser = {
+        const profileValid = {
             address: '1234 Happy Street',
-            emails: [
-                {address:'validemail@example.com'}
-            ]
+            avatar: '',
+            emailVisible: true,
+            fullName: 'Valido Correcto',
+            screenName: 'valido',
+            phone: '555-1212',
+            userId: '123456789ABC'
         }
 
-        const userBadEmail = {
-            address: '1234 Happy Street',
-            emails: [
-                {address:'bleh'}
-            ]
-        }
+        const userId = profileValid.userId;
 
-        const userBadAddress = {
-            address: '',
-            emails: [
-                {address:'validemail@example.com'}
-            ]
-        }
-
-        it('should allow valid email and street address', function () {
-            const result = validateNewUser(validUser)
+        it('should allow valid data', function () {
+            const result = validateProfile(userId, profileValid)
             expect(result).toBe(true);
         });
 
-        it('should reject invalid email', function () {
-            expect(() => {validateNewUser(userBadEmail)}).toThrow();
+        it('should reject invalid address', function () {
+            const profileBadAddress = {...profileValid, address:''}
+            expect(() => {validateProfile(userId, profileBadAddress)}).toThrow();
         });
 
-        it('should reject invalid address', function () {
-            expect(() => {validateNewUser(userBadAddress)}).toThrow();
+        it('should reject missing avatar', function () {
+            const profileBadAvatar = {...profileValid, avatar:null}
+            expect(() => {validateProfile(userId, profileBadAvatar)}).toThrow();
+        });
+
+        it('should reject lengthy screenNames', function () {
+            const profileBadScreenName = {...profileValid, screenName:'abcdefghijklmnopqrstuvwxyz'}
+            expect(() => {validateProfile(userId, profileBadScreenName)}).toThrow();
+        });
+
+        it('should reject lengthy fullNames', function () {
+            const profileBadFullName = {...profileValid, fullName:'abcdefghijklmnopqrstuvwxyz1234567890'}
+            expect(() => {validateProfile(userId, profileBadFullName)}).toThrow();
+        });
+
+        it('should reject a profile without a userId', function () {
+            expect(() => {validateProfile(undefined, profileValid)}).toThrow();
         });
 
     });

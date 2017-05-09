@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {Accounts} from 'meteor/accounts-base';
+// import ImageUpload from './ImageUpload.jsx';
+class ImageUpload extends Component {
 
-import EditProfile from './EditProfile';
-import CurrentUser from './CurrentUser';
-
-// import PrivateHeader from './PrivateHeader.jsx';
-class PrivateHeader extends Component {
-
-    constructor(props, context){
-        super(props, context);
-        this.state = {
-            modalOpen:false
-        }
-       // this.handleClick = this.handleClick.bind(this)
-    }
+    // constructor(props, context){
+    //     super(props, context);
+    //     this.state = {
+    //         whatever:{}
+    //     }
+    //    this.handleClick = this.handleClick.bind(this)
+    // }
 
 
     // handleClick(e) {
@@ -25,36 +20,17 @@ class PrivateHeader extends Component {
     //    })
     // }
 
-    onSubmit(e){
-        e.preventDefault();
-        this.setState({modalOpen: false});
-    }
-
     render() {
-
         return (
-            <div className="private-header header">
-                <div className="header__content">
-                    <h1 className="header__title">{this.props.title}</h1>
-                    <EditProfile/>
-                    <CurrentUser user={this.props.user}/>
-                    <button onClick={() => Accounts.logout()}
-                            className="button button--link">
-                        Log Out
-                    </button>
-                </div>
-
+            <div className="image-upload">
+                ImageUpload
             </div>
         );
     }
 }
 
-// PrivateHeader.defaultProps = {};
-PrivateHeader.propTypes = {
-    title:  PropTypes.string.isRequired,
-    user:   PropTypes.object.isRequired
-};
-// PrivateHeader.propTypes = {
+// ImageUpload.defaultProps = {};
+// ImageUpload.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -64,12 +40,12 @@ PrivateHeader.propTypes = {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-// PrivateHeader.contextTypes = {
+// ImageUpload.contextTypes = {
 //     router: React.PropTypes.object.isRequired
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-export default PrivateHeader;
+export default ImageUpload;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)
@@ -87,7 +63,7 @@ export default PrivateHeader;
 
 // no more constructor - no more 'this' binding required
 
-// class PrivateHeader extends Component {
+// class ImageUpload extends Component {
 
     // this.state = {
     //     'whatever':{}
@@ -102,7 +78,7 @@ export default PrivateHeader;
 
     // render() {
     //     return (
-    //         <div className="private-header">
+    //         <div className="image-upload">
     //         </div>
     //     );
     // }
