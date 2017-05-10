@@ -6,7 +6,6 @@ import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
-import ImageUpload from './ImageUpload';
 import PrivateHeader from './PrivateHeader';
 
 import {Profiles} from '../api/profiles';
@@ -36,7 +35,6 @@ export class Dashboard extends Component {
         return (
             <div className="dashboard">
                 <PrivateHeader title="Dashboard" user={user}/>
-                <ImageUpload/>
                 <div className="page-content">
                     <div className="row">
                         <div className="col-xs-6">

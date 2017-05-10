@@ -15,6 +15,7 @@ export default class ImageUpload extends React.Component {
             uploadedFile: null,
             uploadedFileCloudinaryUrl: ''
         };
+        this.handleImageUpload = this.handleImageUpload.bind(this);
     }
 
     onImageDrop(files) {
@@ -54,6 +55,7 @@ export default class ImageUpload extends React.Component {
                 this.setState({
                     uploadedFileCloudinaryUrl: res.data.secure_url
                 });
+                this.props.avatarChange(res.data.secure_url);
             }
         })
         .catch((err) => {

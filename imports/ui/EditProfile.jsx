@@ -8,6 +8,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 import Toggle from 'react-toggle'
 
 import {Profiles} from '../api/profiles';
+import ImageUpload from './ImageUpload';
 
 // import EditProfile from './EditProfile.jsx';
 // import {EditProfile} from './EditProfile.jsx';
@@ -31,6 +32,7 @@ export class EditProfile extends Component {
             screenName:''
         }
         this.formSubmit =               this.formSubmit.bind(this)
+        this.handleAvatarChange =       this.handleAvatarChange.bind(this)
         this.handleFullNameChange =     this.handleFullNameChange.bind(this)
         this.handleOpenModal =          this.handleOpenModal.bind(this)
         this.handlePhoneChange =        this.handlePhoneChange.bind(this)
@@ -71,6 +73,15 @@ export class EditProfile extends Component {
                 }
             }
         )
+    }
+
+    handleAvatarChange(avatarUrl){
+        console.log('------------------------------------------');
+        console.log('avatarUrl in handleAvatarChange',avatarUrl);
+        console.log('------------------------------------------');
+        this.setState({
+            avatar:avatarUrl
+        })
     }
 
     handleFullNameChange(e){
@@ -148,31 +159,15 @@ export class EditProfile extends Component {
                                     onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
                             <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
                         </label>
-                        <div className="row well">
-                            <div className="col-md-6">
-                                <div className="form-group">
-                                    <label htmlFor="exampleInputFile">File input</label>
-                                    <input type="file" id="input"
-                                           onChange={this.upload} />
-                                    <p className="help-block">
-                                        Image max restriction: 2MB, 500x500. Cropped: 200x200
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-6 utar-r">
-                                <img src={this.state.avatar}
-                                     height="200"
-                                     width="200" alt="..."
-                                     className="img-rounded" />
-                            </div>
-                            <div className="form-group">
-                                <button className="btn btn-lg btn-primary btn-block"
-                                        type="submit"
-                                        onClick={this.formSubmit}>
-                                    Update Profile
-                                </button>
-                            </div>
-                        </div>
+
+                        <ImageUpload avatarChange={this.handleAvatarChange}/>
+
+                        <button className="btn btn-lg btn-primary btn-block"
+                                type="submit"
+                                onClick={this.formSubmit}>
+                            Update Profile
+                        </button>
+
                         {/*<input  type="text"*/}
                                 {/*onChange={this.onChange}*/}
                                 {/*placeholder="URL"*/}
