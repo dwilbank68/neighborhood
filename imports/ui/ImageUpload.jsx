@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
-
+import _ from 'lodash';
 //import './App.css';
 const CLOUD_NAME = 'dmij4pdz5';
 const CLOUDINARY_UPLOAD_PRESET = 'ycojilpu';
@@ -18,6 +18,17 @@ export default class ImageUpload extends React.Component {
     }
 
     onImageDrop(files) {
+        // const fileType = files[0].type;
+        // const imageTypes = ['image/bmp', 'image/gif',
+        //                     'image/jpg', 'image/jpg', 'image/png']
+        // if (_.includes(imageTypes,fileType)) {
+        //     alert("can't upload that file type");
+        //     this.state = {
+        //         uploadedFile: null,
+        //         uploadedFileCloudinaryUrl: ''
+        //     };
+        //     return;
+        // }
         this.setState({
             uploadedFile: files[0]
         });
@@ -39,9 +50,6 @@ export default class ImageUpload extends React.Component {
             data: formData
         })
         .then((res) => {
-            console.log('------------------------------------------');
-            console.log('res.data.secure_url',res.data.secure_url);
-            console.log('------------------------------------------');
             if (res.data.secure_url !== '') {
                 this.setState({
                     uploadedFileCloudinaryUrl: res.data.secure_url
@@ -55,12 +63,20 @@ export default class ImageUpload extends React.Component {
     }
 
     render() {
+
+        const style = {
+            width: '100px',
+            height: '100px',
+            border: '1px solid black'
+        }
+
         return (
             <form>
                 <div className="FileUpload">
-                    <Dropzone   onDrop={this.onImageDrop.bind(this)}
+                    <Dropzone   accept="image/*"
                                 multiple={false}
-                                accept="image/*">
+                                onDrop={this.onImageDrop.bind(this)}
+                                style={style}>
                         <div>Drop an image or click to select a file to upload.</div>
                     </Dropzone>
                 </div>
@@ -76,3 +92,5 @@ export default class ImageUpload extends React.Component {
         )
     }
 }
+
+// c_pad,g_center,h_200,w_200
