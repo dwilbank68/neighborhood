@@ -11,8 +11,7 @@ import PrivateHeader from './PrivateHeader';
 
 import {Profiles} from '../api/profiles';
 
-// import Dashboard from './Dashboard.jsx';
-// import {Dashboard} from './Dashboard.jsx';
+
 export class Dashboard extends Component {
 
     constructor(props, context) {

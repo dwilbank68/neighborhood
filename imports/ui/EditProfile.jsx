@@ -14,10 +14,7 @@ import {Profiles} from '../api/profiles';
 export class EditProfile extends Component {
 
     componentWillMount() {
-        Slingshot.fileRestrictions("avatar", {
-            allowedFileTypes: ["image/png", "image/jpeg", "image/gif"],
-            maxSize: 2 * 500 * 500
-        });
+
     }
 
 
@@ -34,7 +31,6 @@ export class EditProfile extends Component {
             screenName:''
         }
         this.formSubmit =               this.formSubmit.bind(this)
-        this.upload =                   this.upload.bind(this)
         this.handleFullNameChange =     this.handleFullNameChange.bind(this)
         this.handleOpenModal =          this.handleOpenModal.bind(this)
         this.handlePhoneChange =        this.handlePhoneChange.bind(this)
@@ -192,27 +188,6 @@ export class EditProfile extends Component {
 
             </div>
         );
-    }
-
-    upload(){
-        var userId = Meteor.userId();
-        var metaContext = {avatarId: userId};
-        var uploader = new Slingshot.Upload("UsersAvatar", metaContext);
-        uploader.send(document.getElementById('input').files[0], function (error, downloadUrl) {
-            if (error) {
-                // Log service detailed response
-                console.error('Error uploading', uploader.xhr.response);
-                alert(error); // you may want to fancy this up when you're ready instead of a popup.
-            }
-            else {
-                alert(downloadUrl);
-                this.setState({avatar: downloadUrl});
-                // we use $set because the user can change their avatar so it overwrites the url :)
-                // Meteor.users.update(Meteor.userId(), {$set: {"profile.avatar": downloadUrl}});
-            }
-            // you will need this in the event the user hit the update button because it will remove the avatar url
-            this.setState({avatar: downloadUrl});
-        }.bind(this));
     }
 
 }
