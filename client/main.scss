@@ -1,1 +1,14 @@
 @import '../imports/client/styles/main';
+
+@import url(https://fonts.googleapis.com/css?family=Oswald|Lora:400,700,400italic);
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300);
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+}
+p,a,li,blockquote, input {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}

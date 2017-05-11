@@ -29,12 +29,13 @@ export class Dashboard extends Component {
     // }
 
     render() {
-        let user = _.omit(Meteor.user(), 'status');
-        const profile = _.omit(this.props.profiles[Meteor.userId()], 'userId', '_id', 'status');
-        user = _.merge(user, profile);
+        // let user = _.omit(Meteor.user(), 'status');
+        // const profile = _.omit(this.props.profiles[Meteor.userId()], 'userId', '_id', 'status');
+        // user = _.merge(user, profile);
         return (
             <div className="dashboard">
-                <PrivateHeader title="Dashboard" user={user}/>
+                {/*<PrivateHeader title="Dashboard" user={user}/>*/}
+                <PrivateHeader title=""/>
                 <div className="page-content">
                     <div className="row">
                         <div className="col-xs-6">

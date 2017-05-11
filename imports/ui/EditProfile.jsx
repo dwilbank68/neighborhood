@@ -7,17 +7,15 @@ import {createContainer} from 'meteor/react-meteor-data';
 
 import Toggle from 'react-toggle'
 
+import _ from 'lodash';
+
 import {Profiles} from '../api/profiles';
 import ImageUpload from './ImageUpload';
+import CurrentUser from './CurrentUser';
 
 // import EditProfile from './EditProfile.jsx';
 // import {EditProfile} from './EditProfile.jsx';
 export class EditProfile extends Component {
-
-    componentWillMount() {
-
-    }
-
 
     constructor(props, context){
         super(props, context);
@@ -76,9 +74,6 @@ export class EditProfile extends Component {
     }
 
     handleAvatarChange(avatarUrl){
-        console.log('------------------------------------------');
-        console.log('avatarUrl in handleAvatarChange',avatarUrl);
-        console.log('------------------------------------------');
         this.setState({
             avatar:avatarUrl
         })
@@ -90,8 +85,11 @@ export class EditProfile extends Component {
     }
 
     handleOpenModal(){
-        const {address, fullName, screenName, avatar, phone, emailVisible} = this.props.prof;
-        this.setState({address, fullName, screenName, avatar, phone, emailVisible});
+        const {emails} = this.props.user;
+        const {address, city, state, zipcode,
+                fullName, screenName, avatar, phone, emailVisible} = this.props.prof;
+        this.setState({address, city, state, zipcode,
+                fullName, screenName, avatar, phone, emailVisible, emails});
         this.setState({modalOpen:true});
     }
 
@@ -106,6 +104,9 @@ export class EditProfile extends Component {
     }
 
     render() {
+        let user = _.omit(Meteor.user(), 'status');
+        const profile = _.omit(this.props.prof, 'userId', '_id', 'status');
+        user = _.merge(user, profile);
 
         const modalStyle = {
             overlay: {
@@ -117,10 +118,15 @@ export class EditProfile extends Component {
         return (
             <div className="edit-profile">
 
-                <button className="button"
+                <div    className="edit-profile-click"
                         onClick={this.handleOpenModal}>
-                    Update My Info
-                </button>
+                    <CurrentUser user={user}/>
+                    <div className="overlay">
+                        <div className="overlay-text">
+                            Edit
+                        </div>
+                    </div>
+                </div>
 
                 <Modal  closeTimeoutMS={200}
                         isOpen={this.state.modalOpen}
@@ -150,17 +156,19 @@ export class EditProfile extends Component {
                                     placeholder="Phone (Optional)"
                                     value={this.state.phone}/>
                         </div>
-                        {/*<Switch onClick={() => this.setState({emailVisible: !this.state.emailVisible})}>*/}
-                            {/*{this.state.emailVisible ? 'Show My Email' : 'Hide My Email'}*/}
-                        {/*</Switch>*/}
-                        <label>
-                            <Toggle checked={this.state.emailVisible}
-                                    icons={false}
-                                    onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
-                            <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
-                        </label>
+                        <div className="row">
+                            <label>
+                                <Toggle checked={this.state.emailVisible}
+                                        icons={false}
+                                        onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
+                                <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
+                            </label>
+                        </div>
 
-                        <ImageUpload avatarChange={this.handleAvatarChange}/>
+                        <div className="row upload-preview">
+                            <ImageUpload avatarChange={this.handleAvatarChange}/>
+                            <CurrentUser user={this.state}/>
+                        </div>
 
                         <button className="btn btn-lg btn-primary btn-block"
                                 type="submit"
@@ -168,16 +176,12 @@ export class EditProfile extends Component {
                             Update Profile
                         </button>
 
-                        {/*<input  type="text"*/}
-                                {/*onChange={this.onChange}*/}
-                                {/*placeholder="URL"*/}
-                                {/*value={this.state.url}/>*/}
-                        {/*<button>Add Link</button>*/}
                     </form>
 
-                    <button onClick={() => this.setState({modalOpen:false})}>
-                        cancel
-                    </button>
+                    <div className='button-cancel'
+                            onClick={() => this.setState({modalOpen:false})}>
+                        &#x2715;
+                    </div>
 
                 </Modal>
 
@@ -209,7 +213,8 @@ const mapToProps = (props) => {
     Meteor.subscribe('currentProfile');
     const myProfile = Profiles.find({userId:Meteor.userId()}).fetch();
     return {
-        prof: myProfile[0]
+        prof: myProfile[0],
+        user: Meteor.user()
         // meteorCall: Meteor.call
     }
 }

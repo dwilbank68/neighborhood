@@ -67,30 +67,25 @@ export default class ImageUpload extends React.Component {
     render() {
 
         const style = {
-            width: '100px',
-            height: '100px',
-            border: '1px solid black'
+            width: '70px',
+            height: '52px',
+            border: '1px dashed gray',
+            fontSize: '.7em',
+            fontStyle: 'italic'
         }
 
         return (
-            <form>
+
                 <div className="FileUpload">
                     <Dropzone   accept="image/*"
+                                className='dropzone'
                                 multiple={false}
                                 onDrop={this.onImageDrop.bind(this)}
                                 style={style}>
-                        <div>Drop an image or click to select a file to upload.</div>
+                        <div>Drop image here or click to select file for upload.</div>
                     </Dropzone>
                 </div>
 
-                <div>
-                    {this.state.uploadedFileCloudinaryUrl === '' ? null :
-                        <div>
-                            <p>{this.state.uploadedFile.name}</p>
-                            <img src={this.state.uploadedFileCloudinaryUrl} />
-                        </div>}
-                </div>
-            </form>
         )
     }
 }

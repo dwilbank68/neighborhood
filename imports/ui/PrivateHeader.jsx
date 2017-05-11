@@ -37,7 +37,7 @@ class PrivateHeader extends Component {
                 <div className="header__content">
                     <h1 className="header__title">{this.props.title}</h1>
                     <EditProfile/>
-                    <CurrentUser user={this.props.user}/>
+                    {/*<CurrentUser user={this.props.user}/>*/}
                     <button onClick={() => Accounts.logout()}
                             className="button button--link">
                         Log Out
@@ -51,8 +51,8 @@ class PrivateHeader extends Component {
 
 // PrivateHeader.defaultProps = {};
 PrivateHeader.propTypes = {
-    title:  PropTypes.string.isRequired,
-    user:   PropTypes.object.isRequired
+    title:  PropTypes.string.isRequired
+    // user:   PropTypes.object.isRequired
 };
 // PrivateHeader.propTypes = {
 //     name:        PropTypes.string.isRequired,

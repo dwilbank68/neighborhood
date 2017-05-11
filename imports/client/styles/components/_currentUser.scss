@@ -1,7 +1,21 @@
-.current-user {
+.userbadge {
+    display: flex;
     font-size: 1rem;
-
+    justify-content: center;
     p {
       margin-bottom: 0rem;
     }
+}
+
+.userbadge-body {
+    height: 60px;
+    width: 150px;
+    //margin-left: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.userbadge-pic > img {
+    height: 70px;
+    border: 1px solid #ccc;
 }
