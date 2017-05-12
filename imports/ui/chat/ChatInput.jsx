@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import {Input, TextArea, GenericInput} from 'react-text-input';
 // import ChatInput from './ChatInput.jsx';
 class ChatInput extends Component {
 
-    // constructor(props, context){
-    //     super(props, context);
-    //     this.state = {
-    //         whatever:{}
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    // }
+    constructor(props, context){
+        super(props, context);
+            this.state = {
+                input:''
+            }
+       this.handleInputChange = this.handleInputChange.bind(this)
+    }
 
 
-    // handleClick(e) {
-    //
-    //    this.setState({
-    //
-    //    })
-    // }
+    handleInputChange(e) {
+        this.setState({
+            input: e.target.value
+        })
+    }
 
     render() {
         return (
-            <div className="chat-input">
-                ChatInput
+            <div    className="chat-input" >
+                <TextArea   fitLineLength={true}
+                            ref="chatInput"
+                            onChange={this.handleInputChange}
+                            value={this.state.input}/>
             </div>
         );
     }
@@ -45,9 +47,6 @@ class ChatInput extends Component {
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-console.log('------------------------------------------');
-console.log('ChatInput inside ChatInput.jsx',ChatInput);
-console.log('---------------------------------------');
 
 export default ChatInput;
 

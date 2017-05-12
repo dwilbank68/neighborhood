@@ -6,34 +6,33 @@ import {createContainer} from 'meteor/react-meteor-data';
 
 import ChatList from './ChatList.jsx';
 import ChatInput from './ChatInput.jsx';
-console.log('------------------------------------------');
-console.log('ChatList ',ChatList);
-console.log('ChatInput ',ChatInput);
-console.log('------------------------------------------');
+
+import {Messages} from '../../api/messages';
 
 // import {ChatBox} from './ChatBox.jsx';
 export class ChatBox extends Component {
 
-    // constructor(props, context){
-    //     super(props, context);
-    //     this.state = {
-    //         whatever:{}
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    // }
+    constructor(props, context){
+        super(props, context);
+            this.state = {
+                input:''
+            }
+        this.handleInputSubmit = this.handleInputSubmit.bind(this)
+    }
 
-    // handleClick(e) {
-    //
-    //    this.setState({
-    //
-    //    })
-    // }
+
+
+    handleInputSubmit(e) {
+        this.setState({
+
+        })
+    }
 
     render() {
         return (
             <div className="chat-box">
                 ChatBox
-                <ChatList/>
+                <ChatList   messages={this.props.messages}/>
                 <ChatInput/>
             </div>
         );
@@ -65,10 +64,10 @@ export class ChatBox extends Component {
 // (lets you do 'this.context.router.push('/wherever');
 
 const mapToProps = (props) => {
-    // Meteor.subscribe('bins');
+    Meteor.subscribe('messages');
     // const {binId} = props.params;
     return {
-        // links: Links.find({}).fetch(),
+        messages: Messages.find({}).fetch(),
         // meteorCall: Meteor.call
     }
 }

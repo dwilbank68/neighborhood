@@ -19,6 +19,8 @@ export const validateNewUser = (user) => {
 if (Meteor.isServer) {
     Accounts
         .onCreateUser((options, user) => {
+            // when user created, create a matching profile
+            // with all the other data from the form (which is in options)
             createProfile(user._id, options);
             return user;
         })

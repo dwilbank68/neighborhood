@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 // import ChatList from './ChatList.jsx';
 class ChatList extends Component {
     
-    // constructor(props, context){
-    //     super(props, context);
+    constructor(props, context){
+        super(props, context);
     //     this.state = {
-    //         whatever:{}
+            messages:[]
     //     }
     //    this.handleClick = this.handleClick.bind(this)
-    // }
+    }
     
     
     // handleClick(e) {
@@ -19,24 +19,39 @@ class ChatList extends Component {
     //        
     //    })
     // }
-    
+
+    renderMessages(){
+        if (this.props.messages) {
+            return this.props.messages.map((msg, i) => {
+                return (
+                    <ChatMessage key={msg.id}/>
+                )
+            })
+        } else {
+            return <h3>loading...</h3>
+        }
+
+    }
+
     render() {
         return (
             <div className="chat-list">
                 ChatList
+                {this.renderMessages()}
             </div>
         );
     }
+
 }
 
 // ChatList.defaultProps = {};
-// ChatList.propTypes = {
+ChatList.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
-//     comments:    PropTypes.arrayOf(React.PropTypes.object),
+    messages:    PropTypes.arrayOf(React.PropTypes.object),
 //     date:        PropTypes.instanceOf(Date)
-// };
+};
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 

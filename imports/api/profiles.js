@@ -77,9 +77,6 @@ export const createProfile = (userId, options) => {
 
 Meteor.methods({
     'profileUpdate': function(userId, updatesObj){
-        console.log('------------------------------------------');
-        console.log('userId in profileUpdate',userId);
-        console.log('------------------------------------------');
         validateProfile(userId, updatesObj);
 
         return Profiles.update(
