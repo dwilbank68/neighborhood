@@ -7,6 +7,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
 import PrivateHeader from './PrivateHeader';
+import ChatBox from './chat/ChatBox';
 
 import {Profiles} from '../api/profiles';
 
@@ -37,21 +38,16 @@ export class Dashboard extends Component {
                 {/*<PrivateHeader title="Dashboard" user={user}/>*/}
                 <PrivateHeader title=""/>
                 <div className="page-content">
-                    <div className="row">
-                        <div className="col-xs-6">
-                            all users
-                            <pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>
-                            {/*<pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>*/}
-                        </div>
-                        {/*<div className="col-xs-6">*/}
-                            {/*online users*/}
-                            {/*<pre><code>{JSON.stringify(this.props.onlineUsers, null, 2)}</code></pre>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-xs-6">*/}
-                            {/*profiles*/}
-                            {/*<pre><code>{JSON.stringify(this.props.profiles, null, 2)}</code></pre>*/}
-                        {/*</div>*/}
+
+                    <div className="left-column">
+                        all users
+                        <pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>
+                        {/*<pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>*/}
                     </div>
+                    <div className="right-column">
+                        <ChatBox/>
+                    </div>
+
                 </div>
             </div>
         );

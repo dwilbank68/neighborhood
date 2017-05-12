@@ -1,9 +1,14 @@
 @import './variables';
 @import './base';
+@import 'components/chat/chatBox';
+@import 'components/chat/chatList';
+@import 'components/chat/chatMessage';
+@import 'components/chat/chatInput';
 @import 'components/boxed-view';
 @import 'components/button';
 @import 'components/checkbox';
 @import 'components/currentUser';
+@import 'components/dashboard';
 @import 'components/editProfile';
 @import 'components/header';
 @import 'components/item';

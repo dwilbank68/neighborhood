@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {Meteor} from 'meteor/meteor';
-import {createContainer} from 'meteor/react-meteor-data';
-
-// import ChatBox from './ChatBox.jsx';
-// import {ChatBox} from './ChatBox.jsx';
-export class ChatBox extends Component {
+// import ChatInput from './ChatInput.jsx';
+class ChatInput extends Component {
 
     // constructor(props, context){
     //     super(props, context);
@@ -15,6 +11,7 @@ export class ChatBox extends Component {
     //     }
     //    this.handleClick = this.handleClick.bind(this)
     // }
+
 
     // handleClick(e) {
     //
@@ -25,15 +22,15 @@ export class ChatBox extends Component {
 
     render() {
         return (
-            <div className="chat-box">
-                ChatBox
+            <div className="chat-input">
+                ChatInput
             </div>
         );
     }
 }
 
-// ChatBox.defaultProps = {};
-// ChatBox.propTypes = {
+// ChatInput.defaultProps = {};
+// ChatInput.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -43,30 +40,16 @@ export class ChatBox extends Component {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-
-// -> this.props.loadCourses, this.props.createCourse
-
-//
-// -> this.props.actions.loadCourses();
-
-///////////////////////////// context //////////////////////////////
-
-// ManageCoursePage.contextTypes = {
+// ChatInput.contextTypes = {
 //     router: React.PropTypes.object.isRequired
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-const mapToProps = (props) => {
-    // Meteor.subscribe('bins');
-    // const {binId} = props.params;
-    return {
-        // links: Links.find({}).fetch(),
-        // meteorCall: Meteor.call
-    }
-}
+console.log('------------------------------------------');
+console.log('ChatInput inside ChatInput.jsx',ChatInput);
+console.log('---------------------------------------');
 
-// export default createContainer( mapToProps, ChatBox );
-export default ChatBox;
+export default ChatInput;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)
@@ -74,5 +57,33 @@ export default ChatBox;
 // 3. Arrow functions in your render ( onClick={() => {}} )
 // 4. _.bindAll(this,'methodName','...')
 
-// meteor npm i --save react-addons-pure-render-mixin
-// meteor add react-meteor-data
+
+
+
+
+
+
+//////////////// alternative using ES2016 Property Initializer ////////////////
+
+// no more constructor - no more 'this' binding required
+
+// class ChatInput extends Component {
+
+    // this.state = {
+    //     'whatever':{}
+    // }
+
+    // handleSubmit = (e) => {
+    //    ...
+    //    this.setState({
+    //        ...
+    //    })
+    // }
+
+    // render() {
+    //     return (
+    //         <div className="chat-input">
+    //         </div>
+    //     );
+    // }
+// }
