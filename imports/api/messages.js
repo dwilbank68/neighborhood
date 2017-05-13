@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import {Mongo} from 'meteor/mongo';
 // import {data} from '../../addresses.js';
-//
+
 export const Messages = new Mongo.Collection('messages');
 //
 if (Meteor.isServer) {
@@ -13,6 +13,7 @@ if (Meteor.isServer) {
                 avatar: 1,
                 body: 1,
                 created: 1,
+                screenName: 1,
                 userId: 1,
                 userName: 1
             }}
@@ -43,16 +44,19 @@ if (Meteor.isServer) {
 // }
 
 Meteor.methods({
-    'messageCreate': function(msg){
+    'messageCreate'(msg){
         // validateMessage(userId, updatesObj);
-        const {avatar, body, userId, userName} = msg;
+        if (!this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+        const {avatar, body, screenName, userId} = msg;
         return Messages.insert(
             {
                 avatar,
                 body,
-                created: new Date.getTime(),
-                userId,
-                userName
+                created: new Date().getTime(),
+                screenName,
+                userId
             }
         )
     }

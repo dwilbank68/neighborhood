@@ -842,7 +842,7 @@ react-addons-pure-render-mixin@^15.5.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
-react-dom@>=0.13.0, react-dom@^15.4.1:
+react-dom@^15.4.1:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
@@ -891,13 +891,6 @@ react-router@^3.0.0:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-scroll-box@~0.2.0:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/react-scroll-box/-/react-scroll-box-0.2.9.tgz#fdd1394e8026a50e4bbe8d46ece4a2f9a22ea0f9"
-  dependencies:
-    react ">=0.13.0"
-    react-dom ">=0.13.0"
-
 react-select@^1.0.0-rc.3:
   version "1.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.3.tgz#94ade090522153067eff09282d0525249ea1d9e3"
@@ -905,21 +898,13 @@ react-select@^1.0.0-rc.3:
     classnames "^2.2.4"
     react-input-autosize "^1.1.0"
 
-react-text-input@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/react-text-input/-/react-text-input-0.0.8.tgz#3f269aa31dbee933c5244c50b519539d7150b29c"
-  dependencies:
-    react ">=0.13.0"
-    react-dom ">=0.13.0"
-    react-scroll-box "~0.2.0"
-
 react-toggle@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-toggle/-/react-toggle-3.0.1.tgz#60d462007ea52ad13442eee4fef262fa53c5ec6f"
   dependencies:
     classnames "^2.2.5"
 
-react@>=0.13.0, react@^15.4.1:
+react@^15.4.1:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:

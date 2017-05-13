@@ -17,15 +17,25 @@ export class ChatBox extends Component {
             this.state = {
                 input:''
             }
-        this.handleInputSubmit = this.handleInputSubmit.bind(this)
+        this.handleMsgSubmit = this.handleMsgSubmit.bind(this)
     }
 
 
 
-    handleInputSubmit(e) {
-        this.setState({
-
-        })
+    handleMsgSubmit(msg) {
+        Meteor.call(
+            'messageCreate',
+            msg,
+            (err, res) => {
+                if (res) {
+                    console.log('------------------------------------------');
+                    console.log('res ',res);
+                    console.log('------------------------------------------');
+                } else {
+                    console.log('err', err);
+                }
+            }
+        )
     }
 
     render() {
@@ -33,7 +43,8 @@ export class ChatBox extends Component {
             <div className="chat-box">
                 ChatBox
                 <ChatList   messages={this.props.messages}/>
-                <ChatInput/>
+                <ChatInput  handleMsgSubmit={this.handleMsgSubmit}
+                            profile={this.props.profile}/>
             </div>
         );
     }
@@ -72,8 +83,8 @@ const mapToProps = (props) => {
     }
 }
 
-// export default createContainer( mapToProps, ChatBox );
-export default ChatBox;
+export default createContainer( mapToProps, ChatBox );
+// export default ChatBox;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

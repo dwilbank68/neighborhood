@@ -7,12 +7,13 @@ import PropTypes from 'prop-types';
 const ChatMessage = ({msg}) => {
     // no lifecycle methods
     // no refs
+    console.log('------------------------------------------');
+    console.log('msg in ChatMessage', msg);
+    console.log('------------------------------------------');
 
-    const methodName = (e) => {
-        //
-    }
 
     return (
+
         <div className="chat-message">
             {/*<a onClick={methodName}>Do It</a>       // note no need to call 'this'*/}
             {msg.userId} {msg.avatar} - {msg.body}

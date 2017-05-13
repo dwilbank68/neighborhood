@@ -31,7 +31,7 @@ export class Dashboard extends Component {
 
     render() {
         // let user = _.omit(Meteor.user(), 'status');
-        // const profile = _.omit(this.props.profiles[Meteor.userId()], 'userId', '_id', 'status');
+        const profile = _.omit(this.props.profiles[Meteor.userId()], '_id', 'status');
         // user = _.merge(user, profile);
         return (
             <div className="dashboard">
@@ -45,7 +45,7 @@ export class Dashboard extends Component {
                         {/*<pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>*/}
                     </div>
                     <div className="right-column">
-                        <ChatBox/>
+                        <ChatBox profile={profile}/>
                     </div>
 
                 </div>

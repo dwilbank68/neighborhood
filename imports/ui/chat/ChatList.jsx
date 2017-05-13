@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import ChatList from './ChatList.jsx';
+import ChatMessage from './ChatMessage.jsx';
+
 class ChatList extends Component {
     
     constructor(props, context){
@@ -23,8 +24,11 @@ class ChatList extends Component {
     renderMessages(){
         if (this.props.messages) {
             return this.props.messages.map((msg, i) => {
+                console.log('------------------------------------------');
+                console.log('msg in ChatList',msg);
+                console.log('------------------------------------------');
                 return (
-                    <ChatMessage key={msg.id}/>
+                    <ChatMessage key={msg._id} msg={msg}/>
                 )
             })
         } else {

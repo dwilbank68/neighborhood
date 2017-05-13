@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Input, TextArea, GenericInput} from 'react-text-input';
 // import ChatInput from './ChatInput.jsx';
 class ChatInput extends Component {
 
@@ -10,6 +9,7 @@ class ChatInput extends Component {
                 input:''
             }
        this.handleInputChange = this.handleInputChange.bind(this)
+       this.prepMessage = this.prepMessage.bind(this)
     }
 
 
@@ -19,14 +19,28 @@ class ChatInput extends Component {
         })
     }
 
+    prepMessage(e){
+        e.preventDefault();
+        const profile = this.props.profile;
+        const msg = {
+            avatar: profile.avatar,
+            body: this.state.input,
+            userId: Meteor.userId(),
+            screenName: profile.screenName
+        }
+        this.props.handleMsgSubmit(msg);
+        this.setState({input:''});
+    }
+
     render() {
         return (
-            <div    className="chat-input" >
-                <TextArea   fitLineLength={true}
-                            ref="chatInput"
-                            onChange={this.handleInputChange}
+            <form   className="chat-input" >
+                <input      onChange={this.handleInputChange}
                             value={this.state.input}/>
-            </div>
+                <button onClick={this.prepMessage}>
+                    Submit
+                </button>
+            </form>
         );
     }
 }
