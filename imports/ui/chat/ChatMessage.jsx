@@ -11,12 +11,23 @@ const ChatMessage = ({msg}) => {
     console.log('msg in ChatMessage', msg);
     console.log('------------------------------------------');
 
+    function handleHover(id){
+        console.log('------------------------------------------');
+        console.log('id ',id);
+        console.log('------------------------------------------');
+    }
 
     return (
 
         <div className="chat-message">
+            <div    className="message-pic"
+                    onMouseOver={handleHover(msg.userId)}>
+                <img src={msg.avatar} />
+            </div>
             {/*<a onClick={methodName}>Do It</a>       // note no need to call 'this'*/}
-            {msg.userId} {msg.avatar} - {msg.body}
+            <div className="message-body">
+                {msg.body}
+            </div>
         </div>
     );
 };
