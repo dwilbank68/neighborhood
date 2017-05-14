@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import ScrollArea from 'react-scrollbar';
+
 import ChatMessage from './ChatMessage.jsx';
 
 class ChatList extends Component {
-    
+
+    componentDidMount() {
+        import '../../utils/preventParentScroll.js';
+    }
+
+
     constructor(props, context){
         super(props, context);
     //     this.state = {
@@ -24,9 +31,6 @@ class ChatList extends Component {
     renderMessages(){
         if (this.props.messages) {
             return this.props.messages.map((msg, i) => {
-                console.log('------------------------------------------');
-                console.log('msg in ChatList',msg);
-                console.log('------------------------------------------');
                 return (
                     <ChatMessage key={msg._id} msg={msg}/>
                 )
@@ -39,10 +43,10 @@ class ChatList extends Component {
 
     render() {
         return (
-            <div className="chat-list">
-                ChatList
+            <ScrollArea className="chat-list"
+                       style={{height: '480px'}}>
                 {this.renderMessages()}
-            </div>
+            </ScrollArea>
         );
     }
 

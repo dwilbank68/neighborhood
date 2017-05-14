@@ -12,6 +12,9 @@ import {Messages} from '../../api/messages';
 // import {ChatBox} from './ChatBox.jsx';
 export class ChatBox extends Component {
 
+
+
+
     constructor(props, context){
         super(props, context);
             this.state = {

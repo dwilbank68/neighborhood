@@ -42,7 +42,7 @@ export class Dashboard extends Component {
                     <div className="left-column">
                         all users
                         <pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>
-                        {/*<pre><code>{JSON.stringify(this.props.allUsers, null, 2)}</code></pre>*/}
+                        <pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>
                     </div>
                     <div className="right-column">
                         <ChatBox profile={profile}/>
@@ -51,6 +51,19 @@ export class Dashboard extends Component {
                 </div>
             </div>
         );
+    }
+
+    renderOnlineUsers() {
+        const usersRaw = this.props.onlineUsers;
+        const profiles = this.props.profiles;
+        let profile;
+        return usersRaw.map(user => {
+            profile = _.omit(profiles[user.id], 'userId', '_id', 'fullName',
+                                                'city', 'emailVisible', 'phone',
+                                                'state', 'zipcode');
+            let userStripped    = _.omit(user, 'email');
+            return _.merge(userStripped, profile);
+        })
     }
 
     renderUsers() {

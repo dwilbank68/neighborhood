@@ -7,9 +7,6 @@ import PropTypes from 'prop-types';
 const ChatMessage = ({msg}) => {
     // no lifecycle methods
     // no refs
-    console.log('------------------------------------------');
-    console.log('msg in ChatMessage', msg);
-    console.log('------------------------------------------');
 
     function handleHover(id){
         console.log('------------------------------------------');
@@ -20,8 +17,7 @@ const ChatMessage = ({msg}) => {
     return (
 
         <div className="chat-message">
-            <div    className="message-pic"
-                    onMouseOver={handleHover(msg.userId)}>
+            <div    className="message-pic">
                 <img src={msg.avatar} />
             </div>
             {/*<a onClick={methodName}>Do It</a>       // note no need to call 'this'*/}
