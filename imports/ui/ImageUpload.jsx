@@ -5,8 +5,9 @@ import _ from 'lodash';
 //import './App.css';
 const CLOUD_NAME = 'dmij4pdz5';
 const CLOUDINARY_UPLOAD_PRESET = 'ycojilpu';
-const CLOUDINARY_UPLOAD_URL= `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
-
+const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
+// const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload/c_pad,g_center,h_200,w_200,b_auto:predominant_gradient:2`;
+// const CLOUDINARY_UPLOAD_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_pad,g_center,h_200,w_200,b_auto:predominant_gradient:2`;
 export default class ImageUpload extends React.Component {
     constructor(props) {
         super(props);

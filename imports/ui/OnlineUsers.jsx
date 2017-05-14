@@ -1,76 +1,51 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ScrollArea from 'react-scrollbar';
+// import OnlineUsers from './OnlineUsers.jsx';
+class OnlineUsers extends Component {
 
-import ChatMessage from './ChatMessage.jsx';
-
-class ChatList extends Component {
-
-    // componentDidMount() {
-    //     import '../../utils/preventParentScroll.js';
+    // constructor(props, context){
+    //     super(props, context);
+    //     this.state = {
+    //         whatever:{}
+    //     }
+    //    this.handleClick = this.handleClick.bind(this)
     // }
 
 
-    constructor(props, context){
-        super(props, context);
-    //     this.state = {
-            messages:[]
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    }
-    
-    
     // handleClick(e) {
-    //    
+    //
     //    this.setState({
-    //        
+    //
     //    })
     // }
 
-    renderMessages(){
-        if (this.props.messages) {
-            return this.props.messages.map((msg, i) => {
-                return (
-                    <ChatMessage key={msg._id} msg={msg}/>
-                )
-            })
-        } else {
-            return <h3>loading...</h3>
-        }
-
-    }
-
     render() {
         return (
-            <ScrollArea className="chat-list"
-                        smoothScrolling={true}
-                        stopScrollPropagation={true}
-                        style={{height: '480px'}}>
-                {this.renderMessages()}
-            </ScrollArea>
+            <div className="online-users">
+                OnlineUsers
+            </div>
         );
     }
-
 }
 
-// ChatList.defaultProps = {};
-ChatList.propTypes = {
+// OnlineUsers.defaultProps = {};
+// OnlineUsers.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
-    messages:    PropTypes.arrayOf(React.PropTypes.object),
+//     comments:    PropTypes.arrayOf(React.PropTypes.object),
 //     date:        PropTypes.instanceOf(Date)
-};
+// };
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-// ChatList.contextTypes = {
+// OnlineUsers.contextTypes = {
 //     router: React.PropTypes.object.isRequired
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-export default ChatList;
+export default OnlineUsers;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)
@@ -88,22 +63,22 @@ export default ChatList;
 
 // no more constructor - no more 'this' binding required
 
-// class ChatList extends Component {
-    
+// class OnlineUsers extends Component {
+
     // this.state = {
     //     'whatever':{}
     // }
-    
+
     // handleSubmit = (e) => {
     //    ...
     //    this.setState({
     //        ...
     //    })
     // }
-    
+
     // render() {
     //     return (
-    //         <div className="chat-list">
+    //         <div className="online-users">
     //         </div>
     //     );
     // }
