@@ -1,27 +1,32 @@
-import React, {Component} from 'react';
-
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
+import {Profiles} from '../api/profiles';
 import _ from 'lodash';
 
-import PrivateHeader from './PrivateHeader';
-import ChatBox from './chat/ChatBox';
-import Users from './Users';
-
-import {Profiles} from '../api/profiles';
-
-
-export class Dashboard extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            isOpen: false
-        }
-        // this.handleClick = this.handleClick.bind(this)
+const style = {
+    main: {
+        display: 'flex'
+    },
+    img: {
+        height: '30px',
+        borderRadius: '50%'
     }
+}
+
+// import OnlineUsers from './OnlineUsers.jsx';
+// import {OnlineUsers} from './OnlineUsers.jsx';
+export class Users extends Component {
+
+    // constructor(props, context){
+    //     super(props, context);
+    //     this.state = {
+    //         whatever:{}
+    //     }
+    //    this.handleClick = this.handleClick.bind(this)
+    // }
 
     // handleClick(e) {
     //
@@ -30,38 +35,47 @@ export class Dashboard extends Component {
     //    })
     // }
 
-    render() {
-        // let user = _.omit(Meteor.user(), 'status');
-        const profile = _.omit(this.props.profiles[Meteor.userId()], '_id', 'status');
-        // user = _.merge(user, profile);
-        return (
-            <div className="dashboard">
-                {/*<PrivateHeader title="Dashboard" user={user}/>*/}
-                <PrivateHeader title=""/>
-                <Users className="online-users"/>
-                <div className="page-content">
-                    <div className="left-column">
-                        all users
-                        {/*<pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>*/}
-                        {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
-                    </div>
-                    <div className="right-column">
-                        <ChatBox profile={profile}/>
-                    </div>
+    renderAllUsers() {
+        const usersRaw = this.props.allUsers;
+        const profiles = this.props.profiles;
+        let profile;
+        return usersRaw.map(user => {
+            profile = _.omit(profiles[user.id], 'userId', '_id');
+            return _.merge(user, profile);
+        })
+    }
 
+    renderOnlineUsers() {
+        const usersRaw = this.props.onlineUsers;
+        const profiles = this.props.profiles;
+        let profile;
+        return usersRaw.map(user => {
+            profile = _.omit(profiles[user.id], 'userId', '_id', 'fullName',
+                'city', 'emailVisible', 'phone',
+                'state', 'zipcode');
+            let userStripped    = _.omit(user, 'email');
+            let onlineUser = _.merge(userStripped, profile);
+            return (
+                <div    className="online-user">
+                    <img    src={onlineUser.avatar}
+                            style={style.img}/>
                 </div>
+            )
+        })
+    }
+
+    render() {
+        return (
+            <div className="online-users"
+                 style={style.main} >
+                {this.renderOnlineUsers()}
             </div>
         );
     }
-
-
-
-
-
 }
 
-// Dashboard.defaultProps = {};
-// Dashboard.propTypes = {
+// OnlineUsers.defaultProps = {};
+// OnlineUsers.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -92,12 +106,6 @@ const mapToProps = (props) => {
     const onlineUsers = Meteor.users.find({"status.online": true}).fetch();
     const profiles = Profiles.find({}).fetch();
     return {
-        allUsers: allUsers.map(u => {
-            return {
-                email: u.emails[0].address,
-                id: u._id
-            }
-        }),
         onlineUsers: onlineUsers.map(u => {
             return {
                 email: u.emails[0].address,
@@ -110,8 +118,8 @@ const mapToProps = (props) => {
     }
 }
 
-export default createContainer(mapToProps, Dashboard);
-// export default Dashboard;
+export default createContainer( mapToProps, Users );
+// export default OnlineUsers;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)
