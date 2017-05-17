@@ -1,0 +1,39 @@
+//const style = {
+//    main: {
+//      display: 'flex'
+//    },
+//  img: {
+//    borderRadius: '50%',
+//    height: '30px',
+//    marginLeft: '5px'
+//  },
+//  userDisplay: {
+//    display: 'flex'
+//  },
+//  userDisplaySwitch: {
+//    width: '100px'
+//  },
+//  onlineUser: {
+//    position: 'relative'
+//  },
+//  infoBox: {
+//    left: '-90px',
+//    position: 'absolute',
+//    transition: 'opacity .5s'
+//  }
+//}
+
+.user {
+    position: relative;
+}
+
+.user-img:hover + .user-info {
+  opacity: 1;
+}
+
+.user-info {
+    left: -90px;
+    opacity: 0;
+    position: absolute !important;
+    transition: opacity .5s;
+}

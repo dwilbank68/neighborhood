@@ -25,6 +25,14 @@ const style = {
     },
     userDisplaySwitch: {
         width: '100px'
+    },
+    onlineUser: {
+        position: 'relative'
+    },
+    infoBox: {
+        left: '-90px',
+        position: 'absolute',
+        transition: 'opacity .5s'
     }
 }
 
@@ -33,17 +41,32 @@ export class Users extends Component {
     constructor(props, context){
         super(props, context);
         this.state = {
-            onlineUsersOnly:true,
-            showProfile: false
+            onlineUsersOnly:true
+            // visibleProfile: null
         }
-        this.handleMouseOver = this.handleMouseOver.bind(this)
+        // this.handleHover = this.handleHover.bind(this)
+        // this.handleLeave = this.handleLeave.bind(this)
     }
 
-    handleMouseOver(e) {
-       this.setState({
-
-       })
-    }
+    // handleHover(userId) {
+    //     this.showProfile(userId);
+    // }
+    //
+    // handleLeave(){
+    //     this.hideProfile();
+    // }
+    //
+    // hideProfile(){
+    //     this.setState({
+    //         visibleProfile: null
+    //     })
+    // }
+    //
+    // showProfile(userId){
+    //     this.setState({
+    //          visibleProfile: userId
+    //     })
+    // }
 
     // renderAllUsers() {
     //     const usersRaw = this.props.allUsers;
@@ -87,13 +110,13 @@ export class Users extends Component {
                                                 size={30}
                                                 style={style.img}/>
                 return (
-                    <div    className="online-user"
+                    <div    className='user'
                             key={user.id} >
-                        <div    onMouseOver={this.handleMouseOver}>
+                        <div    className="user-img">
                             {user.avatar ? img : gravatar}
                         </div>
-                        <div className="info-box">
-                            {this.state.showProfile ? <CurrentUser user={user}/> : null}
+                        <div className='user-info'>
+                            <CurrentUser user={user}/>
                         </div>
                     </div>
                 )
