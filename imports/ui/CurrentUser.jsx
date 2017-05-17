@@ -2,34 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Gravatar from 'react-gravatar'
 
-// import CurrentUser from './CurrentUser.jsx';
-// const CurrentUser = (props) => {
-const CurrentUser = (props) => {
-    const {address, city, state, zipcode,
-        fullName, screenName, avatar,
-        emailVisible, emails, phone} = props.user;
+const CurrentUser = ({user}) => {
+    if (!user) return <div>...loading</div>;
+    if (user) {
+        const {address, city, state, zipcode,
+            fullName, screenName, avatar,
+            emailVisible, email, phone} = user;
 
-    const img = <img    src={avatar} />;
-    const gravatar = <Gravatar   email={emails ? emails[0].address:''}
-                                 size={70}/>
-    return (
-        <div className="current-user">
-            <div className="userbadge">
-                <div className="userbadge-pic">
-                    {avatar ? img : gravatar}
+        const img = <img    src={avatar} />;
+        const gravatar = <Gravatar   email={email ? email:''}
+                                     size={70}/>
+        return (
+            <div className="current-user">
+                <div className="userbadge">
+                    <div className="userbadge-pic">
+                        {avatar ? img : gravatar}
+                    </div>
+                    <div className="userbadge-body">
+                        <p>{screenName} {fullName ? '(' + fullName + ')' : null}</p>
+                        <p>{address}</p>
+                        <p>{city}, {state} {zipcode}</p>
+                        <p>{phone ? phone : '(phone private)'}</p>
+                        <p>{emailVisible ? email : '(email private)'}</p>
+                    </div>
+                </div>
 
-                </div>
-                <div className="userbadge-body">
-                    <p>{screenName} {fullName ? '(' + fullName + ')' : null}</p>
-                    <p>{address}</p>
-                    <p>{city}, {state} {zipcode}</p>
-                    <p>{phone ? phone : '(phone private)'}</p>
-                    <p>{emailVisible ? emails[0].address : '(email private)'}</p>
-                </div>
             </div>
+        );
+    }
 
-        </div>
-    );
+
 };
 
 

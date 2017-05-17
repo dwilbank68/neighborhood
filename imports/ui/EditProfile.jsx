@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
 import {Meteor} from 'meteor/meteor';
-import {createContainer} from 'meteor/react-meteor-data';
+// import {createContainer} from 'meteor/react-meteor-data';
 
 import Toggle from 'react-toggle'
 
@@ -85,12 +85,15 @@ export class EditProfile extends Component {
     }
 
     handleOpenModal(){
-        const {emails} = this.props.user;
-        const {address, city, state, zipcode,
-                fullName, screenName, avatar, phone, emailVisible} = this.props.prof;
-        this.setState({address, city, state, zipcode,
-                fullName, screenName, avatar, phone, emailVisible, emails});
-        this.setState({modalOpen:true});
+        const {
+            address, avatar, city, email, emailVisible,
+            fullName, phone, screenName, state, zipcode
+        } = this.props.currentUser;
+        this.setState({
+            address, avatar, city, email, emailVisible,
+            fullName, phone, screenName, state, zipcode,
+            modalOpen: true
+        });
     }
 
     handlePhoneChange(e){
@@ -120,7 +123,7 @@ export class EditProfile extends Component {
 
                 <div    className="edit-profile-click"
                         onClick={this.handleOpenModal}>
-                    <CurrentUser user={user}/>
+                    <CurrentUser user={this.props.currentUser}/>
                     <div className="overlay">
                         <div className="overlay-text">
                             Edit
@@ -209,18 +212,18 @@ export class EditProfile extends Component {
 // -> this.props.actions.loadCourses();
 
 
-const mapToProps = (props) => {
-    Meteor.subscribe('currentProfile');
-    const myProfile = Profiles.find({userId:Meteor.userId()}).fetch();
-    return {
-        prof: myProfile[0],
-        user: Meteor.user()
-        // meteorCall: Meteor.call
-    }
-}
+// const mapToProps = (props) => {
+//     Meteor.subscribe('currentProfile');
+//     const myProfile = Profiles.find({userId:Meteor.userId()}).fetch();
+//     return {
+//         prof: myProfile[0],
+//         user: Meteor.user()
+//         // meteorCall: Meteor.call
+//     }
+// }
 
-export default createContainer( mapToProps, EditProfile );
-// export default EditProfile;
+// export default createContainer( mapToProps, EditProfile );
+export default EditProfile;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

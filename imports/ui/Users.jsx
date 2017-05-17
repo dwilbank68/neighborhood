@@ -2,73 +2,120 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
-import {createContainer} from 'meteor/react-meteor-data';
-import {Profiles} from '../api/profiles';
-import _ from 'lodash';
+
+import Gravatar from 'react-gravatar'
+
+// import {createContainer} from 'meteor/react-meteor-data';
+
+// import {Profiles} from '../api/profiles';
+// import _ from 'lodash';
+import CurrentUser from './CurrentUser';
 
 const style = {
     main: {
         display: 'flex'
     },
     img: {
+        borderRadius: '50%',
         height: '30px',
-        borderRadius: '50%'
+        marginLeft: '5px'
+    },
+    userDisplay: {
+        display: 'flex'
+    },
+    userDisplaySwitch: {
+        width: '100px'
     }
 }
 
-// import OnlineUsers from './OnlineUsers.jsx';
-// import {OnlineUsers} from './OnlineUsers.jsx';
 export class Users extends Component {
 
-    // constructor(props, context){
-    //     super(props, context);
-    //     this.state = {
-    //         whatever:{}
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    // }
-
-    // handleClick(e) {
-    //
-    //    this.setState({
-    //
-    //    })
-    // }
-
-    renderAllUsers() {
-        const usersRaw = this.props.allUsers;
-        const profiles = this.props.profiles;
-        let profile;
-        return usersRaw.map(user => {
-            profile = _.omit(profiles[user.id], 'userId', '_id');
-            return _.merge(user, profile);
-        })
+    constructor(props, context){
+        super(props, context);
+        this.state = {
+            onlineUsersOnly:true,
+            showProfile: false
+        }
+        this.handleMouseOver = this.handleMouseOver.bind(this)
     }
 
-    renderOnlineUsers() {
-        const usersRaw = this.props.onlineUsers;
-        const profiles = this.props.profiles;
-        let profile;
-        return usersRaw.map(user => {
-            profile = _.omit(profiles[user.id], 'userId', '_id', 'fullName',
-                'city', 'emailVisible', 'phone',
-                'state', 'zipcode');
-            let userStripped    = _.omit(user, 'email');
-            let onlineUser = _.merge(userStripped, profile);
-            return (
-                <div    className="online-user">
-                    <img    src={onlineUser.avatar}
-                            style={style.img}/>
-                </div>
-            )
-        })
+    handleMouseOver(e) {
+       this.setState({
+
+       })
+    }
+
+    // renderAllUsers() {
+    //     const usersRaw = this.props.allUsers;
+    //     const profiles = this.props.profiles;
+    //     let profile;
+    //     return usersRaw.map(user => {
+    //         profile = _.omit(profiles[user.id], 'userId', '_id');
+    //         return _.merge(user, profile);
+    //     })
+    // }
+    //
+    // renderOnlineUsers() {
+    //     const usersRaw = this.props.onlineUsers;
+    //     const profiles = this.props.profiles;
+    //     let profile;
+    //     return usersRaw.map(user => {
+    //         profile = _.omit(profiles[user.id], 'userId', '_id', 'fullName',
+    //             'city', 'emailVisible', 'phone',
+    //             'state', 'zipcode');
+    //         let userStripped    = _.omit(user, 'email');
+    //         let onlineUser = _.merge(userStripped, profile);
+    //         return (
+    //             <div    className="online-user"
+    //                     key={onlineUser.id} >
+    //                 <img    src={onlineUser.avatar}
+    //                         style={style.img}/>
+    //             </div>
+    //         )
+    //     })
+    // }
+
+    renderUsers(){
+        if (this.props.users) {
+            const allUsers =    this.props.users;
+            const onlineUsers = allUsers.filter(u => u.online == true);
+            let displayedUsers = this.state.onlineUsersOnly ? onlineUsers : allUsers;
+            return displayedUsers.map((user, i) => {
+                const img =         <img        src={user.avatar}
+                                                style={style.img}/>;
+                const gravatar =    <Gravatar   email={user.email ? user.email:''}
+                                                size={30}
+                                                style={style.img}/>
+                return (
+                    <div    className="online-user"
+                            key={user.id} >
+                        <div    onMouseOver={this.handleMouseOver}>
+                            {user.avatar ? img : gravatar}
+                        </div>
+                        <div className="info-box">
+                            {this.state.showProfile ? <CurrentUser user={user}/> : null}
+                        </div>
+                    </div>
+                )
+            })
+        } else {
+            return <div>loading...</div>
+        }
+
     }
 
     render() {
         return (
-            <div className="online-users"
-                 style={style.main} >
-                {this.renderOnlineUsers()}
+            <div  style={style.userDisplay}>
+                <div    onClick={() => this.setState({
+                            onlineUsersOnly: !this.state.onlineUsersOnly
+                        })}
+                        style={style.userDisplaySwitch}>
+                    {this.state.onlineUsersOnly ? 'Online Users' : 'All Users'}
+                </div>
+                <div style={style.main} >
+                    {this.renderUsers()}
+                </div>
             </div>
         );
     }
@@ -98,28 +145,28 @@ export class Users extends Component {
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-const mapToProps = (props) => {
-    Meteor.subscribe('allUsers');
-    Meteor.subscribe('onlineUsers');
-    Meteor.subscribe('profiles');
-    const allUsers = Meteor.users.find().fetch();
-    const onlineUsers = Meteor.users.find({"status.online": true}).fetch();
-    const profiles = Profiles.find({}).fetch();
-    return {
-        onlineUsers: onlineUsers.map(u => {
-            return {
-                email: u.emails[0].address,
-                id: u._id
-            }
-        }),
-        profiles: _.mapKeys(profiles, 'userId')
-        // links: Links.find({}).fetch(),
-        // meteorCall: Meteor.call
-    }
-}
+// const mapToProps = (props) => {
+//     Meteor.subscribe('allUsers');
+//     Meteor.subscribe('onlineUsers');
+//     Meteor.subscribe('profiles');
+//     const allUsers = Meteor.users.find().fetch();
+//     const onlineUsers = Meteor.users.find({"status.online": true}).fetch();
+//     const profiles = Profiles.find({}).fetch();
+//     return {
+//         onlineUsers: onlineUsers.map(u => {
+//             return {
+//                 email: u.emails[0].address,
+//                 id: u._id
+//             }
+//         }),
+//         profiles: _.mapKeys(profiles, 'userId')
+//         // links: Links.find({}).fetch(),
+//         // meteorCall: Meteor.call
+//     }
+// }
 
-export default createContainer( mapToProps, Users );
-// export default OnlineUsers;
+// export default createContainer( mapToProps, Users );
+export default Users;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

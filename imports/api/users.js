@@ -32,16 +32,18 @@ Meteor.publish("allUsers", function () {
         {},
         { fields: {
             emails: 1,
+            _id: 1,
+            'status.idle': 1,
             'status.online': 1
         }}
     );
 });
 
-Meteor.publish("onlineUsers", function () {
-    return Meteor.users.find(
-        {"status.online":true},
-        { fields: {
-            emails: 1
-        }}
-    );
-});
+// Meteor.publish("onlineUsers", function () {
+//     return Meteor.users.find(
+//         {"status.online":true},
+//         { fields: {
+//             emails: 1
+//         }}
+//     );
+// });

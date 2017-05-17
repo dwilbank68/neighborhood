@@ -31,14 +31,14 @@ export class Dashboard extends Component {
     // }
 
     render() {
-        // let user = _.omit(Meteor.user(), 'status');
-        const profile = _.omit(this.props.profiles[Meteor.userId()], '_id', 'status');
-        // user = _.merge(user, profile);
+
         return (
             <div className="dashboard">
                 {/*<PrivateHeader title="Dashboard" user={user}/>*/}
-                <PrivateHeader title=""/>
-                <Users className="online-users"/>
+
+                <PrivateHeader  title=""
+                                currentUser={this.props.currentUser}/>
+                <Users  users={this.props.allUsers} />
                 <div className="page-content">
                     <div className="left-column">
                         all users
@@ -46,7 +46,7 @@ export class Dashboard extends Component {
                         {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
                     </div>
                     <div className="right-column">
-                        <ChatBox profile={profile}/>
+                        {/*<ChatBox profile={profile}/>*/}
                     </div>
 
                 </div>
@@ -86,28 +86,32 @@ export class Dashboard extends Component {
 
 const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
-    Meteor.subscribe('onlineUsers');
     Meteor.subscribe('profiles');
-    const allUsers = Meteor.users.find().fetch();
-    const onlineUsers = Meteor.users.find({"status.online": true}).fetch();
+    const users = Meteor.users.find().fetch();
     const profiles = Profiles.find({}).fetch();
-    return {
-        allUsers: allUsers.map(u => {
+    if (profiles.length > 0 && users.length > 0) {
+        const profilesObj = _.mapKeys(profiles, 'userId');
+        let profile;
+        let mergedUsers = users.map(u => {
+            profile = profilesObj[u._id];
+            const { screenName, emailVisible, fullName, avatar, address, city, state, zipcode, phone } = profile;
             return {
-                email: u.emails[0].address,
-                id: u._id
+                screenName, fullName, avatar, address, city, state, zipcode, phone, emailVisible,
+                email: emailVisible ? u.emails[0].address : null,
+                id: u._id,
+                online: u.status.online,
             }
-        }),
-        onlineUsers: onlineUsers.map(u => {
-            return {
-                email: u.emails[0].address,
-                id: u._id
-            }
-        }),
-        profiles: _.mapKeys(profiles, 'userId')
-        // links: Links.find({}).fetch(),
-        // meteorCall: Meteor.call
+        });
+        let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
+        return {
+            allUsers: mergedUsers,
+            currentUser
+        }
+    } else {
+        return [{}];
     }
+//
+//
 }
 
 export default createContainer(mapToProps, Dashboard);
