@@ -12,9 +12,6 @@ import Gravatar from 'react-gravatar'
 import CurrentUser from './CurrentUser';
 
 const style = {
-    main: {
-        display: 'flex'
-    },
     img: {
         borderRadius: '50%',
         height: '30px',
@@ -41,32 +38,29 @@ export class Users extends Component {
     constructor(props, context){
         super(props, context);
         this.state = {
-            onlineUsersOnly:true
-            // visibleProfile: null
+            filterText: '',
+            selectedUser: null
         }
-        // this.handleHover = this.handleHover.bind(this)
-        // this.handleLeave = this.handleLeave.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    // handleHover(userId) {
-    //     this.showProfile(userId);
-    // }
-    //
-    // handleLeave(){
-    //     this.hideProfile();
-    // }
-    //
-    // hideProfile(){
-    //     this.setState({
-    //         visibleProfile: null
-    //     })
-    // }
-    //
-    // showProfile(userId){
-    //     this.setState({
-    //          visibleProfile: userId
-    //     })
-    // }
+    handleChange(e) {
+        this.setState({
+            filterText: e.target.value
+        })
+    }
+
+    handleClick(userId) {
+        this.showProfile(userId);
+    }
+
+    showProfile(userId){
+        const selectedUser = this.props.users.find(u => u.id == userId);
+        this.setState({
+             selectedUser
+        })
+    }
 
     // renderAllUsers() {
     //     const usersRaw = this.props.allUsers;
@@ -100,10 +94,13 @@ export class Users extends Component {
 
     renderUsers(){
         if (this.props.users) {
-            const allUsers =    this.props.users;
-            const onlineUsers = allUsers.filter(u => u.online == true);
-            let displayedUsers = this.state.onlineUsersOnly ? onlineUsers : allUsers;
-            return displayedUsers.map((user, i) => {
+            const allUsers = this.props.users.filter((u) => {
+                return u
+                    .screenName
+                    .toLowerCase()
+                    .search(this.state.filterText.toLowerCase()) !== -1;
+            });
+            return allUsers.map((user, i) => {
                 const img =         <img        src={user.avatar}
                                                 style={style.img}/>;
                 const gravatar =    <Gravatar   email={user.email ? user.email:''}
@@ -111,13 +108,16 @@ export class Users extends Component {
                                                 style={style.img}/>
                 return (
                     <div    className='user'
-                            key={user.id} >
-                        <div    className="user-img">
+                            key={user.id}
+                            onClick={() => this.handleClick(user.id)}>
+
+                        <div className="user-img">
                             {user.avatar ? img : gravatar}
                         </div>
-                        <div className='user-info'>
-                            <CurrentUser user={user}/>
+                        <div className="user-short-name">
+                            {user.screenName}
                         </div>
+
                     </div>
                 )
             })
@@ -128,17 +128,27 @@ export class Users extends Component {
     }
 
     render() {
+
         return (
-            <div  style={style.userDisplay}>
-                <div    onClick={() => this.setState({
-                            onlineUsersOnly: !this.state.onlineUsersOnly
-                        })}
-                        style={style.userDisplaySwitch}>
-                    {this.state.onlineUsersOnly ? 'Online Users' : 'All Users'}
+            <div className="user-display" >
+
+                <div className="user-filter">
+                    <input type="text"
+                            onChange={this.handleChange}/>
                 </div>
-                <div style={style.main} >
+
+                <div className="user-list" >
                     {this.renderUsers()}
                 </div>
+
+                <div>
+                    <CurrentUser user={
+                        this.state.selectedUser ?
+                            this.state.selectedUser :
+                            this.props.currentUser
+                    }/>
+                </div>
+
             </div>
         );
     }

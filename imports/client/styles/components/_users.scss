@@ -1,39 +1,48 @@
-//const style = {
-//    main: {
-//      display: 'flex'
-//    },
-//  img: {
-//    borderRadius: '50%',
-//    height: '30px',
-//    marginLeft: '5px'
-//  },
-//  userDisplay: {
-//    display: 'flex'
-//  },
-//  userDisplaySwitch: {
-//    width: '100px'
-//  },
-//  onlineUser: {
-//    position: 'relative'
-//  },
-//  infoBox: {
-//    left: '-90px',
-//    position: 'absolute',
-//    transition: 'opacity .5s'
-//  }
-//}
+.user-display {
+    //align-items: center;
+    background-color: greenyellow;
+    //display: flex;
+    //justify-content: center;
+    margin-left: 5%;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    width: 300px;
+
+}
+
+.user-filter input {
+    margin-bottom: 4px;
+    margin-left: 4px;
+    width: 90%;
+}
+
+.user-list {
+    background-color: red;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+}
 
 .user {
-    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 50px;
 }
 
-.user-img:hover + .user-info {
-  opacity: 1;
+.user-img {
+    border-radius: 50%;
+    height: 30px;
+    //margin-left: 5px;
 }
 
-.user-info {
-    left: -90px;
-    opacity: 0;
-    position: absolute !important;
-    transition: opacity .5s;
+.user-short-name {
+    font-size: .7em;
+    text-align: center;
+    width: 100%;
 }

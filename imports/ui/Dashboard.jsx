@@ -38,7 +38,8 @@ export class Dashboard extends Component {
 
                 <PrivateHeader  title=""
                                 currentUser={this.props.currentUser}/>
-                <Users  users={this.props.allUsers} />
+                <Users  currentUser={this.props.currentUser}
+                        users={this.props.allUsers} />
                 <div className="page-content">
                     <div className="left-column">
                         all users
@@ -99,7 +100,7 @@ const mapToProps = (props) => {
                 screenName, fullName, avatar, address, city, state, zipcode, phone, emailVisible,
                 email: emailVisible ? u.emails[0].address : null,
                 id: u._id,
-                online: u.status.online,
+                online: u.status ? u.status.online : true
             }
         });
         let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
