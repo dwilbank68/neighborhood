@@ -38,16 +38,17 @@ export class Dashboard extends Component {
 
                 <PrivateHeader  title=""
                                 currentUser={this.props.currentUser}/>
-                <Users  currentUser={this.props.currentUser}
-                        users={this.props.allUsers} />
+
                 <div className="page-content">
                     <div className="left-column">
-                        all users
+
                         {/*<pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>*/}
                         {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
                     </div>
                     <div className="right-column">
-                        {/*<ChatBox profile={profile}/>*/}
+                        <Users  currentUser={this.props.currentUser}
+                                users={this.props.allUsers} />
+                        <ChatBox currentUser={this.props.currentUser}/>
                     </div>
 
                 </div>
@@ -95,7 +96,8 @@ const mapToProps = (props) => {
         let profile;
         let mergedUsers = users.map(u => {
             profile = profilesObj[u._id];
-            const { screenName, emailVisible, fullName, avatar, address, city, state, zipcode, phone } = profile;
+            const { screenName, emailVisible, fullName, avatar,
+                address, city, state, zipcode, phone } = profile;
             return {
                 screenName, fullName, avatar, address, city, state, zipcode, phone, emailVisible,
                 email: emailVisible ? u.emails[0].address : null,

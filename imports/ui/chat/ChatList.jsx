@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import ScrollArea from 'react-scrollbar';
@@ -7,9 +8,14 @@ import ChatMessage from './ChatMessage.jsx';
 
 class ChatList extends Component {
 
-    // componentDidMount() {
-    //     import '../../utils/preventParentScroll.js';
-    // }
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        this.scrollToBottom();
+    }
 
 
     constructor(props, context){
@@ -19,22 +25,25 @@ class ChatList extends Component {
     //     }
     //    this.handleClick = this.handleClick.bind(this)
     }
-    
-    
-    // handleClick(e) {
-    //    
-    //    this.setState({
-    //        
-    //    })
-    // }
+
+    scrollToBottom () {
+        const node = ReactDOM.findDOMNode(this.refs.messagesEnd);
+        node.scrollIntoView({behavior: "smooth"});
+    }
 
     renderMessages(){
         if (this.props.messages) {
-            return this.props.messages.map((msg, i) => {
+            const msgList = this.props.messages.map((msg, i) => {
                 return (
                     <ChatMessage key={msg._id} msg={msg}/>
                 )
             })
+            msgList.push(
+                <div    style={ {float:"left", clear: "both"} }
+                        ref="messagesEnd">
+                </div>
+            )
+            return msgList;
         } else {
             return <h3>loading...</h3>
         }
@@ -43,12 +52,17 @@ class ChatList extends Component {
 
     render() {
         return (
-            <ScrollArea className="chat-list"
-                        smoothScrolling={true}
-                        stopScrollPropagation={true}
-                        style={{height: '480px'}}>
-                {this.renderMessages()}
-            </ScrollArea>
+            <div>
+                <ScrollArea className="chat-list"
+                            id="chat-list"
+                            smoothScrolling={true}
+                            stopScrollPropagation={true}
+                            style={{height: '510px'}}>
+                    {this.renderMessages()}
+                </ScrollArea>
+            </div>
+
+
         );
     }
 

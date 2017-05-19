@@ -21,12 +21,12 @@ class ChatInput extends Component {
 
     prepMessage(e){
         e.preventDefault();
-        const profile = this.props.profile;
+        const currentUser = this.props.currentUser;
         const msg = {
-            avatar: profile.avatar,
+            avatar: currentUser.avatar,
             body: this.state.input,
             userId: Meteor.userId(),
-            screenName: profile.screenName
+            screenName: currentUser.screenName
         }
         this.props.handleMsgSubmit(msg);
         this.setState({input:''});

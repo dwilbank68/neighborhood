@@ -12,9 +12,6 @@ import {Messages} from '../../api/messages';
 // import {ChatBox} from './ChatBox.jsx';
 export class ChatBox extends Component {
 
-
-
-
     constructor(props, context){
         super(props, context);
             this.state = {
@@ -47,7 +44,7 @@ export class ChatBox extends Component {
                 ChatBox
                 <ChatList   messages={this.props.messages}/>
                 <ChatInput  handleMsgSubmit={this.handleMsgSubmit}
-                            profile={this.props.profile}/>
+                            currentUser={this.props.currentUser}/>
             </div>
         );
     }

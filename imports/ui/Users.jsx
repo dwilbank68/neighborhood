@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import {Meteor} from 'meteor/meteor';
 
 import Gravatar from 'react-gravatar'
+import Masonry from 'react-masonry-component';
 
+var masonryOptions = {
+    transitionDuration: 300
+};
 // import {createContainer} from 'meteor/react-meteor-data';
 
 // import {Profiles} from '../api/profiles';
@@ -95,10 +99,19 @@ export class Users extends Component {
     renderUsers(){
         if (this.props.users) {
             const allUsers = this.props.users.filter((u) => {
-                return u
-                    .screenName
-                    .toLowerCase()
-                    .search(this.state.filterText.toLowerCase()) !== -1;
+                return (
+                    u.screenName
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                    ||
+                    u.fullName
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                    ||
+                    u.address
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                )
             });
             return allUsers.map((user, i) => {
                 const img =         <img        src={user.avatar}
@@ -134,11 +147,14 @@ export class Users extends Component {
 
                 <div className="user-filter">
                     <input type="text"
-                            onChange={this.handleChange}/>
+                            onChange={this.handleChange}
+                            placeholder="filter by name or addresses"/>
                 </div>
 
                 <div className="user-list" >
-                    {this.renderUsers()}
+                    <Masonry options={masonryOptions}>
+                        {this.renderUsers()}
+                    </Masonry>
                 </div>
 
                 <div>
