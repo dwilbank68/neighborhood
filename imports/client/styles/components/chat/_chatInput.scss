@@ -24,8 +24,9 @@
     height: 48px;
     width: 310px;
 
-    word-wrap: break-word;
-    word-break: break-all;
+    &:focus {
+        border: none !important;
+    }
 }
 
 .chat-input-button {

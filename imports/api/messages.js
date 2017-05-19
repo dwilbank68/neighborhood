@@ -59,5 +59,12 @@ Meteor.methods({
                 userId
             }
         )
+    },
+    'messageDelete'(msgId){
+        // validateMessage(userId, updatesObj);
+        if (!this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+        return Messages.remove({'_id':msgId})
     }
 })

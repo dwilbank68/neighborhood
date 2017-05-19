@@ -26,6 +26,23 @@ class ChatList extends Component {
     //    this.handleClick = this.handleClick.bind(this)
     }
 
+    deleteMsg(msgId){
+
+        Meteor.call(
+            'messageDelete',
+            msgId,
+            (err, res) => {
+                if (res) {
+                    console.log('------------------------------------------');
+                    console.log('res in deleteMsg',res);
+                    console.log('------------------------------------------');
+                } else {
+                    console.log('err in deleteMsg', err);
+                }
+            }
+        )
+    }
+
     scrollToBottom () {
         const node = ReactDOM.findDOMNode(this.refs.messagesEnd);
         node.scrollIntoView({behavior: "smooth"});
@@ -35,9 +52,12 @@ class ChatList extends Component {
         if (this.props.messages) {
             const msgList = this.props.messages.map((msg, i) => {
                 return (
-                    <ChatMessage key={msg._id} msg={msg}/>
+                    <ChatMessage key={msg._id} msg={msg} deleteMsg={this.deleteMsg}/>
                 )
-            })
+            });
+            // push an invisible msg div onto the tail so that our
+            // javascript can have a place to scrollTo each time a
+            // new message comes in
             msgList.push(
                 <div    key='99999blah99999'
                         style={ {float:"left", clear: "both"} }
@@ -56,7 +76,6 @@ class ChatList extends Component {
             <div>
                 <ScrollArea className="chat-list"
                             id="chat-list"
-                            smoothScrolling={true}
                             stopScrollPropagation={true}
                             style={{height: '510px'}}>
                     {this.renderMessages()}
