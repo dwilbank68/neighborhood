@@ -39,7 +39,8 @@ class ChatList extends Component {
                 )
             })
             msgList.push(
-                <div    style={ {float:"left", clear: "both"} }
+                <div    key='99999blah99999'
+                        style={ {float:"left", clear: "both"} }
                         ref="messagesEnd">
                 </div>
             )

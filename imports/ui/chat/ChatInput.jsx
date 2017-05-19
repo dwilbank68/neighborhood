@@ -21,6 +21,9 @@ class ChatInput extends Component {
 
     prepMessage(e){
         e.preventDefault();
+        if (this.state.input == '') {
+            return;
+        }
         const currentUser = this.props.currentUser;
         const msg = {
             avatar: currentUser.avatar,
@@ -35,11 +38,15 @@ class ChatInput extends Component {
     render() {
         return (
             <form   className="chat-input" >
-                <input      onChange={this.handleInputChange}
-                            value={this.state.input}/>
-                <button onClick={this.prepMessage}>
-                    Submit
-                </button>
+                <div className="chat-input-box">
+                    <input      className="chat-input-input"
+                                onChange={this.handleInputChange}
+                                value={this.state.input}/>
+                    <button   className="chat-input-button"
+                            onClick={this.prepMessage}>
+                        &#x27A4;
+                    </button>
+                </div>
             </form>
         );
     }

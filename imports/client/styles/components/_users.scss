@@ -1,12 +1,12 @@
 .user-display {
     //align-items: center;
-    background-color: #AAA;
+    background-color: rgba(0,0,0,.1);
     //display: flex;
     //justify-content: center;
     margin-left: 5%;
     padding-bottom: 4px;
     padding-top: 4px;
-    width: 300px;
+    width: 320px;
 }
 
 .user-filter input {
@@ -16,7 +16,12 @@
 }
 
 .user-list {
-    background-color: #ddd;
+    //-webkit-filter: blur(4px);
+    //-moz-filter: blur(4px);
+    //-o-filter: blur(4px);
+    //-ms-filter: blur(4px);
+    //filter: blur(4px);
+    background-color: rgba(0,0,0,.1);
     height:375px;
     overflow: auto;
 }
