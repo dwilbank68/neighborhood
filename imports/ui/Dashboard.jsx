@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import PrivateHeader from './PrivateHeader';
 import ChatBox from './chat/ChatBox';
@@ -46,9 +47,24 @@ export class Dashboard extends Component {
                         {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
                     </div>
                     <div className="right-column">
-                        <Users  currentUser={this.props.currentUser}
-                                users={this.props.allUsers} />
-                        <ChatBox currentUser={this.props.currentUser}/>
+
+                        <Tabs>
+                            <TabList>
+                                <Tab>Users</Tab>
+                                <Tab>Chat</Tab>
+                            </TabList>
+
+                            <TabPanel>
+                                <Users  currentUser={this.props.currentUser}
+                                        users={this.props.allUsers} />
+                            </TabPanel>
+                            <TabPanel>
+                                <ChatBox currentUser={this.props.currentUser}/>
+                            </TabPanel>
+                        </Tabs>
+
+
+
                     </div>
 
                 </div>

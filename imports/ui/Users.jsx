@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
 
-import Gravatar from 'react-gravatar';
 import gravatar from 'node-gravatar';
 
 import Masonry from 'react-masonry-component';

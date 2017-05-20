@@ -1,22 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Gravatar from 'react-gravatar'
+import gravatar from 'node-gravatar';
 
 const CurrentUser = ({user}) => {
     if (!user) return <div>...loading</div>;
+
+    renderAvatar = (user) => {
+        if (user.avatar) return user.avatar;
+        if (user.email) return gravatar.get(user.email);
+        return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
+    }
+
     if (user) {
         const {address, city, state, zipcode,
             fullName, screenName, avatar,
             emailVisible, email, phone} = user;
 
-        const img = <img    src={avatar} />;
-        const gravatar = <Gravatar   email={email ? email:''}
-                                     size={70}/>
+
         return (
             <div className="current-user">
                 <div className="userbadge">
                     <div className="userbadge-pic">
-                        {avatar ? img : gravatar}
+                        <img src={renderAvatar(user)} />
                     </div>
                     <div className="userbadge-body">
                         <p>{screenName} {fullName ? '(' + fullName + ')' : null}</p>

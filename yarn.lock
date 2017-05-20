@@ -161,7 +161,7 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   dependencies:
     inherits "^2.0.1"
 
-classnames@^2.2.4, classnames@^2.2.5:
+classnames@^2.2.0, classnames@^2.2.4, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -870,7 +870,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
+prop-types@^15.5.0, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
   dependencies:
@@ -1008,6 +1008,13 @@ react-select@^1.0.0-rc.3:
   dependencies:
     classnames "^2.2.4"
     react-input-autosize "^1.1.0"
+
+react-tabs@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-1.0.0.tgz#f150c9f9102dd65dbc94a5a0e1e019d5e3814a7f"
+  dependencies:
+    classnames "^2.2.0"
+    prop-types "^15.5.0"
 
 react-toggle@^3.0.1:
   version "3.0.1"

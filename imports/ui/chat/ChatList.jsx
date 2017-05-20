@@ -76,8 +76,7 @@ class ChatList extends Component {
             <div>
                 <ScrollArea className="chat-list"
                             id="chat-list"
-                            stopScrollPropagation={true}
-                            style={{height: '510px'}}>
+                            stopScrollPropagation={true} >
                     {this.renderMessages()}
                 </ScrollArea>
             </div>

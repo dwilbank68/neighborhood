@@ -12,7 +12,7 @@ const ChatMessage = ({deleteMsg, msg}) => {
 
     convertTime = (ms) => {
         var momentTime = moment.utc(ms);
-        return momentTime.format('MMMM Do YYYY, h:mma');
+        return momentTime.local().format('MMMM Do YYYY, h:mma');
     }
 
     renderAvatar = (msg) => {
