@@ -1,6 +1,6 @@
 .user-display {
     //align-items: center;
-    background-color: rgba(0,0,0,.1);
+    background-color: $shade1;
     //display: flex;
     //justify-content: center;
     margin-left: 5%;
@@ -10,6 +10,7 @@
 }
 
 .user-filter input {
+    font-style: italic;
     margin-bottom: 4px;
     margin-left: 4px;
     width: 90%;
@@ -21,7 +22,7 @@
     //-o-filter: blur(4px);
     //-ms-filter: blur(4px);
     //filter: blur(4px);
-    background-color: rgba(0,0,0,.1);
+    background-color: $shade1;
     height:375px;
     overflow: auto;
 }

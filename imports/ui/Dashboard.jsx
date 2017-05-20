@@ -32,7 +32,6 @@ export class Dashboard extends Component {
     // }
 
     render() {
-
         return (
             <div className="dashboard">
                 {/*<PrivateHeader title="Dashboard" user={user}/>*/}
@@ -50,8 +49,14 @@ export class Dashboard extends Component {
 
                         <Tabs>
                             <TabList>
+                                <Tab>Phone & Info</Tab>
                                 <Tab>Users</Tab>
                                 <Tab>Chat</Tab>
+                                <Tab>Services</Tab>
+                                <Tab>Offers</Tab>
+                                <Tab>Rules</Tab>
+                                <Tab>Announcements</Tab>
+                                <Tab>Wanted</Tab>
                             </TabList>
 
                             <TabPanel>
@@ -61,6 +66,13 @@ export class Dashboard extends Component {
                             <TabPanel>
                                 <ChatBox currentUser={this.props.currentUser}/>
                             </TabPanel>
+                            <TabPanel></TabPanel>
+                            <TabPanel></TabPanel>
+                            <TabPanel></TabPanel>
+                            <TabPanel></TabPanel>
+                            <TabPanel></TabPanel>
+                            <TabPanel></TabPanel>
+
                         </Tabs>
 
 
@@ -70,6 +82,7 @@ export class Dashboard extends Component {
                 </div>
             </div>
         );
+
     }
 
 

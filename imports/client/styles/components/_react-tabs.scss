@@ -1,25 +1,28 @@
 .react-tabs {
   &__tab-list {
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid $white-subdued;
     margin: 0 0 10px;
     padding: 0;
+    width: 330px;
   }
 
   &__tab {
     display: inline-block;
-    border: 1px solid transparent;
+    background: $shade1;
+    border: 1px solid $white-subdued;
     border-bottom: none;
+    border-radius: 5px 5px 0 0;
     bottom: -1px;
+    color: $white-subdued;
     position: relative;
     list-style: none;
     padding: 6px 12px;
     cursor: pointer;
 
     &--selected {
-      background: #fff;
-      border-color: #aaa;
-      color: black;
-      border-radius: 5px 5px 0 0;
+      background: $shade1;
+      border-color: white;
+      color: white;
     }
     &:focus {
       box-shadow: 0 0 5px hsl(208, 99%, 50%);
