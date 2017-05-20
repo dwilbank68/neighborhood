@@ -9,6 +9,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import PrivateHeader from './PrivateHeader';
 import ChatBox from './chat/ChatBox';
+import ServiceBox from './service/ServiceBox';
 import Users from './Users';
 
 import {Profiles} from '../api/profiles';
@@ -58,6 +59,9 @@ export class Dashboard extends Component {
                                 <Tab>Announcements</Tab>
                                 <Tab>Wanted</Tab>
                             </TabList>
+                            <TabPanel>
+                                Phone & Info
+                            </TabPanel>
 
                             <TabPanel>
                                 <Users  currentUser={this.props.currentUser}
@@ -66,8 +70,9 @@ export class Dashboard extends Component {
                             <TabPanel>
                                 <ChatBox currentUser={this.props.currentUser}/>
                             </TabPanel>
-                            <TabPanel></TabPanel>
-                            <TabPanel></TabPanel>
+                            <TabPanel>
+                                <ServiceBox currentUser={this.props.currentUser}/>
+                            </TabPanel>
                             <TabPanel></TabPanel>
                             <TabPanel></TabPanel>
                             <TabPanel></TabPanel>

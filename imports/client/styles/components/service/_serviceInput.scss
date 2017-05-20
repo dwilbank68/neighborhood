@@ -1,0 +1,48 @@
+.service-input {
+    position: absolute;
+    bottom: 0;
+    height: 55px;
+    width: 320px;
+}
+
+.service-input-box {
+    position: relative;
+}
+
+.service-input-input {
+    background: rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 5px;
+    bottom: -52px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 1.1em;
+    left: 5px;
+    padding-left: 10px;
+    position: absolute;
+    right: 5px;
+    height: 48px;
+    width: 310px;
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+.service-input-button {
+    bottom: -36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,.5);
+    font-size: 1.2em;
+    right: 18px;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+
+    &:focus {
+        border: none !important;
+    }
+
+}
