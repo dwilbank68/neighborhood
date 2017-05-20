@@ -1009,10 +1009,6 @@ react-router@^3.0.0:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-scrollbar-js@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-scrollbar-js/-/react-scrollbar-js-1.0.1.tgz#c13fd5d76c5bb858f94fb320f054f5db2b0eadce"
-
 react-scrollbar@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/react-scrollbar/-/react-scrollbar-0.5.1.tgz#012a3727f30ea74d6ff294f4856d75328f3f422b"

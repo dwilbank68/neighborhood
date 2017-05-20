@@ -41,7 +41,7 @@ export class ChatBox extends Component {
     render() {
         return (
             <div className="chat-box">
-                ChatBox
+
                 <ChatList   messages={this.props.messages}/>
                 <ChatInput  handleMsgSubmit={this.handleMsgSubmit}
                             currentUser={this.props.currentUser}/>

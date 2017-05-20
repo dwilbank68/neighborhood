@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-// import ScrollArea from 'react-scrollbar';
-import ReactScrollbar from 'react-scrollbar-js';
+import ScrollArea from 'react-scrollbar';
 
 import ChatMessage from './ChatMessage.jsx';
 
@@ -44,14 +43,9 @@ class ChatList extends Component {
         )
     }
 
-    // scrollToBottom () {
-    //     const node = ReactDOM.findDOMNode(this.refs.messagesEnd);
-    //     node.scrollIntoView({behavior: "smooth"});
-    // }
-
     scrollToBottom () {
-        // scroll.scrollToBottom();
-        this.scroll.scrollToY('100%')
+        const node = ReactDOM.findDOMNode(this.refs.messagesEnd);
+        node.scrollIntoView({behavior: "smooth"});
     }
 
     renderMessages(){
@@ -80,12 +74,12 @@ class ChatList extends Component {
     render() {
         return (
             <div>
-                <ReactScrollbar className="chat-list"
-                                id="chat-list"
-                                ref={(c) => { this.scroll = c; }}
-                                style={{height: '510px'}}>
+                <ScrollArea className="chat-list"
+                            id="chat-list"
+                            stopScrollPropagation={true}
+                            style={{height: '510px'}}>
                     {this.renderMessages()}
-                </ReactScrollbar>
+                </ScrollArea>
             </div>
 
 
