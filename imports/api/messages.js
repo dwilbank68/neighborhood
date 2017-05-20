@@ -13,6 +13,7 @@ if (Meteor.isServer) {
                 avatar: 1,
                 body: 1,
                 created: 1,
+                email: 1,
                 screenName: 1,
                 userId: 1,
                 userName: 1
@@ -49,12 +50,13 @@ Meteor.methods({
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        const {avatar, body, screenName, userId} = msg;
+        const {avatar, body, email, screenName, userId} = msg;
         return Messages.insert(
             {
                 avatar,
                 body,
                 created: new Date().getTime(),
+                email,
                 screenName,
                 userId
             }

@@ -28,6 +28,7 @@ class ChatInput extends Component {
         const msg = {
             avatar: currentUser.avatar,
             body: this.state.input,
+            email: currentUser.email,
             userId: Meteor.userId(),
             screenName: currentUser.screenName
         }

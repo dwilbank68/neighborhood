@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
 
-import Gravatar from 'react-gravatar'
+import Gravatar from 'react-gravatar';
+import gravatar from 'node-gravatar';
+
 import Masonry from 'react-masonry-component';
 
 var masonryOptions = {
@@ -96,6 +98,12 @@ export class Users extends Component {
     //     })
     // }
 
+    renderAvatar(user){
+        if (user.avatar) return user.avatar;
+        if (user.email) return gravatar.get(user.email);
+        return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
+    }
+
     renderUsers(){
         if (this.props.users) {
             const allUsers = this.props.users.filter((u) => {
@@ -114,18 +122,15 @@ export class Users extends Component {
                 )
             });
             return allUsers.map((user, i) => {
-                const img =         <img        src={user.avatar}
-                                                style={style.img}/>;
-                const gravatar =    <Gravatar   email={user.email ? user.email:''}
-                                                size={30}
-                                                style={style.img}/>
+
                 return (
                     <div    className='user'
                             key={user.id}
                             onClick={() => this.handleClick(user.id)}>
 
                         <div className="user-img">
-                            {user.avatar ? img : gravatar}
+                            <img    src={this.renderAvatar(user)}
+                                    style={style.img}/>
                         </div>
                         <div className="user-short-name">
                             {user.screenName}

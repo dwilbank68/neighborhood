@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import moment from 'moment';
+import gravatar from 'node-gravatar';
+
 // import ChatMessage from './ChatMessage.jsx';
 // const ChatMessage = (props) => {
 const ChatMessage = ({deleteMsg, msg}) => {
@@ -11,6 +13,12 @@ const ChatMessage = ({deleteMsg, msg}) => {
     convertTime = (ms) => {
         var momentTime = moment.utc(ms);
         return momentTime.format('MMMM Do YYYY, h:mma');
+    }
+
+    renderAvatar = (msg) => {
+        if (msg.avatar) return msg.avatar;
+        if (msg.email) return gravatar.get(msg.email);
+        return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
     }
 
     renderDeleteButton = (msg) => {
@@ -28,11 +36,10 @@ const ChatMessage = ({deleteMsg, msg}) => {
 
     return (
 
-
-
         <div className="message-chat">
             <div    className="message-chat-pic">
-                <img src={msg.avatar} />
+                {/*<img src={msg.avatar ? msg.avatar : msg.email? gravatar.get(msg.email):'none'} />*/}
+                <img src={renderAvatar(msg)} />
             </div>
 
             <div className="message-chat-text">
