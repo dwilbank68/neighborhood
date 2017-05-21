@@ -46,12 +46,12 @@ if (Meteor.isServer) {
 // }
 
 Meteor.methods({
-    'serviceCreate'(msg){
+    'serviceCreate'(svc){
         // validateMessage(userId, updatesObj);
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        const {avatar, body, category, email, screenName, userId} = msg;
+        const {avatar, body, category, email, screenName, userId} = svc;
         return Services.insert(
             {
                 avatar,
@@ -64,11 +64,11 @@ Meteor.methods({
             }
         )
     },
-    'serviceDelete'(msgId){
+    'serviceDelete'(svcId){
         // validateMessage(userId, updatesObj);
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        return Services.remove({'_id':msgId})
+        return Services.remove({'_id':svcId})
     }
 })

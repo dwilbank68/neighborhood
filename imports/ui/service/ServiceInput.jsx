@@ -18,7 +18,7 @@ class ServiceInput extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleOpenModal = this.handleOpenModal.bind(this)
-        this.prepMessage = this.prepMessage.bind(this)
+        this.prepService = this.prepService.bind(this)
         this.onCategoryChange = this.onCategoryChange.bind(this)
     }
 
@@ -42,27 +42,29 @@ class ServiceInput extends Component {
     }
 
     onCategoryChange(val){
-        console.log('------------------------------------------');
-        console.log('val ',val);
-        console.log('------------------------------------------');
         this.setState({ categories: val });
     }
 
-    prepMessage(e){
+    prepService(e){
         e.preventDefault();
         if (this.state.input == '') {
             return;
         }
         const currentUser = this.props.currentUser;
-        const msg = {
+        const svc = {
             avatar: currentUser.avatar,
+            categories: this.state.categories,
             body: this.state.input,
             email: currentUser.email,
+            reputation: 0,
             userId: Meteor.userId(),
             screenName: currentUser.screenName
         }
-        this.props.handleMsgSubmit(msg);
-        this.setState({input:''});
+        console.log('------------------------------------------');
+        console.log('JSON.stringify(svc , null, 2) ',JSON.stringify(svc , null, 2));
+        console.log('------------------------------------------');
+        this.props.handleSvcSubmit(svc);
+        this.setState({input:'', categories:'', modalOpen: false});
     }
 
     render() {
@@ -98,7 +100,7 @@ class ServiceInput extends Component {
                         <div className="service-input-box">
                             <Select className="category"
                                     multi joinValues simpleValue
-                                    placeholder="Select A Category"
+                                    placeholder="Select One Or More Categories"
                                     options={options}
                                     onChange={ this.onCategoryChange }
                                     value={this.state.categories}/>
@@ -106,14 +108,18 @@ class ServiceInput extends Component {
                                         onChange={this.handleInputChange}
                                         value={this.state.input}/>
                             <button   className="service-input-button"
-                                      onClick={this.prepMessage}>
+                                      onClick={this.prepService}>
                                 Submit
                             </button>
                         </div>
                     </form>
 
                     <div className='button-cancel'
-                         onClick={() => this.setState({modalOpen:false})}>
+                         onClick={() => this.setState({
+                             modalOpen:false,
+                             categories: '',
+                             input: ''
+                         })}>
                         &#x2715;
                     </div>
 

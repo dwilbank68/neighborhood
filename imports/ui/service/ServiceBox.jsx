@@ -17,15 +17,15 @@ export class ServiceBox extends Component {
             this.state = {
                 input:''
             }
-        this.handleMsgSubmit = this.handleMsgSubmit.bind(this)
+        this.handleSvcSubmit = this.handleSvcSubmit.bind(this)
     }
 
 
 
-    handleMsgSubmit(msg) {
+    handleSvcSubmit(svc) {
         Meteor.call(
             'serviceCreate',
-            msg,
+            svc,
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');
@@ -41,8 +41,8 @@ export class ServiceBox extends Component {
     render() {
         return (
             <div className="service-box">
-                <ServiceList   services={this.props.messages}/>
-                <ServiceInput   handleMsgSubmit={this.handleMsgSubmit}
+                <ServiceList   services={this.props.services}/>
+                <ServiceInput   handleSvcSubmit={this.handleSvcSubmit}
                                 currentUser={this.props.currentUser}/>
             </div>
         );
@@ -77,7 +77,7 @@ const mapToProps = (props) => {
     Meteor.subscribe('services');
     // const {binId} = props.params;
     return {
-        messages: Services.find({}).fetch(),
+        services: Services.find({}).fetch(),
         // meteorCall: Meteor.call
     }
 }

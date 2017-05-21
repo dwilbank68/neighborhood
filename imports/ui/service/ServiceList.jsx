@@ -14,31 +14,31 @@ class ServiceList extends Component {
     //    this.handleClick = this.handleClick.bind(this)
     }
 
-    deleteMsg(msgId){
+    deleteSvc(svcId){
 
         Meteor.call(
-            'messageDelete',
-            msgId,
+            'serviceDelete',
+            svcId,
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');
-                    console.log('res in deleteMsg',res);
+                    console.log('res in deleteSvc',res);
                     console.log('------------------------------------------');
                 } else {
-                    console.log('err in deleteMsg', err);
+                    console.log('err in deleteSvc', err);
                 }
             }
         )
     }
 
-    renderMessages(){
-        if (this.props.messages) {
-            const msgList = this.props.messages.map((msg, i) => {
+    renderServices(){
+        if (this.props.services) {
+            const svcList = this.props.services.map((svc, i) => {
                 return (
-                    <ServiceMessage key={msg._id} msg={msg} deleteMsg={this.deleteMsg}/>
+                    <ServiceMessage key={svc._id} svc={svc} deleteSvc={this.deleteSvc}/>
                 )
             });
-            return msgList;
+            return svcList;
         } else {
             return <h3>loading...</h3>
         }
@@ -47,9 +47,9 @@ class ServiceList extends Component {
 
     render() {
         return (
-            <div className="service-list">
-                {this.renderMessages()}
-            </div>
+            <ul className="service-list">
+                {this.renderServices()}
+            </ul>
         );
     }
 
@@ -60,7 +60,7 @@ ServiceList.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
-    messages:    PropTypes.arrayOf(React.PropTypes.object),
+    Services:    PropTypes.arrayOf(React.PropTypes.object),
 //     date:        PropTypes.instanceOf(Date)
 };
 //

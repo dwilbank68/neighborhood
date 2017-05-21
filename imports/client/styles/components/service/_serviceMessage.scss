@@ -1,4 +1,4 @@
-.message-service {
+.service-msg {
     display: flex;
     //background-color: lightblue;
     //border-top-left-radius: 14px;
@@ -8,7 +8,7 @@
     margin-left:    10px;
     margin-right:   10px;
 
-    .message-service-pic {
+    .service-msg-pic {
         img {
             border-radius: 50%;
             height: 35px;
@@ -18,7 +18,7 @@
         }
     }
 
-    .message-service-text {
+    .service-text {
         background: rgba(0,0,0,.15);
         border-bottom-right-radius: 10px;
         border-top-right-radius: 10px;
@@ -27,14 +27,14 @@
         position: relative; // to allow for delete 'x'
     }
 
-    .message-service-text-sender {
+    .service-text-sender {
         margin-left: 10px;
         //font-weight: bold;
         font-size: .7em;
         color: rgba(255,255,255,0.6);
     }
 
-    .message-service-text-body {
+    .service-text-body {
         color: white;
         margin: 10px;
         //margin-bottom: 10px;
@@ -48,7 +48,7 @@
 
 }
 
-.message-service-delete {
+.service-delete {
     position: absolute;
     right: 8px;
     top: 5px;

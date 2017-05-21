@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import gravatar from 'node-gravatar';
 
-// import ChatMessage from './ChatMessage.jsx';
-// const ChatMessage = (props) => {
-const ChatMessage = ({deleteMsg, msg}) => {
+// import ServiceMessage from './ServiceMessage.jsx';
+// const ServiceMessage = (props) => {
+const ServiceMessage = ({deleteSvc, svc}) => {
     // no lifecycle methods
     // no refs
 
@@ -15,17 +15,17 @@ const ChatMessage = ({deleteMsg, msg}) => {
         return momentTime.local().format('MMMM Do YYYY, h:mma');
     }
 
-    renderAvatar = (msg) => {
-        if (msg.avatar) return msg.avatar;
-        if (msg.email) return gravatar.get(msg.email);
+    renderAvatar = (svc) => {
+        if (svc.avatar) return svc.avatar;
+        if (svc.email) return gravatar.get(svc.email);
         return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
     }
 
-    renderDeleteButton = (msg) => {
-        if (msg.userId === Meteor.userId()) {
+    renderDeleteButton = (svc) => {
+        if (svc.userId === Meteor.userId()) {
             return (
-                <div    className="message-chat-delete"
-                        onClick={()=>deleteMsg(msg._id)}>
+                <div    className="service-delete"
+                        onClick={()=>deleteSvc(svc._id)}>
                     &#10005;
                 </div>
             )
@@ -36,34 +36,34 @@ const ChatMessage = ({deleteMsg, msg}) => {
 
     return (
 
-        <div className="message-chat">
-            <div    className="message-chat-pic">
-                {/*<img src={msg.avatar ? msg.avatar : msg.email? gravatar.get(msg.email):'none'} />*/}
-                <img src={renderAvatar(msg)} />
+        <li className="service-msg">
+            <div    className="service-msg-pic">
+                {/*<img src={svc.avatar ? svc.avatar : svc.email? gravatar.get(svc.email):'none'} />*/}
+                <img src={renderAvatar(svc)} />
             </div>
 
-            <div className="message-chat-text">
-                <span className="message-chat-text-sender">
-                    {msg.screenName} - {convertTime(msg.created)}
+            <div className="service-text">
+                <span className="service-text-sender">
+                    {svc.screenName} - {convertTime(svc.created)}
                 </span>
 
-                <div className="message-chat-text-body">
-                    {msg.body}
+                <div className="service-text-body">
+                    {svc.body}
                 </div>
-                {renderDeleteButton(msg)}
+                {renderDeleteButton(svc)}
             </div>
 
-        </div>
+        </li>
     );
 };
 
 
-// ChatMessage.defaultProps = {};
-// ChatMessage.propTypes = {
+// ServiceMessage.defaultProps = {};
+// ServiceMessage.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     hndleIptChg: PropTypes.func,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
-//     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
+//     service:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
 //     comments:    PropTypes.arrayOf(React.PropTypes.object),
 //     todos:       PropTypes.array,
 //     isComplete:  PropTypes.bool,
@@ -73,4 +73,4 @@ const ChatMessage = ({deleteMsg, msg}) => {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-export default ChatMessage;
+export default ServiceMessage;
