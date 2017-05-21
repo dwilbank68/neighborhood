@@ -2,21 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import ScrollArea from 'react-scrollbar';
-
 import ServiceMessage from './ServiceMessage.jsx';
 
 class ServiceList extends Component {
-
-    componentDidMount() {
-        this.scrollToBottom();
-    }
-
-
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        this.scrollToBottom();
-    }
-
 
     constructor(props, context){
         super(props, context);
@@ -43,11 +31,6 @@ class ServiceList extends Component {
         )
     }
 
-    scrollToBottom () {
-        const node = ReactDOM.findDOMNode(this.refs.messagesEnd);
-        node.scrollIntoView({behavior: "smooth"});
-    }
-
     renderMessages(){
         if (this.props.messages) {
             const msgList = this.props.messages.map((msg, i) => {
@@ -55,15 +38,6 @@ class ServiceList extends Component {
                     <ServiceMessage key={msg._id} msg={msg} deleteMsg={this.deleteMsg}/>
                 )
             });
-            // push an invisible msg div onto the tail so that our
-            // javascript can have a place to scrollTo each time a
-            // new message comes in
-            msgList.push(
-                <div    key='99999blah99999'
-                        style={ {float:"left", clear: "both"} }
-                        ref="messagesEnd">
-                </div>
-            )
             return msgList;
         } else {
             return <h3>loading...</h3>
@@ -73,15 +47,9 @@ class ServiceList extends Component {
 
     render() {
         return (
-            <div>
-                <ScrollArea className="chat-list"
-                            id="chat-list"
-                            stopScrollPropagation={true} >
-                    {this.renderMessages()}
-                </ScrollArea>
+            <div className="service-list">
+                {this.renderMessages()}
             </div>
-
-
         );
     }
 

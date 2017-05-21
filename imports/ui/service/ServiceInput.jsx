@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
+import Modal from 'react-modal';
+
+
+import {serviceCategories} from '../../../serviceCategories.js';
+
 // import ServiceInput from './ServiceInput.jsx';
 class ServiceInput extends Component {
 
     constructor(props, context){
         super(props, context);
         this.state = {
-            input:''
+            categories:[],
+            input:'',
+            modalOpen:false,
         }
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleOpenModal = this.handleOpenModal.bind(this)
         this.prepMessage = this.prepMessage.bind(this)
+        this.onCategoryChange = this.onCategoryChange.bind(this)
     }
 
 
@@ -17,6 +27,25 @@ class ServiceInput extends Component {
         this.setState({
             input: e.target.value
         })
+    }
+
+    handleOpenModal(){
+        const {
+            address, avatar, city, email, emailVisible,
+            fullName, phone, screenName, state, zipcode
+        } = this.props.currentUser;
+        this.setState({
+            address, avatar, city, email, emailVisible,
+            fullName, phone, screenName, state, zipcode,
+            modalOpen: true
+        });
+    }
+
+    onCategoryChange(val){
+        console.log('------------------------------------------');
+        console.log('val ',val);
+        console.log('------------------------------------------');
+        this.setState({ categories: val });
     }
 
     prepMessage(e){
@@ -37,19 +66,65 @@ class ServiceInput extends Component {
     }
 
     render() {
-        return (
 
-            <form   className="service-input" >
-                <div className="service-input-box">
-                    <input      className="service-input-input"
-                                onChange={this.handleInputChange}
-                                value={this.state.input}/>
-                    <button   className="service-input-button"
-                              onClick={this.prepMessage}>
-                        &#x27A4;
-                    </button>
+        const options = serviceCategories.categories.map((a) => {
+            return {value:a, label:a}
+        })
+
+        const modalStyle = {
+            overlay: {
+                backgroundColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+
+        return (
+            <div className="service-input">
+
+                <div    className="service-new-button"
+                        onClick={this.handleOpenModal}>
+                    <p>Add Your Skill / Expertise</p> <span>&#10010;</span>
                 </div>
-            </form>
+
+                <Modal  closeTimeoutMS={200}
+                        isOpen={this.state.modalOpen}
+                        contentLabel="Add Skills Or Expertise You Have To Offer"
+                        style={modalStyle}>
+
+                    <p>Describe Skills Or Expertise You Have To Offer</p>
+
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+
+                    <form>
+                        <div className="service-input-box">
+                            <Select className="category"
+                                    multi joinValues simpleValue
+                                    placeholder="Select A Category"
+                                    options={options}
+                                    onChange={ this.onCategoryChange }
+                                    value={this.state.categories}/>
+                            <textarea   className="service-input-input"
+                                        onChange={this.handleInputChange}
+                                        value={this.state.input}/>
+                            <button   className="service-input-button"
+                                      onClick={this.prepMessage}>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+
+                    <div className='button-cancel'
+                         onClick={() => this.setState({modalOpen:false})}>
+                        &#x2715;
+                    </div>
+
+                </Modal>
+
+            </div>
+
+
+
+
+
         );
     }
 }

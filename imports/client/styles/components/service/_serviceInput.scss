@@ -1,31 +1,54 @@
 .service-input {
-    position: absolute;
-    bottom: 0;
-    height: 55px;
+    //position: absolute;
+    background: rgba(0,0,0,.2);
+    color: white;
+    bottom: 0px;
+    height: 50px;
     width: 320px;
 }
 
 .service-input-box {
-    position: relative;
+    //position: relative;
 }
 
 .service-input-input {
-    background: rgba(0,0,0,.2);
+    background: $shade1;
     border: 1px solid rgba(255,255,255,.3);
     border-radius: 5px;
-    bottom: -52px;
+    bottom: 35px;
     box-sizing: border-box;
     color: white;
-    font-size: 1.1em;
-    left: 5px;
-    padding-left: 10px;
-    position: absolute;
-    right: 5px;
-    height: 48px;
-    width: 310px;
+
+    left: 5px; right: 5px; bottom: 30px;
+    height: 240px;
+    width: 100%;
 
     &:focus {
         outline: none !important;
+    }
+}
+
+.Select {
+    padding: .2em !important;
+    font-style: italic;
+}
+
+.service-new-button {
+    align-items: center;
+    //position: absolute;
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
+    width: 100%;
+
+    p {
+        font-size: 1.4em;
+        margin-bottom: .4rem;
+    }
+
+    span {
+        font-size: 1.4em;
+        cursor: pointer;
     }
 }
 
