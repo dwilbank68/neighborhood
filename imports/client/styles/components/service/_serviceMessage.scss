@@ -20,8 +20,6 @@
 
     .service-text {
         background: rgba(0,0,0,.15);
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
         margin-left: 10px;
         margin-right: 15px;
         position: relative; // to allow for delete 'x'
@@ -42,7 +40,8 @@
         //margin-right: 10px;
         font-size: .8em;
         //padding: 5px;
-        width: 225px;
+        white-space: pre-wrap;
+        width: 241px;
         word-wrap: break-word;
     }
 
