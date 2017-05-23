@@ -12,6 +12,8 @@ import ChatBox from './chat/ChatBox';
 import ServiceBox from './service/ServiceBox';
 import Users from './Users';
 
+import {Messages} from '../api/messages';
+import {Services} from '../api/services';
 import {Profiles} from '../api/profiles';
 
 
@@ -31,6 +33,11 @@ export class Dashboard extends Component {
     //
     //    })
     // }
+
+
+    countServices(){
+
+    }
 
     render() {
         return (
@@ -52,8 +59,8 @@ export class Dashboard extends Component {
                             <TabList>
                                 <Tab>Phone & Info</Tab>
                                 <Tab>Users</Tab>
-                                <Tab>Chat</Tab>
-                                <Tab>Services</Tab>
+                                <Tab>Chat ({this.props.messageCount})</Tab>
+                                <Tab>Services ({this.props.serviceCount})</Tab>
                                 <Tab>Offers</Tab>
                                 <Tab>Rules</Tab>
                                 <Tab>Announcements</Tab>

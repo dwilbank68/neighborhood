@@ -42,7 +42,9 @@ class ServiceInput extends Component {
     }
 
     onCategoryChange(val){
-        this.setState({ categories: val });
+        this.setState({
+            categories: val
+        });
     }
 
     prepService(e){
@@ -53,16 +55,13 @@ class ServiceInput extends Component {
         const currentUser = this.props.currentUser;
         const svc = {
             avatar: currentUser.avatar,
-            categories: this.state.categories,
+            categories: this.state.categories.replace(',', '\n'),
             body: this.state.input,
             email: currentUser.email,
             reputation: 0,
             userId: Meteor.userId(),
             screenName: currentUser.screenName
         }
-        console.log('------------------------------------------');
-        console.log('JSON.stringify(svc , null, 2) ',JSON.stringify(svc , null, 2));
-        console.log('------------------------------------------');
         this.props.handleSvcSubmit(svc);
         this.setState({input:'', categories:'', modalOpen: false});
     }

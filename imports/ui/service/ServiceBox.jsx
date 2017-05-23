@@ -75,9 +75,9 @@ export class ServiceBox extends Component {
 
 const mapToProps = (props) => {
     Meteor.subscribe('services');
-    // const {binId} = props.params;
+    const services = Services.find({}).fetch();
     return {
-        services: Services.find({}).fetch(),
+        services
         // meteorCall: Meteor.call
     }
 }

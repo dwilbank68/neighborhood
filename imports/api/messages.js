@@ -21,6 +21,8 @@ if (Meteor.isServer) {
         );
     })
 
+
+
 }
 //
 // export const validateProfile = (userId, profileObj) => {

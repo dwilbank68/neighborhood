@@ -12,9 +12,10 @@ if (Meteor.isServer) {
             { fields: {
                 avatar: 1,
                 body: 1,
-                category: 1,
+                categories: 1,
                 created: 1,
                 email: 1,
+                reputation: 1,
                 screenName: 1,
                 userId: 1,
                 userName: 1
@@ -51,14 +52,15 @@ Meteor.methods({
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        const {avatar, body, category, email, screenName, userId} = svc;
+        const {avatar, body, categories, email, screenName, userId} = svc;
         return Services.insert(
             {
                 avatar,
                 body,
-                category,
+                categories,
                 created: new Date().getTime(),
                 email,
+                reputation: 0,
                 screenName,
                 userId
             }
