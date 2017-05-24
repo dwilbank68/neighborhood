@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {Meteor} from 'meteor/meteor';
+
+
 import moment from 'moment';
 import gravatar from 'node-gravatar';
 import FontAwesome from 'react-fontawesome';
 // import ServiceMessage from './ServiceMessage.jsx';
 // const ServiceMessage = (props) => {
 const ServiceMessage = ({deleteSvc, svc}) => {
-    // no lifecycle methods
-    // no refs
 
     convertTime = (ms) => {
         var momentTime = moment.utc(ms);
         return momentTime.local().format('MMMM Do YYYY, h:mma');
     }
-
 
     renderAvatar = (svc) => {
         if (svc.avatar) return svc.avatar;
@@ -36,10 +36,12 @@ const ServiceMessage = ({deleteSvc, svc}) => {
     }
 
     renderReputation = (svc) => {
-        if (svc.reputation > 0) {
+        const length = svc.reputation.length;
+        if (length > 0) {
+            const units = (length > 1 ? 'customers':'customer');
             return (
                 <span className="service-text-reputation">
-                    {svc.reputation} happy customers
+                    {svc.reputation.length} happy {units}
                 </span>
             )
         } else {
@@ -47,23 +49,30 @@ const ServiceMessage = ({deleteSvc, svc}) => {
         }
     }
 
-    renderVoteButtons = (svc) => {
+    renderThumbsUp = (svc) => {
         if (svc.userId !== Meteor.userId()) {
             return (
-                <div className="service-thumbs-o-box">
-                    <FontAwesome    className="thumbs-o-up"
-                                    name='thumbs-o-up'
-                                    onClick={()=>vote(svc._id, Meteor.userId())}/>
-                </div>
+                <FontAwesome    className="thumbs-o-up"
+                                name='thumbs-o-up'
+                                onClick={()=>vote(svc)}/>
             )
         }
     }
 
-    vote = (svcId, userId) => {
-        console.log('------------------------------------------');
-        console.log('svcId ',svcId);
-        console.log('userId ',userId);
-        console.log('------------------------------------------');
+    vote = (svc) => {
+        Meteor.call(
+            'serviceVote',
+            svc,
+            (err, res) => {
+                if (res) {
+                    console.log('------------------------------------------');
+                    console.log('res in serviceVote',res);
+                    console.log('------------------------------------------');
+                } else {
+                    console.log('err in serviceVote', err);
+                }
+            }
+        )
     }
 
     return (
@@ -81,18 +90,22 @@ const ServiceMessage = ({deleteSvc, svc}) => {
 
                 {renderReputation(svc)}
 
+                {renderThumbsUp(svc)}
+
             </div>
 
             <div className="service-categories">
                 {svc.categories}
             </div>
 
-            <div className="service-body">{svc.body}</div>
+            <div className="service-body">
+                {svc.body}
+            </div>
 
             <div className="service-date">
                 {convertTime(svc.created)}
             </div>
-            {renderVoteButtons(svc)}
+
             {renderDeleteButton(svc)}
         </li>
     );

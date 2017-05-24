@@ -4,7 +4,7 @@ import {Mongo} from 'meteor/mongo';
 // import {data} from '../../addresses.js';
 
 export const Services = new Mongo.Collection('services');
-//
+
 if (Meteor.isServer) {
     Meteor.publish('services', function () {
         return Services.find(
@@ -60,7 +60,7 @@ Meteor.methods({
                 categories,
                 created: new Date().getTime(),
                 email,
-                reputation: 0,
+                reputation: [],
                 screenName,
                 userId
             }
@@ -72,5 +72,30 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
         return Services.remove({'_id':svcId})
+    },
+    'serviceVote'(svc){
+        // validateMessage(userId, updatesObj);
+        if (!this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+        if (svc.hasOwnProperty(userId)) {
+            throw new Meteor.Error('already gave a review');
+        }
+        const userId = this.userId;
+        return Services.update(
+            {'_id': svc._id},
+            {
+                $addToSet: {
+                    'reputation': {
+                        'author': userId
+                    }
+                }
+            }
+        )
+        console.log('------------------------------------------');
+        console.log('userId ', userId);
+        console.log('svc ', svc);
+        console.log('------------------------------------------');
+        // return Services.remove({'_id':svcId})
     }
 })

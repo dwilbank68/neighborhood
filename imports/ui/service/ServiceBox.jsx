@@ -4,23 +4,46 @@ import PropTypes from 'prop-types';
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 
-import ServiceList from './ServiceList.jsx';
 import ServiceInput from './ServiceInput.jsx';
+import ServiceMessage from './ServiceMessage.jsx';
 
 import {Services} from '../../api/services';
 
-// import {ServiceBox} from './ServiceBox.jsx';
+
 export class ServiceBox extends Component {
 
     constructor(props, context){
         super(props, context);
             this.state = {
-                input:''
+                input:'',
+                filterText: ''
             }
+        this.handleChange = this.handleChange.bind(this);
         this.handleSvcSubmit = this.handleSvcSubmit.bind(this)
     }
 
+    deleteSvc(svcId){
 
+        Meteor.call(
+            'serviceDelete',
+            svcId,
+            (err, res) => {
+                if (res) {
+                    console.log('------------------------------------------');
+                    console.log('res in deleteSvc',res);
+                    console.log('------------------------------------------');
+                } else {
+                    console.log('err in deleteSvc', err);
+                }
+            }
+        )
+    }
+
+    handleChange(e) {
+        this.setState({
+            filterText: e.target.value
+        })
+    }
 
     handleSvcSubmit(svc) {
         Meteor.call(
@@ -38,10 +61,52 @@ export class ServiceBox extends Component {
         )
     }
 
+    renderServices(){
+        if (this.props.services) {
+            const svcs = this.props.services.filter((u) => {
+                return (
+                    u.categories
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                    ||
+                    u.body
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                    ||
+                    u.screenName
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                )
+            });
+            return svcs.map((svc) => {
+
+                return (
+                    <ServiceMessage key={svc._id}
+                                    svc={svc}
+                                    deleteSvc={this.deleteSvc}/>
+
+                )
+
+            })
+        } else {
+            return <div>loading...</div>
+        }
+
+    }
+
     render() {
         return (
             <div className="service-box">
-                <ServiceList   services={this.props.services}/>
+                <div className="service-filter">
+                    <input type="text"
+                           onChange={this.handleChange}
+                           placeholder="filter by category or content"/>
+                </div>
+
+                <div className="service-list">
+                    {this.renderServices()}
+                </div>
+
                 <ServiceInput   handleSvcSubmit={this.handleSvcSubmit}
                                 currentUser={this.props.currentUser}/>
             </div>

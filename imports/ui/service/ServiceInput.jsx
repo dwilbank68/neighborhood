@@ -6,6 +6,15 @@ import Modal from 'react-modal';
 
 import {serviceCategories} from '../../../serviceCategories.js';
 
+const placeholderText = `You can either:
+
+1. Choose one category and create a separate post for each skill.
+2. Choose multiple categories and describe them all in a single post.
+
+The hope for this feature is that you advertise your services either for barter, or for considerably less cost than providers outside the neighborhood.
+
+If there is a service category not included here, choose Miscellaneous, notify the webmaster, and the category will be added.`;
+
 // import ServiceInput from './ServiceInput.jsx';
 class ServiceInput extends Component {
 
@@ -99,12 +108,13 @@ class ServiceInput extends Component {
                         <div className="service-input-box">
                             <Select className="category"
                                     multi joinValues simpleValue
-                                    placeholder="Select One Or More Categories"
+                                    placeholder="Select One Or More Categories (Type here to filter the choices)"
                                     options={options}
                                     onChange={ this.onCategoryChange }
                                     value={this.state.categories}/>
                             <textarea   className="service-input-input"
                                         onChange={this.handleInputChange}
+                                        placeholder={placeholderText}
                                         value={this.state.input}/>
                             <button   className="service-input-button"
                                       onClick={this.prepService}>
