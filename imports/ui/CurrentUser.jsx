@@ -7,11 +7,7 @@ const CurrentUser = ({user}) => {
 
     renderAvatar = (user) => {
         if (user.avatar) return user.avatar;
-        if (user.email) return gravatar.get(user.email);
-        console.log('------------------------------------------');
-        console.log('gravatar.get(user.email) ',gravatar.get(user.email));
-        console.log('gravatar.get(user.email) ', gravatar.get(user.email).replace('http', 'https'));
-        console.log('------------------------------------------');
+        if (user.email) return gravatar.get(user.email).replace('http', 'https');
         return 'https://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
     }
 
