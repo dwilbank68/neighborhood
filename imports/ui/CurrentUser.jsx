@@ -8,7 +8,11 @@ const CurrentUser = ({user}) => {
     renderAvatar = (user) => {
         if (user.avatar) return user.avatar;
         if (user.email) return gravatar.get(user.email);
-        return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
+        console.log('------------------------------------------');
+        console.log('gravatar.get(user.email) ',gravatar.get(user.email));
+        console.log('gravatar.get(user.email) ', gravatar.get(user.email).replace('http', 'https'));
+        console.log('------------------------------------------');
+        return 'https://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
     }
 
     if (user) {

@@ -99,8 +99,8 @@ export class Users extends Component {
 
     renderAvatar(user){
         if (user.avatar) return user.avatar;
-        if (user.email) return gravatar.get(user.email);
-        return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
+        if (user.email) return gravatar.get(user.email).replace('http:','https:');
+        return 'https://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
     }
 
     renderUsers(){
