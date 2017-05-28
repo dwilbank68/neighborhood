@@ -3,6 +3,7 @@ import {Mongo} from 'meteor/mongo';
 
 import {WebApp} from 'meteor/webapp';
 
+import '../imports/api/announcements';
 import '../imports/api/messages';
 import '../imports/api/services';
 import '../imports/api/users';

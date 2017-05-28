@@ -1,0 +1,45 @@
+.announcement-msg {
+    background: rgba(0,0,0,.15);
+    list-style: none;
+    min-height: 33px;
+    margin-bottom:  10px;
+    position: relative;
+
+    .announcement-text {
+        color: rgba(255,255,255,0.6);
+        margin-left: 8px;
+        margin-right: 8px;
+        position: relative; // to allow for delete 'x'
+        white-space: pre-wrap;
+        width: 100%;
+    }
+
+    .sender-date-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .announcement-text-sender, .announcement-date {
+        font-size: .7em;
+        color: rgba(255,255,255,.4);
+    }
+
+    .announcement-body {
+        color: white;
+        margin: 10px;
+        font-size: .8em;
+        white-space: pre-wrap;
+        width: 241px;
+        word-wrap: break-word;
+    }
+
+}
+
+.announcement-delete {
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    font-size: .5em;
+    color: rgba(255,255,255,.6);
+    cursor: pointer;
+}

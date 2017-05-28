@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
 
-
-import moment from 'moment';
 import gravatar from 'node-gravatar';
 import FontAwesome from 'react-fontawesome';
+import {convertTime} from '../../utils/convertTime';
 // import ServiceMessage from './ServiceMessage.jsx';
 // const ServiceMessage = (props) => {
 const ServiceMessage = ({deleteSvc, svc}) => {
 
-    convertTime = (ms) => {
-        var momentTime = moment.utc(ms);
-        return momentTime.local().format('MMMM Do YYYY, h:mma');
-    }
+    // convertTime = (ms) => {
+    //     var momentTime = moment.utc(ms);
+    //     return momentTime.local().format('MMMM Do YYYY, h:mma');
+    // }
 
     renderAvatar = (svc) => {
         if (svc.avatar) return svc.avatar;

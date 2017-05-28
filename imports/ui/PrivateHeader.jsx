@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Accounts} from 'meteor/accounts-base';
 
 import EditProfile from './EditProfile';
+import AnnouncementEditor from './announcement/AnnouncementBox';
 import CurrentUser from './CurrentUser';
 
 // import PrivateHeader from './PrivateHeader.jsx';
@@ -31,13 +32,12 @@ class PrivateHeader extends Component {
     }
 
     render() {
-
+        const {currentUser} = this.props;
         return (
             <div className="private-header header">
                 <div className="header__content">
                     <h1 className="header__title">{this.props.title}</h1>
-                    <EditProfile currentUser={this.props.currentUser}/>
-                    {/*<CurrentUser user={this.props.user}/>*/}
+                    <EditProfile currentUser={currentUser}/>
                     <button onClick={() => Accounts.logout()}
                             className="button button--link">
                         Log Out

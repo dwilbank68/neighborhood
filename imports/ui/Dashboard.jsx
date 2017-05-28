@@ -7,10 +7,11 @@ import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import PrivateHeader from './PrivateHeader';
-import ChatBox from './chat/ChatBox';
-import ServiceBox from './service/ServiceBox';
-import Users from './Users';
+import PrivateHeader    from './PrivateHeader';
+import ChatBox          from './chat/ChatBox';
+import AnnouncementBox  from './announcement/AnnouncementBox';
+import ServiceBox       from './service/ServiceBox';
+import Users            from './Users';
 
 import {Messages} from '../api/messages';
 import {Services} from '../api/services';
@@ -40,22 +41,25 @@ export class Dashboard extends Component {
     }
 
     render() {
+
+        const currentUser = this.props.currentUser;
+
         return (
             <div className="dashboard">
                 {/*<PrivateHeader title="Dashboard" user={user}/>*/}
 
                 <PrivateHeader  title=""
-                                currentUser={this.props.currentUser}/>
+                                currentUser={currentUser}/>
 
                 <div className="page-content">
                     <div className="left-column">
-
                         {/*<pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>*/}
                         {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
                     </div>
                     <div className="right-column">
 
                         <Tabs>
+
                             <TabList>
                                 <Tab>Phone & Info</Tab>
                                 <Tab>Users</Tab>
@@ -66,28 +70,29 @@ export class Dashboard extends Component {
                                 <Tab>Announcements</Tab>
                                 <Tab>Wanted</Tab>
                             </TabList>
+
                             <TabPanel>
                                 Phone & Info
                             </TabPanel>
 
                             <TabPanel>
-                                <Users  currentUser={this.props.currentUser}
+                                <Users  currentUser={currentUser}
                                         users={this.props.allUsers} />
                             </TabPanel>
                             <TabPanel>
-                                <ChatBox currentUser={this.props.currentUser}/>
+                                <ChatBox currentUser={currentUser}/>
                             </TabPanel>
                             <TabPanel>
-                                <ServiceBox currentUser={this.props.currentUser}/>
+                                <ServiceBox currentUser={currentUser}/>
                             </TabPanel>
                             <TabPanel></TabPanel>
                             <TabPanel></TabPanel>
-                            <TabPanel></TabPanel>
+                            <TabPanel>
+                                    <AnnouncementBox currentUser={currentUser}/>
+                            </TabPanel>
                             <TabPanel></TabPanel>
 
                         </Tabs>
-
-
 
                     </div>
 

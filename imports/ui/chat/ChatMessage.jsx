@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import moment from 'moment';
 import gravatar from 'node-gravatar';
+import {convertTime} from '../../utils/convertTime';
 
 // import ChatMessage from './ChatMessage.jsx';
 // const ChatMessage = (props) => {
@@ -10,10 +10,10 @@ const ChatMessage = ({deleteMsg, msg}) => {
     // no lifecycle methods
     // no refs
 
-    convertTime = (ms) => {
-        var momentTime = moment.utc(ms);
-        return momentTime.local().format('MMMM Do YYYY, h:mma');
-    }
+    // convertTime = (ms) => {
+    //     var momentTime = moment.utc(ms);
+    //     return momentTime.local().format('MMMM Do YYYY, h:mma');
+    // }
 
     renderAvatar = (msg) => {
         if (msg.avatar) return msg.avatar;

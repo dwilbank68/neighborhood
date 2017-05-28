@@ -2,6 +2,9 @@
 @import './base';
 @import 'components/boxed-view';
 @import 'components/button';
+@import 'components/announcement/announcementBox';
+@import 'components/announcement/announcementInput';
+@import 'components/announcement/announcementMessage';
 @import 'components/chat/chatBox';
 @import 'components/chat/chatList';
 @import 'components/chat/chatMessage';
@@ -13,6 +16,7 @@
 @import 'components/chat/chatInput';
 @import 'components/currentUser';
 @import 'components/dashboard';
+@import 'components/editor';
 @import 'components/editProfile';
 @import 'components/header';
 @import 'components/imageUpload';
