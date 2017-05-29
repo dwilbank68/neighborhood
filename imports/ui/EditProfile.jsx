@@ -136,7 +136,7 @@ export class EditProfile extends Component {
                         contentLabel="Update Your User Info"
                         style={modalStyle}>
 
-                    <p>Update Your User Info</p>
+                    <h2 className="modal-title">Update Your User Info</h2>
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 

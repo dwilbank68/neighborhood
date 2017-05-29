@@ -6,26 +6,29 @@ import Modal from 'react-modal';
 import { Editor } from 'react-draft-wysiwyg';
 import {convertFromRaw, convertToRaw} from 'draft-js';
 
+import draftToHtml from 'draftjs-to-html';
+import htmlToText from 'html-to-text';
+
 // import AnnouncementInput from './AnnouncementInput.jsx';
 class AnnouncementInput extends Component {
 
     constructor(props, context){
         super(props, context);
         this.state = {
+            input: '',
             modalOpen:false,
         }
-        // this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this)
         this.handleOpenModal = this.handleOpenModal.bind(this)
         this.prepAnnouncement = this.prepAnnouncement.bind(this)
         this.onEditorStateChange = this.onEditorStateChange.bind(this)
     }
 
-
-    // handleInputChange(e) {
-    //     this.setState({
-    //         input: e.target.value
-    //     })
-    // }
+    handleInputChange(e) {
+        this.setState({
+            input: e.target.value
+        })
+    }
 
     handleOpenModal(){
         const {
@@ -48,19 +51,25 @@ class AnnouncementInput extends Component {
         if (this.state.editorState == null) {
             return;
         }
-        const {screenName, userId} = this.props.currentUser;
-
+        if (this.state.input == '') {
+            return;
+        }
+        const {screenName, id} = this.props.currentUser;
+        const title = this.state.input;
         const annContent = this.state.editorState.getCurrentContent();
-        let saveContent = convertToRaw(annContent);
-        saveContent = JSON.stringify(saveContent);
-        console.log('------------------------------------------');
-        console.log('saveContent ', saveContent);
-        console.log('------------------------------------------');
+        const saveContent = convertToRaw(annContent);
+        const saveContentString = JSON.stringify(saveContent);
+        // const saveContent = JSON.parse(announcement.saveContent);
+        const html = draftToHtml(saveContent);
+        const plainText = htmlToText.fromString(html)
+
 
         const announcement = {
-            saveContent,
+            plainText,
+            saveContent: saveContentString,
             screenName,
-            userId
+            title,
+            userId: id
         }
         this.props.handleAnnouncementSubmit(announcement);
         this.setState({modalOpen: false});
@@ -83,7 +92,9 @@ class AnnouncementInput extends Component {
             editorStyle: {
                 backgroundColor: 'white',
                 border: '1px solid gray',
-                height: '300px'
+                height: '312px', width: '450px',
+                marginLeft: '156px',
+                padding: '15px'
             }
         }
 
@@ -101,7 +112,7 @@ class AnnouncementInput extends Component {
                         isOpen={this.state.modalOpen}
                         style={modalStyle}>
 
-                    <p>Create An Announcement</p>
+                    <h2 className="modal-title">Create An Announcement</h2>
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 
@@ -109,10 +120,18 @@ class AnnouncementInput extends Component {
                             editorState={editorState}
                             onEditorStateChange={this.onEditorStateChange}/>
 
-                    <button   className="announcement-input-button"
-                              onClick={this.prepAnnouncement}>
-                        Submit
-                    </button>
+                    <div className="title-button-wrapper">
+                        <input      className="announcement-input-input"
+                                    onChange={this.handleInputChange}
+                                    placeholder="Title required"
+                                    value={this.state.input}/>
+                        <button   className="modal-submit-button"
+                                  onClick={this.prepAnnouncement}>
+                            Submit
+                        </button>
+                    </div>
+
+
 
                     <div className='button-cancel'
                          onClick={() => this.setState({

@@ -30,3 +30,29 @@
     right: 10px;
     cursor: pointer;
 }
+
+.modal-title {
+    font-weight: 700;
+    text-align: center;
+}
+
+.modal-submit-button {
+    background: transparent;
+    border: 1px solid $shade1;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgba(0,0,0,.5);
+    font-size: 1.2em;
+    height: 40px; width: 100%;
+    margin-top: 5px;
+    transition: font-size .3s ease, border .3s ease;
+
+    &:focus {
+        outline: none !important;
+    }
+
+    &:hover {
+        font-size: 1.4em;
+        border: 3px solid $shade1;
+    }
+}

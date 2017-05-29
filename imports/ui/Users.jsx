@@ -152,7 +152,7 @@ export class Users extends Component {
                 <div className="user-filter">
                     <input type="text"
                             onChange={this.handleChange}
-                            placeholder="filter by name or addresses"/>
+                            placeholder="find by name or addresses"/>
                 </div>
 
                 <div className="user-list" >

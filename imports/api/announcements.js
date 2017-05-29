@@ -12,9 +12,11 @@ if (Meteor.isServer) {
             { fields: {
                 active: 1,
                 created: 1,
+                plainText: 1,
                 saveContent: 1,
                 screenName: 1,
-                userId: 1,
+                title: 1,
+                userId: 1
             }}
         );
     })
@@ -48,17 +50,16 @@ Meteor.methods({
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        const { saveContent, screenName, userId } = announcement;
-        console.log('------------------------------------------');
-        console.log('screenName ',screenName);
-        console.log('screenName ',screenName);
-        console.log('------------------------------------------');
+        const { plainText, saveContent, screenName, title, userId } = announcement;
         return Announcements.insert(
             {
                 active: true,
                 created: new Date().getTime(),
+                plainText,
                 saveContent,
-                screenName, userId
+                screenName,
+                title,
+                userId
             }
         )
     },

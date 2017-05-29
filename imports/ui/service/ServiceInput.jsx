@@ -100,7 +100,7 @@ class ServiceInput extends Component {
                         contentLabel="Add Skills Or Expertise You Have To Offer"
                         style={modalStyle}>
 
-                    <p>Describe Skills Or Expertise You Have To Offer</p>
+                    <h2 className="modal-title">Describe Skills Or Expertise You Have To Offer</h2>
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 
@@ -116,7 +116,7 @@ class ServiceInput extends Component {
                                         onChange={this.handleInputChange}
                                         placeholder={placeholderText}
                                         value={this.state.input}/>
-                            <button   className="service-input-button"
+                            <button   className="modal-submit-button"
                                       onClick={this.prepService}>
                                 Submit
                             </button>

@@ -1,9 +1,14 @@
 .announcement-msg {
     background: rgba(0,0,0,.15);
+    box-sizing: border-box;
     list-style: none;
+    margin-bottom: 3px;
     min-height: 33px;
-    margin-bottom:  10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
     position: relative;
+    width: 320px;
+
 
     .announcement-text {
         color: rgba(255,255,255,0.6);
@@ -17,11 +22,22 @@
     .sender-date-wrapper {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 15px;
     }
 
     .announcement-text-sender, .announcement-date {
         font-size: .7em;
         color: rgba(255,255,255,.4);
+    }
+
+    .announcement-text-sender {
+        margin-left: 9px;
+        margin-top: 9px;
+    }
+
+    .announcement-date {
+        margin-right: 40px;
+        margin-top: 9px;
     }
 
     .announcement-body {

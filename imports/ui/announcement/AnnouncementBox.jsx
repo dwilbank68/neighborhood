@@ -22,11 +22,11 @@ export class ServiceBox extends Component {
         this.handleAnnouncementSubmit = this.handleAnnouncementSubmit.bind(this)
     }
 
-    deleteAnnouncement(svcId){
+    deleteAnnouncement(annId){
 
         Meteor.call(
-            'serviceDelete',
-            svcId,
+            'announcementDelete',
+            annId,
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');
@@ -46,6 +46,9 @@ export class ServiceBox extends Component {
     }
 
     handleAnnouncementSubmit(announcement) {
+        console.log('------------------------------------------');
+        console.log('announcement in AnnouncementBox',announcement);
+        console.log('------------------------------------------');
         Meteor.call(
             'announcementCreate',
             announcement,
@@ -64,12 +67,25 @@ export class ServiceBox extends Component {
     renderAnnouncements(){
         if (this.props.announcements) {
             const anns = this.props.announcements.filter( a => {
-                return a.active == true
+                return (
+                    a.screenName
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                    ||
+                    a.title
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                    ||
+                    a.plainText
+                        .toLowerCase()
+                        .search(this.state.filterText.toLowerCase()) !== -1
+                )
             });
             return anns.map((ann) => {
 
                 return (
                     <AnnouncementMessage    announcement={ann}
+                                            deleteAnnouncement={this.deleteAnnouncement}
                                             key={ann._id}>
                     </AnnouncementMessage>
                 )
@@ -87,7 +103,7 @@ export class ServiceBox extends Component {
                 <div className="announcement-filter">
                     <input type="text"
                            onChange={this.handleChange}
-                           placeholder="filter by category or content"/>
+                           placeholder="find by title or content"/>
                 </div>
 
                 <div className="announcement-list">

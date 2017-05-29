@@ -4,32 +4,25 @@ import PropTypes from 'prop-types';
 import {Meteor} from 'meteor/meteor';
 
 import {convertFromRaw, convertToRaw} from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
 
-import htmlToText from 'html-to-text';
 import {convertTime} from '../../utils/convertTime';
 
 // import AnnouncementMessage from './AnnouncementMessage.jsx';
 // const AnnouncementMessage = (props) => {
-const AnnouncementMessage = ({deleteSvc, announcement}) => {
+const AnnouncementMessage = ({deleteAnnouncement, announcement}) => {
 
-    // renderDeleteButton = (announcement) => {
-    //     if (announcement.userId === Meteor.userId()) {
-    //         return (
-    //             <div    className="announcement-delete"
-    //                     onClick={()=>deleteSvc(announcement._id)}>
-    //                 &#10005;
-    //             </div>
-    //         )
-    //     } else {
-    //         return null;
-    //     }
-    // }
-    const saveContent = JSON.parse(announcement.saveContent);
-    const contentState = convertFromRaw(saveContent);
-    const html = draftToHtml(saveContent);
-    const htmlText = htmlToText.fromString(html)
-    // dangerouslySetInnerHTML={{ __html: html }}>
+    renderDeleteButton = (announcement) => {
+        if (announcement.userId === Meteor.userId()) {
+            return (
+                <div    className="announcement-delete"
+                        onClick={()=>deleteAnnouncement(announcement._id)}>
+                    &#10005;
+                </div>
+            )
+        } else {
+            return null;
+        }
+    }
 
     return (
 
@@ -43,12 +36,10 @@ const AnnouncementMessage = ({deleteSvc, announcement}) => {
                 </span>
             </div>
             <div className="announcement-text">
-                {htmlText}
+                {announcement.title}
             </div>
 
-
-
-            {/*{renderDeleteButton(announcement)}*/}
+            {renderDeleteButton(announcement)}
         </li>
     );
 };

@@ -100,7 +100,7 @@ export class ServiceBox extends Component {
                 <div className="service-filter">
                     <input type="text"
                            onChange={this.handleChange}
-                           placeholder="filter by category or content"/>
+                           placeholder="find by category or content"/>
                 </div>
 
                 <div className="service-list">
