@@ -1038,6 +1038,12 @@ react-draft-wysiwyg@^1.10.0:
     immutable "^4.0.0-rc.1"
     prop-types "^15.5.10"
 
+react-draggable@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-2.2.6.tgz#3a806e10f2da6babfea4136be6510e89b0d76901"
+  dependencies:
+    classnames "^2.2.5"
+
 react-dropzone@3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.5.3.tgz#6e40d929ccf2e1407e63bd2d624ff42eafc52e74"

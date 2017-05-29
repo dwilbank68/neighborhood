@@ -2,16 +2,19 @@ import React, {Component} from 'react';
 
 import PropTypes from 'prop-types';
 
+import Draggable from 'react-draggable';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import PrivateHeader    from './PrivateHeader';
-import ChatBox          from './chat/ChatBox';
-import AnnouncementBox  from './announcement/AnnouncementBox';
-import ServiceBox       from './service/ServiceBox';
-import Users            from './Users';
+import AnnouncementDisplay  from './announcement/AnnouncementDisplay';
+import PrivateHeader        from './PrivateHeader';
+import ChatBox              from './chat/ChatBox';
+import AnnouncementBox      from './announcement/AnnouncementBox';
+import ServiceBox           from './service/ServiceBox';
+import Users                from './Users';
 
 import {Messages} from '../api/messages';
 import {Services} from '../api/services';
@@ -56,45 +59,48 @@ export class Dashboard extends Component {
                         {/*<pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>*/}
                         {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
                     </div>
-                    <div className="right-column">
+                    <Draggable>
+                        <div className="right-column">
 
-                        <Tabs>
+                            <Tabs>
 
-                            <TabList>
-                                <Tab>Phone & Info</Tab>
-                                <Tab>Users</Tab>
-                                <Tab>Chat ({this.props.messageCount})</Tab>
-                                <Tab>Services ({this.props.serviceCount})</Tab>
-                                <Tab>Offers</Tab>
-                                <Tab>Rules</Tab>
-                                <Tab>Announcements</Tab>
-                                <Tab>Wanted</Tab>
-                            </TabList>
+                                <TabList>
+                                    <Tab>Phone & Info</Tab>
+                                    <Tab>Users</Tab>
+                                    <Tab>Chat ({this.props.messageCount})</Tab>
+                                    <Tab>Services ({this.props.serviceCount})</Tab>
+                                    <Tab>Offers</Tab>
+                                    <Tab>Rules</Tab>
+                                    <Tab>Announcements</Tab>
+                                    <Tab>Wanted</Tab>
+                                </TabList>
 
-                            <TabPanel>
-                                Phone & Info
-                            </TabPanel>
+                                <TabPanel>
+                                    Phone & Info
+                                </TabPanel>
 
-                            <TabPanel>
-                                <Users  currentUser={currentUser}
-                                        users={this.props.allUsers} />
-                            </TabPanel>
-                            <TabPanel>
-                                <ChatBox currentUser={currentUser}/>
-                            </TabPanel>
-                            <TabPanel>
-                                <ServiceBox currentUser={currentUser}/>
-                            </TabPanel>
-                            <TabPanel></TabPanel>
-                            <TabPanel></TabPanel>
-                            <TabPanel>
+                                <TabPanel>
+                                    <Users  currentUser={currentUser}
+                                            users={this.props.allUsers} />
+                                </TabPanel>
+                                <TabPanel>
+                                    <ChatBox currentUser={currentUser}/>
+                                </TabPanel>
+                                <TabPanel>
+                                    <ServiceBox currentUser={currentUser}/>
+                                </TabPanel>
+                                <TabPanel></TabPanel>
+                                <TabPanel></TabPanel>
+                                <TabPanel>
                                     <AnnouncementBox currentUser={currentUser}/>
-                            </TabPanel>
-                            <TabPanel></TabPanel>
+                                </TabPanel>
+                                <TabPanel></TabPanel>
 
-                        </Tabs>
+                            </Tabs>
 
-                    </div>
+                        </div>
+
+                    </Draggable>
 
                 </div>
             </div>
