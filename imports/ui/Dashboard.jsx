@@ -11,6 +11,7 @@ import _ from 'lodash';
 
 import AnnouncementDisplay  from './announcement/AnnouncementDisplay';
 import PrivateHeader        from './PrivateHeader';
+import Map                  from './Map';
 import ChatBox              from './chat/ChatBox';
 import AnnouncementBox      from './announcement/AnnouncementBox';
 import ServiceBox           from './service/ServiceBox';
@@ -53,6 +54,8 @@ export class Dashboard extends Component {
 
                 <PrivateHeader  title=""
                                 currentUser={currentUser}/>
+
+                <Map/>
 
                 <div className="page-content">
                     <div className="left-column">

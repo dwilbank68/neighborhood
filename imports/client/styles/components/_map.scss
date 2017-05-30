@@ -1,0 +1,14 @@
+.map {
+    //background-image: url("images/traditions90250map.jpg");
+    //background-position: center center;
+    //background-repeat: no-repeat;
+    //background-attachment: fixed;
+    //background-size: cover;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      background: rgba(0,0,0,.3);
+      opacity: .3;
+    }
+}
