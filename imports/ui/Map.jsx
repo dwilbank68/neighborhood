@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
+import ReactSVG from 'react-svg';
 
 // import Map from './Map.jsx';
 // import {Map} from './Map.jsx';
@@ -26,7 +27,11 @@ export class Map extends Component {
     render() {
         return (
             <div className="map">
-                <img src="images/traditions90250map.jpg" />
+                {/*<img src="images/traditions90250map.jpg" />*/}
+                <ReactSVG   path="images/traditions90250.svg"
+                            callback={svg => console.log(svg)}
+                            className="map"
+                />
             </div>
         );
     }

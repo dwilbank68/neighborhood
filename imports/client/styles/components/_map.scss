@@ -4,11 +4,30 @@
     //background-repeat: no-repeat;
     //background-attachment: fixed;
     //background-size: cover;
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: contain;
-      background: rgba(0,0,0,.3);
-      opacity: .3;
-    }
+    //img {
+    //  height: 100%;
+    //  width: 100%;
+    //  object-fit: contain;
+    //  background: rgba(0,0,0,.3);
+    //  top: 0;
+    //  left: 0;
+    //  opacity: .3;
+    //}
+}
+
+path, polygon, rect {
+  stroke: rgba(255,255,255,.5);
+  stroke-width: 5px;
+}
+
+path[id], polygon[id], rect[id] {
+   fill: rgba(0,0,0,.3);
+}
+
+.unassigned {
+    fill: rgba(0,0,0,.5);
+}
+
+#a2047 {
+    fill: red;
 }

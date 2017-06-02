@@ -1125,6 +1125,12 @@ react-select@^1.0.0-rc.4:
     prop-types "^15.5.8"
     react-input-autosize "^1.1.3"
 
+react-svg@^2.1.21:
+  version "2.1.21"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-2.1.21.tgz#0caf34002649542967f04e197480d784768e914c"
+  dependencies:
+    svg-injector "^1.1.3"
+
 react-tabs@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-1.0.0.tgz#f150c9f9102dd65dbc94a5a0e1e019d5e3814a7f"
@@ -1253,6 +1259,10 @@ superagent@2.1.0:
     mime "^1.3.4"
     qs "^6.1.0"
     readable-stream "^2.0.5"
+
+svg-injector@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/svg-injector/-/svg-injector-1.1.3.tgz#8fba18d7419e5f818e712c4f82d83ee357610e61"
 
 timers-browserify@^1.4.2:
   version "1.4.2"
