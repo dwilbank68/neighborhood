@@ -55,57 +55,47 @@ export class Dashboard extends Component {
                 <PrivateHeader  title=""
                                 currentUser={currentUser}/>
 
-                <Map/>
-
                 <div className="page-content">
-                    <div className="left-column">
-                        {/*<pre><code>{JSON.stringify(this.renderUsers(), null, 2)}</code></pre>*/}
-                        {/*<pre><code>{JSON.stringify(this.renderOnlineUsers(), null, 2)}</code></pre>*/}
-                    </div>
-                    <Draggable>
-                        <div className="right-column">
+                    <Map className="map"/>
 
-                            <Tabs>
+                    <Tabs className='tabs'>
+                        <TabList>
+                            <Tab>Phone & Info</Tab>
+                            <Tab>Users</Tab>
+                            <Tab>Chat ({this.props.messageCount})</Tab>
+                            <Tab>Services ({this.props.serviceCount})</Tab>
+                            <Tab>Offers</Tab>
+                            <Tab>Rules</Tab>
+                            <Tab>Announcements</Tab>
+                            <Tab>Wanted</Tab>
+                        </TabList>
 
-                                <TabList>
-                                    <Tab>Phone & Info</Tab>
-                                    <Tab>Users</Tab>
-                                    <Tab>Chat ({this.props.messageCount})</Tab>
-                                    <Tab>Services ({this.props.serviceCount})</Tab>
-                                    <Tab>Offers</Tab>
-                                    <Tab>Rules</Tab>
-                                    <Tab>Announcements</Tab>
-                                    <Tab>Wanted</Tab>
-                                </TabList>
+                        <TabPanel>
+                            Phone & Info
+                        </TabPanel>
 
-                                <TabPanel>
-                                    Phone & Info
-                                </TabPanel>
+                        <TabPanel>
+                            <Users  currentUser={currentUser}
+                                    users={this.props.allUsers} />
+                        </TabPanel>
+                        <TabPanel>
+                            <ChatBox currentUser={currentUser}/>
+                        </TabPanel>
+                        <TabPanel>
+                            <ServiceBox currentUser={currentUser}/>
+                        </TabPanel>
+                        <TabPanel></TabPanel>
+                        <TabPanel></TabPanel>
+                        <TabPanel>
+                            <AnnouncementBox currentUser={currentUser}/>
+                        </TabPanel>
+                        <TabPanel></TabPanel>
 
-                                <TabPanel>
-                                    <Users  currentUser={currentUser}
-                                            users={this.props.allUsers} />
-                                </TabPanel>
-                                <TabPanel>
-                                    <ChatBox currentUser={currentUser}/>
-                                </TabPanel>
-                                <TabPanel>
-                                    <ServiceBox currentUser={currentUser}/>
-                                </TabPanel>
-                                <TabPanel></TabPanel>
-                                <TabPanel></TabPanel>
-                                <TabPanel>
-                                    <AnnouncementBox currentUser={currentUser}/>
-                                </TabPanel>
-                                <TabPanel></TabPanel>
-
-                            </Tabs>
-
-                        </div>
-
-                    </Draggable>
-
+                    </Tabs>
                 </div>
+
+
+                
             </div>
         );
 
