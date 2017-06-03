@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import PropTypes from 'prop-types';
 
-import Draggable from 'react-draggable';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import {Meteor} from 'meteor/meteor';
@@ -56,7 +55,8 @@ export class Dashboard extends Component {
                                 currentUser={currentUser}/>
 
                 <div className="page-content">
-                    <Map className="map"/>
+                    <Map    className="map"
+                            allUsers={this.props.allUsers}/>
 
                     <Tabs className='tabs'>
                         <TabList>
@@ -94,8 +94,6 @@ export class Dashboard extends Component {
                     </Tabs>
                 </div>
 
-
-                
             </div>
         );
 
@@ -134,7 +132,10 @@ export class Dashboard extends Component {
 const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
     Meteor.subscribe('profiles');
-    const users = Meteor.users.find().fetch();
+    const users = Meteor
+                    .users
+                    .find({},{sort:{"status.online":1}})    // 1
+                    .fetch();
     const profiles = Profiles.find({}).fetch();
     if (profiles.length > 0 && users.length > 0) {
         const profilesObj = _.mapKeys(profiles, 'userId');
@@ -173,3 +174,7 @@ export default createContainer(mapToProps, Dashboard);
 
 // meteor npm i --save react-addons-pure-render-mixin
 // meteor add react-meteor-data
+
+// 1 -  sorted with online users at the bottom, because otherwise, some
+//      users who live at the same address who are offline would cause
+//      the 'online' class to be turned off

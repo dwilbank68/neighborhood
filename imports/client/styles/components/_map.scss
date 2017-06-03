@@ -13,17 +13,17 @@
 }
 
 svg {
-    width: 70%;
+    width: 90%;
     height: auto;
     max-height: 736px;
 }
 
 path, polygon, rect {
-  stroke: rgba(255,255,255,.5);
-  stroke-width: 5px;
+  //stroke: rgba(255,255,255,.5);
+  //stroke-width: 5px;
 }
 
-path[id], polygon[id], rect[id] {
+path, polygon, rect {
    fill: rgba(0,0,0,.3);
 }
 
@@ -31,6 +31,13 @@ path[id], polygon[id], rect[id] {
     fill: rgba(0,0,0,.5);
 }
 
-#a2047 {
-    fill: red;
+// states
+
+.online {
+    stroke: yellow;
+    stroke-width: 6px;
+}
+
+.signedUp {
+    fill: rgba(0,0,0,.1);
 }

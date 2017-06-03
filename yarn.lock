@@ -437,6 +437,10 @@ ev-emitter@^1.0.0, ev-emitter@~1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.0.3.tgz#ee5ef74b6ed28d911b32ddcbfc97867f580937bc"
 
+eve@~0.5.1:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/eve/-/eve-0.5.4.tgz#67d080b9725291d7e389e34c26860dd97f1debaa"
+
 events@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
@@ -1038,12 +1042,6 @@ react-draft-wysiwyg@^1.10.0:
     immutable "^4.0.0-rc.1"
     prop-types "^15.5.10"
 
-react-draggable@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-2.2.6.tgz#3a806e10f2da6babfea4136be6510e89b0d76901"
-  dependencies:
-    classnames "^2.2.5"
-
 react-dropzone@3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.5.3.tgz#6e40d929ccf2e1407e63bd2d624ff42eafc52e74"
@@ -1209,6 +1207,12 @@ simpl-schema@^0.2.3:
     message-box "0.0.2"
     mongo-object "0.0.1"
     underscore "1.8.3"
+
+snapsvg@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/snapsvg/-/snapsvg-0.5.1.tgz#0caf52c79189a290746fc446cc5e863f6bdddfe3"
+  dependencies:
+    eve "~0.5.1"
 
 source-map@^0.4.4:
   version "0.4.4"
