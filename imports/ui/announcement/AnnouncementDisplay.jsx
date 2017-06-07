@@ -1,20 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Announcements} from '../../api/announcements';
+import draftToHtml from 'draftjs-to-html';
 
-// const AnnouncementDisplay = (props) => {
-const AnnouncementDisplay = ({whatever1, whatever2}) => {
-    // no lifecycle methods
-    // no refs
+const AnnouncementDisplay = ({announcements}) => {
 
-    const methodName = (e) => {
-        //
+    const draft2html = (saveContent) => {
+        return draftToHtml(saveContent);
+    }
+
+    const renderAnnouncements = () => {
+        if (announcements) {
+            return announcements.map((ann) => {
+                const html = draft2html(JSON.parse(ann.saveContent));
+                console.log('------------------------------------------');
+                console.log('html in display', html);
+                console.log('------------------------------------------');
+                return (
+                    <div    className="announcement"
+                            key={ann._id}>
+                        <h3>{ann.title}</h3>
+                        <div dangerouslySetInnerHTML={{__html: html}}/>
+                    </div>
+                )
+            })
+        }
     }
 
     return (
         <div className="announcement-display">
-            Hey hey hey
+            {announcements ? renderAnnouncements(): <span>...</span>}
         </div>
     );
 };

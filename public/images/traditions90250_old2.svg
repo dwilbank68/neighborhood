@@ -3,17 +3,12 @@
 <svg version="1.1" id="Neighborhood_Map_Outlines" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	 x="0px" y="0px" viewBox="496 -414 2000 1500" style="enable-background:new 496 -414 2000 1500;" xml:space="preserve">
 <style type="text/css">
-	.number {
-        fill:rgba(255,255,255,.5);
-        font-family:'MyriadPro-Regular';
-        font-size:22px;
-    }
-	.street {
-        fill:rgba(255,255,255,.5);
-        font-family:'MyriadPro-Regular';
-        font-size:28px;
-    }
-</style>
+	.st0{font-family:'ArialMT';}
+	.st1{font-size:12px;}
+	.st2{fill:#FFFFFF;}
+	.st3{font-family:'MyriadPro-Regular';}
+	.st4{font-size:20px;}
+                                                      </style>
 <title>Neighborhood Map</title>
 <rect id="a2137" x="1053.8" y="596.5" width="78.8" height="142.8"/>
 <rect id="a2143" x="970.3" y="596.5" width="77.5" height="142.8"/>
@@ -81,6 +76,7 @@
 <path id="a12634" d="M2215.8,293.7l162.5-68.2l-7.1-74.3l-72.2-14h-9.3l-1.4,1.3v27.5l-116.6,42.5c7.6,19.3,16.1,36.9,25.2,51.1
 	C2203.9,270.6,2210.2,282,2215.8,293.7z"/>
 <rect id="a2015" x="2198.5" y="-327" width="86.8" height="151.5"/>
+<text id="a2015t" transform="matrix(1 0 0 1 2198.5 -326.99)" class="st0 st1">2015</text>
 <path id="a12614" d="M2285.3-89h-145.7v76.5h145.7V-89z"/>
 <path id="a2057" d="M1669.8-190.4l-62,43.4l77.4,108.9l61.9-43.5L1669.8-190.4z"/>
 <path id="a2051" d="M1736.7-237.3l-62,43.4L1752-85.1l61.9-43.6L1736.7-237.3z"/>
@@ -95,8 +91,8 @@
 <path id="a2069" d="M1536.1-96.7l-62,43.4l77.5,109.1l61.9-43.5L1536.1-96.7z"/>
 <path id="a2139" d="M1066.1,232.8l-20.9,14.6h-40.8v130c64.1-0.1,106-13.8,142.9-37.5L1066.1,232.8z"/>
 <path id="a2133" d="M1136.7,183.3l-65.6,46l81.4,107.3c1.3-0.9,2.7-1.8,4-2.8l58.1-40.8L1136.7,183.3z"/>
-<path id="a2127" d="M1202.6,137.1l-61.1,42.8l77.9,109.6l61-42.9L1202.6,137.1z"/>
 <rect id="a2052" x="1851" y="816.5" width="78" height="163"/>
+<path id="a2127" d="M1202.6,137.1l-61.1,42.8l77.9,109.6l61-42.9L1202.6,137.1z"/>
 <path id="a2115" d="M1335.5,43.9l-62,43.4l77.8,109.4l61.9-43.5L1335.5,43.9z"/>
 <path id="a2109" d="M1402.4-2.9l-62,43.4l77.7,109.3l61.9-43.5L1402.4-2.9z"/>
 <path id="a2121" d="M1268.6,90.8l-61.1,42.8l77.8,109.5l61-42.9L1268.6,90.8z"/>
@@ -144,126 +140,10 @@
 <path id="a2154" d="M731,804v175.5h79.7V810.3h-17.5c-18,0-35.5-6.4-49.3-18L731,804z"/>
 <path d="M702.3,864.3H725v-63l14.4-13.1c-4.4-4.4-8.3-9.3-11.6-14.6l-25.5,12.8L702.3,864.3z"/>
 <rect id="a12723" x="546.3" y="787.7" width="150" height="76.7"/>
-<text transform="matrix(1 0 0 1 583.4683 360)" class="number">2173</text>
-<text transform="matrix(1 0 0 1 685.218 360)" class="number">2165</text>
-<text transform="matrix(1 0 0 1 769.7181 360)" class="number">2157</text>
-<text transform="matrix(1 0 0 1 854.4681 360)" class="number">2151</text>
-<text transform="matrix(1 0 0 1 939.2184 360)" class="number">2145</text>
-<text transform="matrix(1 0 0 1 1042.9204 342.75)" class="number">2139</text>
-<text transform="matrix(1 0 0 1 1140.9404 303.85)" class="number">2133</text>
-<text transform="matrix(1 0 0 1 1208.4805 255.5)" class="number">2127</text>
-<text transform="matrix(1 0 0 1 1274.4805 208.5599)" class="number">2121</text>
-<text transform="matrix(1 0 0 1 1339.7605 161.6199)" class="number">2115</text>
-<text transform="matrix(1 0 0 1 1406.0404 115.6798)" class="number">2109</text>
-<text transform="matrix(1 0 0 1 1473.3203 68.7397)" class="number">2103</text>
-<text transform="matrix(1 0 0 1 1539.6003 20.7997)" class="number">2069</text>
-<text transform="matrix(1 0 0 1 1604.8804 -25.1404)" class="number">2063</text>
-<text transform="matrix(1 0 0 1 1672.1603 -72.0804)" class="number">2057</text>
-<text transform="matrix(1 0 0 1 1740.4402 -118.0205)" class="number">2051</text>
-<text transform="matrix(1 0 0 1 1806.7202 -166.8806)" class="number">2045</text>
-<text transform="matrix(1 0 0 1 1248.0706 499.35)" class="number">2132</text>
-<text transform="matrix(1 0 0 1 1176.0405 542.7602)" class="number">2138</text>
-<text transform="matrix(1 0 0 1 1315.6105 450)" class="number">2126</text>
-<text transform="matrix(1 0 0 1 1382.6105 405.0599)" class="number">2120</text>
-<text transform="matrix(1 0 0 1 1446.8904 355.1199)" class="number">2114</text>
-<text transform="matrix(1 0 0 1 1513.1704 309.1798)" class="number">2108</text>
-<text transform="matrix(1 0 0 1 1580.4504 262.2397)" class="number">2100</text>
-<text transform="matrix(1 0 0 1 1646.7303 214.2997)" class="number">2066</text>
-<text transform="matrix(1 0 0 1 1712.0103 168.3596)" class="number">2060</text>
-<text transform="matrix(1 0 0 1 1779.2903 121.4196)" class="number">2054</text>
-<text transform="matrix(1 0 0 1 1847.5703 75.4795)" class="number">2048</text>
-<text transform="matrix(1 0 0 1 1915.8502 28.6194)" class="number">2042</text>
-<text transform="matrix(1 0 0 1 1320.9597 607.1102)" class="number">2113</text>
-<text transform="matrix(1 0 0 1 1393.4996 563.7602)" class="number">2107</text>
-<text transform="matrix(1 0 0 1 1589.1704 685)" class="number">2068</text>
-<text transform="matrix(1 0 0 1 1656.8104 638.585)" class="number">2062</text>
-<text transform="matrix(1 0 0 1 1727.6195 587.5)" class="number">2056</text>
-<text transform="matrix(1 0 0 1 1806.7202 556.7602)" class="number">2050</text>
-<text transform="matrix(1 0 0 1 1886.8209 527.0204)" class="number">2044</text>
-<text transform="matrix(1 0 0 1 1967.9216 497.2806)" class="number">2038</text>
-<text transform="matrix(1 0 0 1 2000.4805 407.0599)" class="number">2030</text>
-<text transform="matrix(1 0 0 1 2090.9204 386.295)" class="number">2024</text>
-<text transform="matrix(1 0 0 1 1460.4996 515.8201)" class="number">2101</text>
-<text transform="matrix(1 0 0 1 1524.7795 468.8801)" class="number">2067</text>
-<text transform="matrix(1 0 0 1 1591.0596 422.94)" class="number">2061</text>
-<text transform="matrix(1 0 0 1 1658.3396 375.9999)" class="number">2055</text>
-<text transform="matrix(1 0 0 1 1724.6195 328.0599)" class="number">2049</text>
-<text transform="matrix(1 0 0 1 1789.8994 282.1198)" class="number">2043</text>
-<text transform="matrix(1 0 0 1 1857.1794 235.1797)" class="number">2037</text>
-<text transform="matrix(1 0 0 1 1925.4595 189.2397)" class="number">2031</text>
-<text transform="matrix(1 0 0 1 2014.7394 160.3796)" class="number">2025</text>
-<text transform="matrix(1 0 0 1 2003.9866 14)" class="number">2036</text>
-<text transform="matrix(1 0 0 1 1881.4805 -212.7)" class="number">2039</text>
-<text transform="matrix(1 0 0 1 1958.731 -223)" class="number">2033</text>
-<text transform="matrix(1 0 0 1 2047.7186 -223)" class="number">2027</text>
-<text transform="matrix(1 0 0 1 2133.2185 -223)" class="number">2021</text>
-<text transform="matrix(1 0 0 1 2220.1067 -196)" class="number">2015</text>
-<text transform="matrix(1 0 0 1 2186.7856 55.83)" class="number">12622</text>
-<text transform="matrix(1 0 0 1 2186.9507 -26.44)" class="number">12614</text>
-<text transform="matrix(1 0 0 1 2187.1157 -108.71)" class="number">12604</text>
-<text transform="matrix(1 0 0 1 814.468 722)" class="number">2155</text>
-<text transform="matrix(1 0 0 1 812.0932 572)" class="number">2162</text>
-<text transform="matrix(1 0 0 1 903.7315 572)" class="number">2156</text>
-<text transform="matrix(1 0 0 1 986.6052 572)" class="number">2148</text>
-<text transform="matrix(1 0 0 1 1081.4814 572)" class="number">2144</text>
-<text transform="matrix(1 0 0 1 610.0031 964)" class="number">12729</text>
-<text transform="matrix(1 0 0 1 605.8506 601)" class="number">12705</text>
-<text transform="matrix(1 0 0 1 605.8506 683.89)" class="number">12711</text>
-<text transform="matrix(1 0 0 1 605.8506 765)" class="number">12717</text>
-<text transform="matrix(1 0 0 1 605.8506 848)" class="number">12723</text>
-<text transform="matrix(1 0 0 1 750.3146 964)" class="number">2154</text>
-<text transform="matrix(1 0 0 1 834.9462 964)" class="number">2150</text>
-<text transform="matrix(1 0 0 1 918.5362 964)" class="number">2146</text>
-<text transform="matrix(1 0 0 1 1001.6256 964)" class="number">2140</text>
-<text transform="matrix(1 0 0 1 1085.7152 964)" class="number">2134</text>
-<text transform="matrix(1 0 0 1 1168.8143 964)" class="number">2128</text>
-<text transform="matrix(1 0 0 1 1249.906 964)" class="number">2122</text>
-<text transform="matrix(1 0 0 1 1333.4954 964)" class="number">2118</text>
-<text transform="matrix(1 0 0 1 1415.0867 964)" class="number">2112</text>
-<text transform="matrix(1 0 0 1 1496.6904 964)" class="number">2106</text>
-<text transform="matrix(1 0 0 1 1577.0596 964)" class="number">2102</text>
-<text transform="matrix(1 0 0 1 1786.611 964)" class="number">2058</text>
-<text transform="matrix(1 0 0 1 1869.481 964)" class="number">2052</text>
-<text transform="matrix(1 0 0 1 1952.351 964)" class="number">2046</text>
-<text transform="matrix(1 0 0 1 2035.2209 964)" class="number">2034</text>
-<text transform="matrix(1 0 0 1 2118.0908 964)" class="number">2032</text>
-<text transform="matrix(1 0 0 1 2201.9812 964)" class="number">2026</text>
-<text transform="matrix(1 0 0 1 2287.7314 964)" class="number">2020</text>
-<text transform="matrix(1 0 0 1 2381.9502 964)" class="number">2014</text>
-<text transform="matrix(1 0 0 1 904.6063 722)" class="number">2149</text>
-<text transform="matrix(1 0 0 1 988.4808 722)" class="number">2143</text>
-<text transform="matrix(1 0 0 1 1072.6064 722)" class="number">2137</text>
-<text transform="matrix(1 0 0 1 1154.7312 722)" class="number">2131</text>
-<text transform="matrix(1 0 0 1 1236.3209 722)" class="number">2125</text>
-<text transform="matrix(1 0 0 1 1342.1405 722)" class="number">2119</text>
-<text transform="matrix(1 0 0 1 1748.8635 732)" class="number">2059</text>
-<text transform="matrix(1 0 0 1 1830.2673 732)" class="number">2047</text>
-<text transform="matrix(1 0 0 1 1911.0513 732)" class="number">2041</text>
-<text transform="matrix(1 0 0 1 2003.9866 732)" class="number">2035</text>
-<text transform="matrix(1 0 0 1 2112.8271 730.785)" class="number">12727</text>
-<text transform="matrix(1 0 0 1 2105.3457 638.4301)" class="number">12721</text>
-<text transform="matrix(1 0 0 1 2097.8638 557.0751)" class="number">12715</text>
-<text transform="matrix(1 0 0 1 2089.3823 474.7201)" class="number">12709</text>
-<text transform="matrix(1 0 0 1 2329.356 746.3402)" class="number">12734</text>
-<text transform="matrix(1 0 0 1 2321.2012 665)" class="number">12728</text>
-<text transform="matrix(1 0 0 1 2312.9858 583.8403)" class="number">12722</text>
-<text transform="matrix(1 0 0 1 2304.7805 502.7598)" class="number">12716</text>
-<text transform="matrix(1 0 0 1 2295.7109 423.4796)" class="number">12710</text>
-<text transform="matrix(1 0 0 1 2278.9507 338.0002)" class="number">12704</text>
-<text transform="matrix(1 0 0 1 2251.092 243.1799)" class="number">12634</text>
-<text transform="matrix(1 0 0 1 2188.9502 158.2302)" class="number">12628</text>
-<text transform="matrix(-1.745242e-002 0.9998 -0.9998 -1.745242e-002 2100.6777 -18.0741)" class="street">Cypress</text>
-<text transform="matrix(0.4695 0.8829 -0.8829 0.4695 2142.3984 241.6613)" class="street">Knoll</text>
-<text transform="matrix(0.1392 0.9903 -0.9903 0.1392 2212.1689 470.1251)" class="street">Lane</text>
-<text transform="matrix(1 0 0 1 1014.1102 783.3096)" class="street">St. Andrews Way</text>
-<text transform="matrix(1 0 0 1 1923.1411 787.67)" class="street">St. Andrews Way</text>
-<text transform="matrix(1 0 0 1 992.1186 1026.0984)" class="street">El Segundo Boulevard</text>
-<text transform="matrix(1 0 0 1 2028.5818 1026.0984)" class="street">El Segundo Boulevard</text>
-<text transform="matrix(0.8192 -0.5736 0.5736 0.8192 1720.2292 425.9828)" class="street">Pine Hurst Lane</text>
-<text transform="matrix(1 0 0 1 548.2284 474.7201)" class="street">Pine Valley Drive</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 526.29 687.5967)" class="street">Van Ness Avenue</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 758.5439 685.498)" class="street">Glen Eagles Drive</text>
-<text transform="matrix(1 0 0 1 867.0306 415.92)" class="street">St. Augusta Lane</text>
-<text transform="matrix(0.8192 -0.5736 0.5736 0.8192 1477.0122 159.0747)" class="street">St. Augusta Lane</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 1710.8346 978.3389)" class="street">Oakmont Lane</text>
+<text transform="matrix(1 0 0 1 583.4683 360)" class="st2 st3 st4">2173</text>
+<text transform="matrix(1 0 0 1 685.218 360)"  class="st2 st3 st4">2165</text>
+<text transform="matrix(1 0 0 1 769.7181 360)" class="st2 st3 st4">2157</text>
+<text transform="matrix(1 0 0 1 854.4681 360)" class="st2 st3 st4">2151</text>
+<text transform="matrix(1 0 0 1 939.2184 360)" class="st2 st3 st4">2145</text>
+<text transform="matrix(1 0 0 1 1042.9204 342.75)" class="st2 st3 st4">2139</text>
 </svg>

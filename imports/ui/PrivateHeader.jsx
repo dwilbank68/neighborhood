@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Accounts} from 'meteor/accounts-base';
 
 import EditProfile from './EditProfile';
-import AnnouncementEditor from './announcement/AnnouncementBox';
+
 import CurrentUser from './CurrentUser';
 
 // import PrivateHeader from './PrivateHeader.jsx';

@@ -7,10 +7,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 import AnnouncementInput from './AnnouncementInput.jsx';
 import AnnouncementMessage from './AnnouncementMessage.jsx';
 
-import {Announcements} from '../../api/announcements';
-
-
-export class ServiceBox extends Component {
+export class AnnouncementBox extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -86,8 +83,7 @@ export class ServiceBox extends Component {
                 return (
                     <AnnouncementMessage    announcement={ann}
                                             deleteAnnouncement={this.deleteAnnouncement}
-                                            key={ann._id}>
-                    </AnnouncementMessage>
+                                            key={ann._id}/>
                 )
 
             })
@@ -110,15 +106,15 @@ export class ServiceBox extends Component {
                     {this.renderAnnouncements()}
                 </div>
 
-                <AnnouncementInput   handleAnnouncementSubmit={this.handleAnnouncementSubmit}
-                                currentUser={this.props.currentUser}/>
+                <AnnouncementInput  handleAnnouncementSubmit={this.handleAnnouncementSubmit}
+                                    currentUser={this.props.currentUser}/>
             </div>
         );
     }
 }
 
-// ServiceBox.defaultProps = {};
-// ServiceBox.propTypes = {
+// AnnouncementBox.defaultProps = {};
+// AnnouncementBox.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -141,17 +137,16 @@ export class ServiceBox extends Component {
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-const mapToProps = (props) => {
-    Meteor.subscribe('announcements');
-    const announcements = Announcements.find({}).fetch();
-    return {
-        announcements
-        // meteorCall: Meteor.call
-    }
-}
+// const mapToProps = (props) => {
+    // Meteor.subscribe('announcements');
+    // const announcements = Announcements.find({}).fetch();
+    // return {
+    //     announcements
+    // }
+// }
 
-export default createContainer( mapToProps, ServiceBox );
-// export default ServiceBox;
+// export default createContainer( mapToProps, AnnouncementBox );
+export default AnnouncementBox;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

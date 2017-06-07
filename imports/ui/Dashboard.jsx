@@ -16,6 +16,7 @@ import AnnouncementBox      from './announcement/AnnouncementBox';
 import ServiceBox           from './service/ServiceBox';
 import Users                from './Users';
 
+import {Announcements} from '../api/announcements';
 import {Messages} from '../api/messages';
 import {Services} from '../api/services';
 import {Profiles} from '../api/profiles';
@@ -53,6 +54,7 @@ export class Dashboard extends Component {
 
                 <PrivateHeader  title=""
                                 currentUser={currentUser}/>
+                <AnnouncementDisplay announcements={this.props.announcements}/>
 
                 <div className="page-content">
                     <Map    className="map"
@@ -87,7 +89,8 @@ export class Dashboard extends Component {
                         <TabPanel></TabPanel>
                         <TabPanel></TabPanel>
                         <TabPanel>
-                            <AnnouncementBox currentUser={currentUser}/>
+                            <AnnouncementBox announcements={this.props.announcements}
+                                             currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel></TabPanel>
 
@@ -132,6 +135,8 @@ export class Dashboard extends Component {
 const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
     Meteor.subscribe('profiles');
+    Meteor.subscribe('announcements');
+    const announcements = Announcements.find({}).fetch();
     const users = Meteor
                     .users
                     .find({},{sort:{"status.online":1}})    // 1
@@ -154,6 +159,7 @@ const mapToProps = (props) => {
         let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
         return {
             allUsers: mergedUsers,
+            announcements,
             currentUser
         }
     } else {
