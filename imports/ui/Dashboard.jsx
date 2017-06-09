@@ -13,6 +13,7 @@ import PrivateHeader        from './PrivateHeader';
 import Map                  from './Map';
 import ChatBox              from './chat/ChatBox';
 import AnnouncementBox      from './announcement/AnnouncementBox';
+import PhoneInfoBox         from './phone_info/PhoneInfoBox';
 import ServiceBox           from './service/ServiceBox';
 import Users                from './Users';
 
@@ -73,19 +74,22 @@ export class Dashboard extends Component {
                         </TabList>
 
                         <TabPanel>
-                            Phone & Info
+                            <PhoneInfoBox currentUser={currentUser}/>
                         </TabPanel>
 
                         <TabPanel>
                             <Users  currentUser={currentUser}
                                     users={this.props.allUsers} />
                         </TabPanel>
+
                         <TabPanel>
                             <ChatBox currentUser={currentUser}/>
                         </TabPanel>
+
                         <TabPanel>
                             <ServiceBox currentUser={currentUser}/>
                         </TabPanel>
+
                         <TabPanel></TabPanel>
                         <TabPanel></TabPanel>
                         <TabPanel>

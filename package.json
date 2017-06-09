@@ -27,11 +27,13 @@
     "react-router": "^3.0.0",
     "react-scrollbar": "^0.5.1",
     "react-select": "^1.0.0-rc.4",
+    "react-slick": "^0.14.11",
     "react-svg": "^2.1.21",
     "react-tabs": "^1.0.0",
     "react-toggle": "^3.0.1",
     "sha1": "^1.1.1",
     "simpl-schema": "^0.2.3",
+    "slick-carousel": "^1.6.0",
     "snapsvg": "^0.5.1",
     "superagent": "2.1.0"
   },

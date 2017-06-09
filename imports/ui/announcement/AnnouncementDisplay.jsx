@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import draftToHtml from 'draftjs-to-html';
+import Slider from 'react-slick';
 
 const AnnouncementDisplay = ({announcements}) => {
 
@@ -13,24 +14,35 @@ const AnnouncementDisplay = ({announcements}) => {
         if (announcements) {
             return announcements.map((ann) => {
                 const html = draft2html(JSON.parse(ann.saveContent));
-                console.log('------------------------------------------');
-                console.log('html in display', html);
-                console.log('------------------------------------------');
                 return (
+                    // <div    className="announcement"
+                    //         key={ann._id}>
+                    //     <h3>{ann.title}</h3>
+                    //     <div dangerouslySetInnerHTML={{__html: html}}/>
+                    // </div>
                     <div    className="announcement"
-                            key={ann._id}>
-                        <h3>{ann.title}</h3>
-                        <div dangerouslySetInnerHTML={{__html: html}}/>
-                    </div>
+                            dangerouslySetInnerHTML={{__html: html}}
+                            key={ann._id}/>
+
                 )
             })
         }
     }
 
+    const settings = {
+        autoplay: true, autoplaySpeed: 2000,
+        centerMode:true,
+        dots: true,
+        fade: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4
+    };
+
     return (
-        <div className="announcement-display">
-            {announcements ? renderAnnouncements(): <span>...</span>}
-        </div>
+            <Slider {...settings}>
+                {announcements ? renderAnnouncements(): <span>...</span>}
+            </Slider>
     );
 };
 
