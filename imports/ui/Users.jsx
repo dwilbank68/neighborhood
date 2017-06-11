@@ -147,7 +147,7 @@ export class Users extends Component {
     render() {
 
         return (
-            <div className="user-display" >
+            <div className="generic-box" >
 
                 <div className="user-filter">
                     <input type="text"

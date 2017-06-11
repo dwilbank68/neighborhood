@@ -9,6 +9,9 @@
 @import 'components/chat/chatBox';
 @import 'components/chat/chatList';
 @import 'components/chat/chatMessage';
+@import 'components/phone_info/phoneInfoBox';
+@import 'components/phone_info/phoneInfoInput';
+@import 'components/phone_info/phoneInfoItem';
 @import 'components/service/serviceBox';
 @import 'components/service/serviceInput';
 @import 'components/service/serviceList';
@@ -19,6 +22,7 @@
 @import 'components/dashboard';
 @import 'components/editor';
 @import 'components/editProfile';
+@import 'components/generic';
 @import 'components/header';
 @import 'components/imageUpload';
 @import 'components/item';

@@ -95,7 +95,7 @@ export class AnnouncementBox extends Component {
 
     render() {
         return (
-            <div className="announcement-box">
+            <div className="generic-box">
                 <div className="announcement-filter">
                     <input type="text"
                            onChange={this.handleChange}

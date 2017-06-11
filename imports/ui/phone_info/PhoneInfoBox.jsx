@@ -9,6 +9,12 @@ import PhoneInfoItem from './PhoneInfoItem.jsx';
 
 import {PhoneNumbers} from '../../api/phone_numbers';
 
+const styles = {
+    list: {
+        background: 'rgba(0,0,0,.15)',
+        height: '360px'
+    }
+}
 
 export class PhoneInfoBox extends Component {
 
@@ -19,7 +25,6 @@ export class PhoneInfoBox extends Component {
                 filterText: ''
             }
         this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-        this.handlePhoneNumberSubmit = this.handlePhoneNumberSubmit.bind(this)
     }
 
     deletePhoneNumber(numId){
@@ -44,21 +49,6 @@ export class PhoneInfoBox extends Component {
         })
     }
 
-    handlePhoneNumberSubmit(phoneNumber) {
-        Meteor.call(
-            'phoneNumberCreate',
-            phoneNumber,
-            (err, res) => {
-                if (res) {
-                    console.log('------------------------------------------');
-                    console.log('res ',res);
-                    console.log('------------------------------------------');
-                } else {
-                    console.log('err', err);
-                }
-            }
-        )
-    }
 
     renderPhoneNumbers(){
         if (this.props.phone_numbers) {
@@ -91,19 +81,18 @@ export class PhoneInfoBox extends Component {
 
     render() {
         return (
-            <div className="service-box">
-                <div className="service-filter">
+            <div className="generic-box">
+                <div className="info-filter">
                     <input type="text"
                            onChange={this.handleFilterTextChange}
-                           placeholder="find by category or content"/>
+                           placeholder="find by name or number"/>
                 </div>
 
-                <div className="service-list">
+                <div className="info-list">
                     {this.renderPhoneNumbers()}
                 </div>
 
-                <PhoneInfoInput   handlePhoneNumberSubmit={this.handlePhoneNumberSubmit}
-                                currentUser={this.props.currentUser}/>
+                <PhoneInfoInput     currentUser={this.props.currentUser}/>
             </div>
         );
     }
@@ -136,9 +125,6 @@ export class PhoneInfoBox extends Component {
 const mapToProps = (props) => {
     Meteor.subscribe('phone_numbers');
     const phone_numbers = PhoneNumbers.find({}).fetch();
-    console.log('------------------------------------------');
-    console.log('phone_numbers in PhoneInfoBox',phone_numbers);
-    console.log('------------------------------------------');
     return {
         phone_numbers
         // meteorCall: Meteor.call

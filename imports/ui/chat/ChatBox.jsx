@@ -40,7 +40,7 @@ export class ChatBox extends Component {
 
     render() {
         return (
-            <div className="chat-box">
+            <div className="generic-box">
 
                 <ChatList   messages={this.props.messages}/>
                 <ChatInput  handleMsgSubmit={this.handleMsgSubmit}

@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
-import Modal from 'react-modal';
 
-
-import {serviceCategories} from '../../../serviceCategories.js';
-
-const placeholderText = `You can either:
-
-1. Choose one category and create a separate post for each skill.
-2. Choose multiple categories and describe them all in a single post.
-
-The hope for this feature is that you advertise your services either for barter, or for considerably less cost than providers outside the neighborhood.
-
-If there is a service category not included here, choose Miscellaneous, notify the webmaster, and the category will be added.`;
+const styles = {
+    phoneInfoInputWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    phoneInfoInput: {
+        marginTop: '5px',
+        width: '125px'
+    },
+    phoneInfoNewButton: {
+        cursor: 'pointer',
+        textAlign: 'center'
+    }
+}
 
 // import PhoneInfoInput from './PhoneInfoInput.jsx';
 class PhoneInfoInput extends Component {
@@ -26,7 +28,7 @@ class PhoneInfoInput extends Component {
         }
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handleNumberChange = this.handleNumberChange.bind(this)
-        this.prepService = this.prepService.bind(this)
+        this.prepPhoneInfo = this.prepPhoneInfo.bind(this)
     }
 
     handleNameChange(e) {
@@ -41,83 +43,54 @@ class PhoneInfoInput extends Component {
         })
     }
 
-    prepService(e){
+    handlePhoneNumberSubmit(phoneNumber) {
+        Meteor.call(
+            'phoneNumberCreate',
+            phoneNumber,
+            (err, res) => {
+                if (res) {
+                    console.log('------------------------------------------');
+                    console.log('res ',res);
+                    console.log('------------------------------------------');
+                } else {
+                    console.log('err', err);
+                }
+            }
+        )
+    }
+
+    prepPhoneInfo(e){
         e.preventDefault();
         if (this.state.input == '') {
             return;
         }
-        const currentUser = this.props.currentUser;
-        const svc = {
-            avatar: currentUser.avatar,
-            categories: this.state.categories.replace(',', '\n'),
-            body: this.state.input,
-            email: currentUser.email,
-            reputation: 0,
+        const phoneNumber = {
+            name: this.state.name,
+            number: this.state.number,
             userId: Meteor.userId(),
-            screenName: currentUser.screenName
         }
-        this.props.handleSvcSubmit(svc);
-        this.setState({input:'', categories:'', modalOpen: false});
+        this.handlePhoneNumberSubmit(phoneNumber);
+        this.setState({name:'', number:''});
     }
 
     render() {
 
-        const options = serviceCategories.categories.map((a) => {
-            return {value:a, label:a}
-        })
-
-        const modalStyle = {
-            overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        }
-
         return (
-            <div className="service-input">
-
-                <div    className="service-new-button"
-                        onClick={this.handleOpenModal}>
-                    <p>Add Your Skill / Expertise</p> <span>&#10010;</span>
-                </div>
-
-                <Modal  closeTimeoutMS={200}
-                        isOpen={this.state.modalOpen}
-                        contentLabel="Add Skills Or Expertise You Have To Offer"
-                        style={modalStyle}>
-
-                    <h2 className="modal-title">Describe Skills Or Expertise You Have To Offer</h2>
-
-                    {this.state.error ? <p>{this.state.error}</p> : undefined}
-
-                    <form>
-                        <div className="service-input-box">
-                            <Select className="category"
-                                    multi joinValues simpleValue
-                                    placeholder="Select One Or More Categories (Type here to filter the choices)"
-                                    options={options}
-                                    onChange={ this.onCategoryChange }
-                                    value={this.state.categories}/>
-                            <textarea   className="service-input-input"
-                                        onChange={this.handleInputChange}
-                                        placeholder={placeholderText}
-                                        value={this.state.input}/>
-                            <button   className="modal-submit-button"
-                                      onClick={this.prepService}>
-                                Submit
-                            </button>
-                        </div>
-                    </form>
-
-                    <div className='button-cancel'
-                         onClick={() => this.setState({
-                             modalOpen:false,
-                             categories: '',
-                             input: ''
-                         })}>
-                        &#x2715;
+            <div className="phone-info-input">
+                <div style={styles.phoneInfoInputWrapper}>
+                    <input  style={styles.phoneInfoInput}
+                            type="text"
+                            onChange={this.handleNameChange}
+                            placeholder="enter name"/>
+                    <input  style={styles.phoneInfoInput}
+                            type="text"
+                            onChange={this.handleNumberChange}
+                            placeholder="enter number"/>
+                    <div style={styles.phoneInfoNewButton}
+                         onClick={this.prepPhoneInfo}>
+                        &#10010;
                     </div>
-
-                </Modal>
+                </div>
 
             </div>
 

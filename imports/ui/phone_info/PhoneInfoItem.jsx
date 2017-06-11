@@ -32,18 +32,20 @@ const PhoneInfoItem = ({num}) => {
     return (
 
         <li className="info-msg">
-            <div className="info-text">
+            <div className="info-wrapper">
 
-                <span className="info-text-sender">
+                <div>
                     {num.name}
-                </span>
+                </div>
+
+                <div>
+                    {num.number}
+                </div>
 
             </div>
 
 
-            <div className="info-body">
-                {num.number}
-            </div>
+
 
             {renderDeleteButton(num)}
         </li>

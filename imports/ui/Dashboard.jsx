@@ -55,7 +55,7 @@ export class Dashboard extends Component {
 
                 <PrivateHeader  title=""
                                 currentUser={currentUser}/>
-                <AnnouncementDisplay announcements={this.props.announcements}/>
+                {/*<AnnouncementDisplay announcements={this.props.announcements}/>*/}
 
                 <div className="page-content">
                     <Map    className="map"

@@ -1,0 +1,36 @@
+.phone-info-input {
+  //position: absolute;
+  background: rgba(0,0,0,.2);
+  color: white;
+  bottom: 0px;
+  height: 54px;
+  width: 320px;
+}
+
+.phone-info-input-box {
+  //position: relative;
+}
+
+.phone-info-input-input {
+    background: white;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+    bottom: 3px;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    font-size: 1em;
+    height: 40px; width: 100%;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 10px;
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+.title-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
