@@ -8,7 +8,7 @@ const styles = {
         justifyContent: 'space-around'
     },
     phoneInfoInput: {
-        marginTop: '5px',
+        marginTop: '9px',
         width: '125px'
     },
     phoneInfoNewButton: {
@@ -61,9 +61,8 @@ class PhoneInfoInput extends Component {
 
     prepPhoneInfo(e){
         e.preventDefault();
-        if (this.state.input == '') {
-            return;
-        }
+        if (this.state.name == '') return;
+        if (this.state.number == '') return;
         const phoneNumber = {
             name: this.state.name,
             number: this.state.number,
@@ -81,11 +80,13 @@ class PhoneInfoInput extends Component {
                     <input  style={styles.phoneInfoInput}
                             type="text"
                             onChange={this.handleNameChange}
-                            placeholder="enter name"/>
+                            placeholder="add name"
+                            value={this.state.name}/>
                     <input  style={styles.phoneInfoInput}
                             type="text"
                             onChange={this.handleNumberChange}
-                            placeholder="enter number"/>
+                            placeholder="add number"
+                            value={this.state.number}/>
                     <div style={styles.phoneInfoNewButton}
                          onClick={this.prepPhoneInfo}>
                         &#10010;

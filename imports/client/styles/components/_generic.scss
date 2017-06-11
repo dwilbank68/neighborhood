@@ -4,4 +4,22 @@
     width: 320px;
     height: 600px;
     position: relative;
+
+    .generic-filter input {
+        font-style: italic;
+        margin-bottom: 4px;
+        margin-left: 4px;
+        margin-top: 2px;
+        width: 91%;
+    }
+
+    .generic-input {
+        background: rgba(0,0,0,.2);
+        color: white;
+        position: absolute;
+        bottom: 0;
+        height: 55px;
+        width: 320px;
+    }
+
 }

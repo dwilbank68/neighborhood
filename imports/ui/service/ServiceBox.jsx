@@ -96,8 +96,8 @@ export class ServiceBox extends Component {
 
     render() {
         return (
-            <div className="service-box">
-                <div className="service-filter">
+            <div className="generic-box">
+                <div className="generic-filter">
                     <input type="text"
                            onChange={this.handleChange}
                            placeholder="find by category or content"/>

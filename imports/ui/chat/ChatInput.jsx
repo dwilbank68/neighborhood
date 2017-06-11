@@ -38,7 +38,7 @@ class ChatInput extends Component {
 
     render() {
         return (
-            <form   className="chat-input" >
+            <form   className="generic-input" >
                 <div className="chat-input-box">
                     <input      className="chat-input-input"
                                 onChange={this.handleInputChange}

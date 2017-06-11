@@ -100,7 +100,7 @@ class AnnouncementInput extends Component {
         }
 
         return (
-            <div className="announcement-input">
+            <div className="generic-input">
 
                 <div    className="announcement-new-button"
                         onClick={this.handleOpenModal}>

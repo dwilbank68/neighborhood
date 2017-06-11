@@ -96,7 +96,7 @@ export class AnnouncementBox extends Component {
     render() {
         return (
             <div className="generic-box">
-                <div className="announcement-filter">
+                <div className="generic-filter">
                     <input type="text"
                            onChange={this.handleChange}
                            placeholder="find by title or content"/>

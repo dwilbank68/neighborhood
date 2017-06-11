@@ -18,7 +18,7 @@ const CurrentUser = ({user}) => {
 
 
         return (
-            <div className="current-user">
+            <div className="user-display">
                 <div className="userbadge">
                     <div className="userbadge-pic">
                         <img src={renderAvatar(user)} />

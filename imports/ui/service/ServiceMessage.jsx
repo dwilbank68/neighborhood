@@ -64,9 +64,7 @@ const ServiceMessage = ({deleteSvc, svc}) => {
             svc,
             (err, res) => {
                 if (res) {
-                    console.log('------------------------------------------');
                     console.log('res in serviceVote',res);
-                    console.log('------------------------------------------');
                 } else {
                     console.log('err in serviceVote', err);
                 }
