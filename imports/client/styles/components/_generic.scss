@@ -4,6 +4,7 @@
     width: 320px;
     height: 600px;
     position: relative;
+
 }
 
 .generic-filter input {
@@ -18,4 +19,13 @@
     background-color: $shade1;
     height:498px;
     overflow: auto;
+}
+
+.generic-input {
+    background: rgba(0,0,0,.2);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    height: 55px;
+    width: 320px;
 }

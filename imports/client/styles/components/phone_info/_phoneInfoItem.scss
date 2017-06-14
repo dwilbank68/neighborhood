@@ -4,7 +4,7 @@
     min-height: 10px;
     padding: 4px;
     position: relative;
-    width: 320px;
+    width: 295px;
 
     .info-wrapper {
         color: white;
@@ -17,8 +17,8 @@
 
 .info-delete {
     position: absolute;
-    right: 8px;
-    top: 5px;
+    right: -12px;
+    top: 6px;
     font-size: .5em;
     color: rgba(255,255,255,.6);
     cursor: pointer;

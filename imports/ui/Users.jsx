@@ -155,19 +155,18 @@ export class Users extends Component {
                             placeholder="find by name or addresses"/>
                 </div>
 
-                <div className="generic-list" >
+                <div className="user-list" >
                     <Masonry options={masonryOptions}>
                         {this.renderUsers()}
                     </Masonry>
                 </div>
 
-                <div>
-                    <CurrentUser user={
-                        this.state.selectedUser ?
-                            this.state.selectedUser :
-                            this.props.currentUser
-                    }/>
-                </div>
+                <CurrentUser user={
+                    this.state.selectedUser ?
+                        this.state.selectedUser :
+                        this.props.currentUser
+                }/>
+
 
             </div>
         );

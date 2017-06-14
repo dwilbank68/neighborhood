@@ -10,10 +10,19 @@ import {Meteor} from 'meteor/meteor';
 // const PhoneInfoItem = (props) => {
 const PhoneInfoItem = ({num}) => {
 
-    // convertTime = (ms) => {
-    //     var momentTime = moment.utc(ms);
-    //     return momentTime.local().format('MMMM Do YYYY, h:mma');
-    // }
+    const deleteInfoItem = (infoId) => {
+        Meteor.call(
+            'phoneNumberDelete',
+            infoId,
+            (err, res) => {
+                if (res) {
+                    console.log('res in deleteInfoItem',res);
+                } else {
+                    console.log('err in deleteInfoItem', err);
+                }
+            }
+        )
+    }
 
     renderDeleteButton = (num) => {
         if (num.userId === Meteor.userId()) {
@@ -33,20 +42,13 @@ const PhoneInfoItem = ({num}) => {
 
         <li className="info-msg">
             <div className="info-wrapper">
-
                 <div>
                     {num.name}
                 </div>
-
                 <div>
                     {num.number}
                 </div>
-
             </div>
-
-
-
-
             {renderDeleteButton(num)}
         </li>
     );

@@ -6,6 +6,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 
 import PhoneInfoInput from './PhoneInfoInput.jsx';
 import PhoneInfoItem from './PhoneInfoItem.jsx';
+import ScrollArea from 'react-scrollbar';
 
 import {PhoneNumbers} from '../../api/phone_numbers';
 
@@ -88,9 +89,10 @@ export class PhoneInfoBox extends Component {
                            placeholder="find by name or number"/>
                 </div>
 
-                <div className="generic-list">
+                <ScrollArea className="phone-info-list"
+                            stopScrollPropagation={true} >
                     {this.renderPhoneNumbers()}
-                </div>
+                </ScrollArea>
 
                 <PhoneInfoInput     currentUser={this.props.currentUser}/>
             </div>
