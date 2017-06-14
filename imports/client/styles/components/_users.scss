@@ -9,24 +9,6 @@
 //    width: 320px;
 //}
 
-.user-filter input {
-    font-style: italic;
-    margin-bottom: 4px;
-    margin-left: 4px;
-    width: 90%;
-}
-
-.user-list {
-    //-webkit-filter: blur(4px);
-    //-moz-filter: blur(4px);
-    //-o-filter: blur(4px);
-    //-ms-filter: blur(4px);
-    //filter: blur(4px);
-    background-color: $shade1;
-    height:375px;
-    overflow: auto;
-}
-
 .user {
     display: flex;
     align-items: center;

@@ -13,7 +13,7 @@ export default class ImageUpload extends React.Component {
 
         this.state = {
             uploadedFile: null,
-            uploadedFileCloudinaryUrl: ''
+            uploadedFileCloudinaryUrl: '',
         };
         this.handleImageUpload = this.handleImageUpload.bind(this);
     }
@@ -44,6 +44,7 @@ export default class ImageUpload extends React.Component {
                 this.setState({
                     uploadedFileCloudinaryUrl: res.data.secure_url
                 });
+
                 this.props.avatarChange(res.data.secure_url);
             }
         })

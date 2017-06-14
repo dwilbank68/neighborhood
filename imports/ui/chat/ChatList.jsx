@@ -50,7 +50,18 @@ class ChatList extends Component {
 
     renderMessages(){
         if (this.props.messages) {
-            const msgList = this.props.messages.map((msg, i) => {
+            const msgs = this.props.messages.filter((m) => {
+                return (
+                    m.body
+                        .toLowerCase()
+                        .search(this.props.filterText.toLowerCase()) !== -1
+                    ||
+                    m.screenName
+                        .toLowerCase()
+                        .search(this.props.filterText.toLowerCase()) !== -1
+                )
+            });
+            const msgList = msgs.map((msg) => {
                 return (
                     <ChatMessage key={msg._id} msg={msg} deleteMsg={this.deleteMsg}/>
                 )
@@ -74,8 +85,7 @@ class ChatList extends Component {
     render() {
         return (
             <div>
-                <ScrollArea className="chat-list"
-                            id="chat-list"
+                <ScrollArea className="generic-list"
                             stopScrollPropagation={true} >
                     {this.renderMessages()}
                 </ScrollArea>

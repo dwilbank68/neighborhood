@@ -149,13 +149,13 @@ export class Users extends Component {
         return (
             <div className="generic-box" >
 
-                <div className="user-filter">
+                <div className="generic-filter">
                     <input type="text"
                             onChange={this.handleChange}
                             placeholder="find by name or addresses"/>
                 </div>
 
-                <div className="user-list" >
+                <div className="generic-list" >
                     <Masonry options={masonryOptions}>
                         {this.renderUsers()}
                     </Masonry>

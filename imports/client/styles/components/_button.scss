@@ -16,6 +16,15 @@
   text-decoration: none;
 }
 
+.button--link--header {
+  display: inline-block;
+  text-decoration: none;
+  background-color: transparent !important;
+  &:active {
+      outline: none;
+  }
+}
+
 .button--pill {
   background-color: transparent;
   border: 1px solid $button-pill-color;
@@ -28,11 +37,6 @@
   background-color: $button-secondary-bg;
   border: 1px solid $button-secondary-bg;
   color: #777;
-}
-
-.button--link {
-  display: inline-block;
-  text-decoration: none;
 }
 
 .button--link-text {

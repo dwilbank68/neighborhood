@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ScrollArea from 'react-scrollbar';
 
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
@@ -97,15 +98,16 @@ export class ServiceBox extends Component {
     render() {
         return (
             <div className="service-box">
-                <div className="service-filter">
+                <div className="generic-filter">
                     <input type="text"
                            onChange={this.handleChange}
                            placeholder="find by category or content"/>
                 </div>
 
-                <div className="service-list">
+                <ScrollArea className="generic-list"
+                            stopScrollPropagation={true}>
                     {this.renderServices()}
-                </div>
+                </ScrollArea>
 
                 <ServiceInput   handleSvcSubmit={this.handleSvcSubmit}
                                 currentUser={this.props.currentUser}/>

@@ -15,12 +15,18 @@ export class ChatBox extends Component {
     constructor(props, context){
         super(props, context);
             this.state = {
-                input:''
+                input:'',
+                filterText: ''
             }
+        this.handleChange = this.handleChange.bind(this)
         this.handleMsgSubmit = this.handleMsgSubmit.bind(this)
     }
 
-
+    handleChange(e) {
+        this.setState({
+            filterText: e.target.value
+        })
+    }
 
     handleMsgSubmit(msg) {
         Meteor.call(
@@ -41,8 +47,13 @@ export class ChatBox extends Component {
     render() {
         return (
             <div className="generic-box">
-
-                <ChatList   messages={this.props.messages}/>
+                <div className="generic-filter">
+                    <input type="text"
+                           onChange={this.handleChange}
+                           placeholder="find message by sender or by text"/>
+                </div>
+                <ChatList   filterText={this.state.filterText}
+                            messages={this.props.messages}/>
                 <ChatInput  handleMsgSubmit={this.handleMsgSubmit}
                             currentUser={this.props.currentUser}/>
             </div>

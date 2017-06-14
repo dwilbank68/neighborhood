@@ -5,3 +5,17 @@
     height: 600px;
     position: relative;
 }
+
+.generic-filter input {
+    font-style: italic;
+    margin-bottom: 3px;
+    margin-left: 5px;
+    margin-top: 2px;
+    width: 90%;
+}
+
+.generic-list {
+    background-color: $shade1;
+    height:498px;
+    overflow: auto;
+}

@@ -82,13 +82,13 @@ export class PhoneInfoBox extends Component {
     render() {
         return (
             <div className="generic-box">
-                <div className="info-filter">
+                <div className="generic-filter">
                     <input type="text"
                            onChange={this.handleFilterTextChange}
                            placeholder="find by name or number"/>
                 </div>
 
-                <div className="info-list">
+                <div className="generic-list">
                     {this.renderPhoneNumbers()}
                 </div>
 
