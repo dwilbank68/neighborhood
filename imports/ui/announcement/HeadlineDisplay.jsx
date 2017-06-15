@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import draftToHtml from 'draftjs-to-html';
-
-// import AnnouncementDisplay from './AnnouncementDisplay.jsx';
-class AnnouncementDisplay extends Component {
+import {Link} from 'react-router';
+// import HeadlineDisplay from './HeadlineDisplay.jsx';
+class HeadlineDisplay extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props === prevProps) return;
         if (this.props.announcements) {
             const annLength = this.props.announcements.length;
             const rotateAnnouncements = (length) => {
-                let left = 0,
-                middle = 1,
-                right = 2;
+                let idx = 0;
                 setInterval(() => {
-                    this.setState({
-                        leftTitle:this.props.announcements[left].title,
-                        middleTitle:this.props.announcements[middle].title,
-                        rightTitle:this.props.announcements[right].title
-                    })
-                    left   = (left + 1)   % length;
-                    middle = (left + 1)   % length;
-                    right  = (middle + 1) % length;
-                }, 3000);
+
+                    this.setState({fading: true});
+
+                    setTimeout(() => {
+                        this.setState({
+                            headline:this.props.announcements[idx].title,
+                        })
+                        this.setState({fading: false});
+                    }, 1000);
+
+                    idx = (idx + 1) % length;
+
+                }, 6000);
             }
             rotateAnnouncements(annLength);
         }
@@ -32,16 +32,12 @@ class AnnouncementDisplay extends Component {
     constructor(props, context){
         super(props, context);
         this.state = {
-            leftTitle:'',
-            middleTitle:'',
-            rightTitle:'',
+            headline:''
         }
        // this.handleClick = this.handleClick.bind(this)
     }
 
-    draft2html (saveContent) {
-        return draftToHtml(saveContent);
-    }
+
     // handleClick(e) {
     //
     //    this.setState({
@@ -49,36 +45,24 @@ class AnnouncementDisplay extends Component {
     //    })
     // }
 
-    renderAnnouncements() {
-        if (this.props.announcements) {
-            return this.props.announcements.map((ann) => {
-                const html = draft2html(JSON.parse(ann.saveContent));
-                return (
-                    // <div    className="announcement"
-                    //         key={ann._id}>
-                    //     <h3>{ann.title}</h3>
-                    //     <div dangerouslySetInnerHTML={{__html: html}}/>
-                    // </div>
-                    <div    className="announcement"
-                            dangerouslySetInnerHTML={{__html: html}}
-                            key={ann._id}/>
 
-                )
-            })
-        }
-    }
 
     render() {
         return (
-            <div className="announcement-display">
-                {this.props.announcements ? renderAnnouncements() : <span>...</span>}
-            </div>
+            <Link to="/announcements" className='announcement-link'>
+                <div className="announcement-display">
+                    <div className={`headline ${this.state.fading ? 'faded' : ''}`}>
+                        {this.state.headline ? this.state.headline : new Date().toDateString()}
+                    </div>
+                </div>
+            </Link>
+
         );
     }
 }
 
-// AnnouncementDisplay.defaultProps = {};
-// AnnouncementDisplay.propTypes = {
+// HeadlineDisplay.defaultProps = {};
+// HeadlineDisplay.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -88,12 +72,12 @@ class AnnouncementDisplay extends Component {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-// AnnouncementDisplay.contextTypes = {
+// HeadlineDisplay.contextTypes = {
 //     router: React.PropTypes.object.isRequired
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-export default AnnouncementDisplay;
+export default HeadlineDisplay;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)
@@ -111,7 +95,7 @@ export default AnnouncementDisplay;
 
 // no more constructor - no more 'this' binding required
 
-// class AnnouncementDisplay extends Component {
+// class HeadlineDisplay extends Component {
 
     // this.state = {
     //     'whatever':{}

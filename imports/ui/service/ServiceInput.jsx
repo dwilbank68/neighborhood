@@ -100,36 +100,38 @@ class ServiceInput extends Component {
                         contentLabel="Add Skills Or Expertise You Have To Offer"
                         style={modalStyle}>
 
-                    <h2 className="modal-title">Describe Skills Or Expertise You Have To Offer</h2>
+                    <div className="modal-content-wrapper">
+                        <h2 className="modal-title">Describe Skills Or Expertise You Have To Offer</h2>
 
-                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+                        {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                    <form>
-                        <div className="service-input-box">
-                            <Select className="category"
-                                    multi joinValues simpleValue
-                                    placeholder="Select One Or More Categories (Type here to filter the choices)"
-                                    options={options}
-                                    onChange={ this.onCategoryChange }
-                                    value={this.state.categories}/>
-                            <textarea   className="service-input-input"
-                                        onChange={this.handleInputChange}
-                                        placeholder={placeholderText}
-                                        value={this.state.input}/>
-                            <button   className="modal-submit-button"
-                                      onClick={this.prepService}>
-                                Submit
-                            </button>
+                        <form>
+                            <div className="service-input-box">
+                                <Select className="category"
+                                        multi joinValues simpleValue
+                                        placeholder="Select One Or More Categories (Type here to filter the choices)"
+                                        options={options}
+                                        onChange={ this.onCategoryChange }
+                                        value={this.state.categories}/>
+                                <textarea   className="service-input-input"
+                                            onChange={this.handleInputChange}
+                                            placeholder={placeholderText}
+                                            value={this.state.input}/>
+                                <button   className="modal-submit-button"
+                                          onClick={this.prepService}>
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+
+                        <div className='button-cancel'
+                             onClick={() => this.setState({
+                                 modalOpen:false,
+                                 categories: '',
+                                 input: ''
+                             })}>
+                            &#x2715;
                         </div>
-                    </form>
-
-                    <div className='button-cancel'
-                         onClick={() => this.setState({
-                             modalOpen:false,
-                             categories: '',
-                             input: ''
-                         })}>
-                        &#x2715;
                     </div>
 
                 </Modal>

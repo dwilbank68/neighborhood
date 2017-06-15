@@ -8,11 +8,11 @@ import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
-import AnnouncementDisplay  from './announcement/AnnouncementDisplay';
 import PrivateHeader        from './PrivateHeader';
 import Map                  from './Map';
 import ChatBox              from './chat/ChatBox';
 import AnnouncementBox      from './announcement/AnnouncementBox';
+import HeadlineDisplay      from './announcement/HeadlineDisplay';
 import PhoneInfoBox         from './phone_info/PhoneInfoBox';
 import ServiceBox           from './service/ServiceBox';
 import Users                from './Users';
@@ -55,7 +55,8 @@ export class Dashboard extends Component {
 
                 <PrivateHeader  title=""
                                 currentUser={currentUser}/>
-                {/*<AnnouncementDisplay announcements={this.props.announcements}/>*/}
+
+                <HeadlineDisplay announcements={this.props.announcements}/>
 
                 <div className="page-content">
                     <Map    className="map"

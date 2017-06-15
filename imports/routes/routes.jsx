@@ -2,10 +2,11 @@ import {Meteor} from 'meteor/meteor';
 import React from 'react';
 import {Router, Route, browserHistory} from 'react-router';
 
-import LogIn from       '../ui/LogIn';
-import SignUp from      '../ui/SignUp';
-import Dashboard from        '../ui/Dashboard';
-import NotFound from    '../ui/NotFound';
+import LogIn from           '../ui/LogIn';
+import SignUp from          '../ui/SignUp';
+import Dashboard from       '../ui/Dashboard';
+import Announcements from   '../ui/announcement/Announcements';
+import NotFound from        '../ui/NotFound';
 
 window.b = browserHistory;
 const unauthPages = ['/','/signup'];
@@ -43,6 +44,7 @@ export const routes = (
                onEnter={onEnterPublicPage}/>
         <Route path="/dashboard"    component={Dashboard}
                onEnter={onEnterPrivatePage}/>
+        <Route path="/announcements"    component={Announcements}/>
         <Route path="*"             component={NotFound}
                onEnter={onEnterPrivatePage}/>
     </Router>

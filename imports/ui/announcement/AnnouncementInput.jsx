@@ -113,34 +113,36 @@ class AnnouncementInput extends Component {
                         isOpen={this.state.modalOpen}
                         style={modalStyle}>
 
-                    <h2 className="modal-title">Create An Announcement</h2>
+                    <div className="modal-content-wrapper">
+                        <h2 className="modal-title">Create An Announcement</h2>
 
-                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+                        {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                    <Editor editorStyle={edStyle.editorStyle}
-                            editorState={editorState}
-                            onEditorStateChange={this.onEditorStateChange}/>
+                        <Editor editorStyle={edStyle.editorStyle}
+                                editorState={editorState}
+                                onEditorStateChange={this.onEditorStateChange}/>
 
-                    <div className="title-button-wrapper">
-                        <input      className="announcement-input-input"
-                                    onChange={this.handleInputChange}
-                                    placeholder="Title required"
-                                    value={this.state.input}/>
-                        <button   className="modal-submit-button"
-                                  onClick={this.prepAnnouncement}>
-                            Submit
-                        </button>
-                    </div>
+                        <div className="title-button-wrapper">
+                            <input      className="announcement-input-input"
+                                        onChange={this.handleInputChange}
+                                        placeholder="Title required"
+                                        value={this.state.input}/>
+                            <button   className="modal-submit-button"
+                                      onClick={this.prepAnnouncement}>
+                                Submit
+                            </button>
+                        </div>
 
 
 
-                    <div className='button-cancel'
-                         onClick={() => this.setState({
-                             modalOpen:false,
-                             categories: '',
-                             input: ''
-                         })}>
-                        &#x2715;
+                        <div className='button-cancel'
+                             onClick={() => this.setState({
+                                 modalOpen:false,
+                                 categories: '',
+                                 input: ''
+                             })}>
+                            &#x2715;
+                        </div>
                     </div>
 
                 </Modal>

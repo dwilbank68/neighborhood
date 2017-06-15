@@ -1,0 +1,26 @@
+.announcement {
+    border: 1px solid white;
+    height: 300px !important; width: 450px !important;
+    padding: 10px;
+}
+
+.announcement-link {
+    text-decoration: none !important;
+}
+
+.announcement-display {
+    color: white;
+    font-size: 1.4em;
+    text-align: center;
+    background-color: rgba(0,0,0,.4);
+    height: 25px;
+}
+
+.headline {
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.faded {
+    opacity : 0;
+}

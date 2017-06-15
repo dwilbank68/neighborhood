@@ -135,56 +135,58 @@ export class EditProfile extends Component {
                         isOpen={this.state.modalOpen}
                         contentLabel="Update Your User Info"
                         style={modalStyle}>
+                    <div className="modal-content-wrapper">
+                        <h2 className="modal-title">Update Your User Info</h2>
 
-                    <h2 className="modal-title">Update Your User Info</h2>
+                        {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+                        <form onSubmit={this.onSubmit}>
+                            <div className="row">
+                                <input  type="text" ref="screenName" name="screenName"
+                                        onChange={this.handleScreenNameChange}
+                                        placeholder="Screen Name"
+                                        value={this.state.screenName}/>
+                            </div>
+                            <div className="row">
+                                <input  type="text" ref="fullName" name="fullName"
+                                        onChange={this.handleFullNameChange}
+                                        placeholder="Full Name (Optional)"
+                                        value={this.state.fullName}/>
+                            </div>
+                            <div className="row">
+                                <input  type="text" ref="phone" name="phone"
+                                        onChange={this.handlePhoneChange}
+                                        placeholder="Phone (Optional)"
+                                        value={this.state.phone}/>
+                            </div>
+                            <div className="row">
+                                <label>
+                                    <Toggle checked={this.state.emailVisible}
+                                            icons={false}
+                                            onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
+                                    <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
+                                </label>
+                            </div>
 
-                    <form onSubmit={this.onSubmit}>
-                        <div className="row">
-                            <input  type="text" ref="screenName" name="screenName"
-                                    onChange={this.handleScreenNameChange}
-                                    placeholder="Screen Name"
-                                    value={this.state.screenName}/>
+                            <div className="row upload-preview">
+                                <ImageUpload avatarChange={this.handleAvatarChange}/>
+                                <CurrentUser user={this.state}/>
+                            </div>
+
+                            <button className="btn btn-lg btn-primary btn-block"
+                                    type="submit"
+                                    onClick={this.formSubmit}>
+                                Update Profile
+                            </button>
+
+                        </form>
+
+                        <div className='button-cancel'
+                             onClick={() => this.setState({modalOpen:false})}>
+                            &#x2715;
                         </div>
-                        <div className="row">
-                            <input  type="text" ref="fullName" name="fullName"
-                                    onChange={this.handleFullNameChange}
-                                    placeholder="Full Name (Optional)"
-                                    value={this.state.fullName}/>
-                        </div>
-                        <div className="row">
-                            <input  type="text" ref="phone" name="phone"
-                                    onChange={this.handlePhoneChange}
-                                    placeholder="Phone (Optional)"
-                                    value={this.state.phone}/>
-                        </div>
-                        <div className="row">
-                            <label>
-                                <Toggle checked={this.state.emailVisible}
-                                        icons={false}
-                                        onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
-                                <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
-                            </label>
-                        </div>
-
-                        <div className="row upload-preview">
-                            <ImageUpload avatarChange={this.handleAvatarChange}/>
-                            <CurrentUser user={this.state}/>
-                        </div>
-
-                        <button className="btn btn-lg btn-primary btn-block"
-                                type="submit"
-                                onClick={this.formSubmit}>
-                            Update Profile
-                        </button>
-
-                    </form>
-
-                    <div className='button-cancel'
-                            onClick={() => this.setState({modalOpen:false})}>
-                        &#x2715;
                     </div>
+
 
                 </Modal>
 
