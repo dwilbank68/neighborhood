@@ -17,8 +17,8 @@ class HeadlineDisplay extends Component {
                     setTimeout(() => {
                         this.setState({
                             headline:this.props.announcements[idx].title,
+                            fading: false
                         })
-                        this.setState({fading: false});
                     }, 1000);
 
                     idx = (idx + 1) % length;

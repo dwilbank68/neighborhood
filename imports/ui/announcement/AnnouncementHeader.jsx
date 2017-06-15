@@ -11,7 +11,7 @@ class AnnouncementHeader extends Component {
             <div className="private-header header">
                 <div className="header__content">
                     <h1 className="header__title">{this.props.title}</h1>
-                    <Link to="/dashboard">Back to main page</Link>
+                    <Link className="back-link" to="/dashboard">&#8678; Back to main page</Link>
                     <button onClick={() => Accounts.logout()}
                             className="button button--link--header">
                         Log Out

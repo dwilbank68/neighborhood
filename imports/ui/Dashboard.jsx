@@ -13,12 +13,14 @@ import Map                  from './Map';
 import ChatBox              from './chat/ChatBox';
 import AnnouncementBox      from './announcement/AnnouncementBox';
 import HeadlineDisplay      from './announcement/HeadlineDisplay';
+import NeedBox              from './need/NeedBox';
 import PhoneInfoBox         from './phone_info/PhoneInfoBox';
 import ServiceBox           from './service/ServiceBox';
 import Users                from './Users';
 
 import {Announcements} from '../api/announcements';
 import {Messages} from '../api/messages';
+import {Needs} from '../api/needs';
 import {Services} from '../api/services';
 import {Profiles} from '../api/profiles';
 
@@ -71,7 +73,7 @@ export class Dashboard extends Component {
                             <Tab>Offers</Tab>
                             <Tab>Rules</Tab>
                             <Tab>Announcements</Tab>
-                            <Tab>Wanted</Tab>
+                            <Tab>Wanted ({this.props.needsCount})</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -97,7 +99,9 @@ export class Dashboard extends Component {
                             <AnnouncementBox announcements={this.props.announcements}
                                              currentUser={currentUser}/>
                         </TabPanel>
-                        <TabPanel></TabPanel>
+                        <TabPanel>
+                            <NeedBox        currentUser={currentUser}/>
+                        </TabPanel>
 
                     </Tabs>
                 </div>
@@ -138,15 +142,20 @@ export class Dashboard extends Component {
 // (lets you do 'this.context.router.push('/wherever');
 
 const mapToProps = (props) => {
+
     Meteor.subscribe('allUsers');
-    Meteor.subscribe('profiles');
     Meteor.subscribe('announcements');
+    Meteor.subscribe('needs');
+    Meteor.subscribe('profiles');
+    
     const announcements = Announcements.find({}).fetch();
     const users = Meteor
                     .users
                     .find({},{sort:{"status.online":1}})    // 1
                     .fetch();
     const profiles = Profiles.find({}).fetch();
+    const needs = Needs.find({}).fetch();
+    const needsCount = needs.length;
     if (profiles.length > 0 && users.length > 0) {
         const profilesObj = _.mapKeys(profiles, 'userId');
         let profile;
@@ -165,7 +174,8 @@ const mapToProps = (props) => {
         return {
             allUsers: mergedUsers,
             announcements,
-            currentUser
+            currentUser,
+            needsCount
         }
     } else {
         return [{}];
