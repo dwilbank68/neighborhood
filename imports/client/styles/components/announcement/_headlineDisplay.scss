@@ -1,7 +1,22 @@
+.masonry-wrapper {
+    background-color: #408DE7;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
 .announcement {
-    border: 1px solid white;
-    height: 300px !important; width: 450px !important;
+    background: rgba(255,255,255,.7);
+    //outline: 10px solid transparent;
+    box-sizing: border-box;
+    width: 450px !important;
+    outline: 10px solid #408DE7;
     padding: 10px;
+
+    img {
+        max-width: 100% !important;
+    }
+
 }
 
 .announcement-link {

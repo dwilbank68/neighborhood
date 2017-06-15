@@ -45,7 +45,7 @@ export default class ImageUpload extends React.Component {
                     uploadedFileCloudinaryUrl: res.data.secure_url
                 });
 
-                this.props.avatarChange(res.data.secure_url);
+                this.props.avatarChange(res.data.secure_url, res.data.public_id);
             }
         })
         .catch((err) => {

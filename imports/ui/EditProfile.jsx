@@ -73,9 +73,13 @@ export class EditProfile extends Component {
         )
     }
 
-    handleAvatarChange(avatarUrl){
+    handleAvatarChange(avatarUrl, public_id){
+        console.log('------------------------------------------');
+        console.log("public_id for use only if I decide to use cloudinary's react sdk", public_id);
+        console.log('------------------------------------------');
         this.setState({
-            avatar:avatarUrl
+            avatar:avatarUrl,
+            public_id
         })
     }
 
