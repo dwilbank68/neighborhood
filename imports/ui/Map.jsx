@@ -59,7 +59,6 @@ export class Map extends Component {
 
     updateMap(){
         if (this.state.mapLoaded == false) {
-            console.log('updateMap called from componentDidMount');
             // this runs upon ComponentDidMount
             let map = Snap('#map');
             Snap.load("images/traditions90250.svg", function(data){
@@ -69,7 +68,6 @@ export class Map extends Component {
             }.bind(this))
         } else {
             // this runs upon ComponentDidUpdate
-            console.log('updateMap called from componentDidUpdate');
             if (!this.map) return;
             if (!this.props.allUsers) return;
             // const a2047 = this.map.select('#a2047');

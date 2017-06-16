@@ -62,7 +62,8 @@ export class Dashboard extends Component {
 
                 <div className="page-content">
                     <Map    className="map"
-                            allUsers={this.props.allUsers}/>
+                            allUsers={this.props.allUsers}
+                            needs={this.props.needs}/>
 
                     <Tabs className='tabs'>
                         <TabList>
@@ -161,10 +162,17 @@ const mapToProps = (props) => {
         let profile;
         let mergedUsers = users.map(u => {
             profile = profilesObj[u._id];
-            const { screenName, emailVisible, fullName, avatar,
-                address, city, state, zipcode, phone } = profile;
+            const {emailVisible} = profile;
             return {
-                screenName, fullName, avatar, address, city, state, zipcode, phone, emailVisible,
+                screenName: profile.screenName,
+                fullName:   profile.fullName,
+                avatar:     profile.avatar,
+                address:    profile.address,
+                city:       profile.city,
+                state:      profile.state,
+                zipcode:    profile.zipcode,
+                phone:      profile.phone,
+                emailVisible,
                 email: emailVisible ? u.emails[0].address : null,
                 id: u._id,
                 online: u.status ? u.status.online : true

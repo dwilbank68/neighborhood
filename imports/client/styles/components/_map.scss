@@ -19,11 +19,6 @@ svg {
 }
 
 path, polygon, rect {
-  //stroke: rgba(255,255,255,.5);
-  //stroke-width: 5px;
-}
-
-path, polygon, rect {
    fill: rgba(0,0,0,.3);
 }
 
@@ -40,4 +35,24 @@ path, polygon, rect {
 
 .signedUp {
     fill: rgba(0,0,0,.1);
+}
+
+.number, .street {
+    opacity: 0;
+}
+
+.number {
+    transition: opacity 2s ease;
+}
+
+.street {
+    transition: opacity 1s ease;
+}
+
+#map:hover .street {
+    opacity: 1;
+}
+
+#map:hover .number {
+    opacity: 1;
 }
