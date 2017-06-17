@@ -26,6 +26,7 @@ class NeedInput extends Component {
         }
         const currentUser = this.props.currentUser;
         const need = {
+            address: currentUser.address,
             avatar: currentUser.avatar,
             body: this.state.input,
             email: currentUser.email,

@@ -74,7 +74,7 @@ export class Dashboard extends Component {
                             <Tab>Offers</Tab>
                             <Tab>Rules</Tab>
                             <Tab>Announcements</Tab>
-                            <Tab>Wanted ({this.props.needsCount})</Tab>
+                            <Tab>Wanted ({this.props.needs? this.props.needs.length:null})</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -162,20 +162,22 @@ const mapToProps = (props) => {
         let profile;
         let mergedUsers = users.map(u => {
             profile = profilesObj[u._id];
-            const {emailVisible} = profile;
-            return {
-                screenName: profile.screenName,
-                fullName:   profile.fullName,
-                avatar:     profile.avatar,
-                address:    profile.address,
-                city:       profile.city,
-                state:      profile.state,
-                zipcode:    profile.zipcode,
-                phone:      profile.phone,
-                emailVisible,
-                email: emailVisible ? u.emails[0].address : null,
-                id: u._id,
-                online: u.status ? u.status.online : true
+            if (profile) {
+                const {emailVisible} = profile;
+                return {
+                    screenName: profile.screenName,
+                    fullName:   profile.fullName,
+                    avatar:     profile.avatar,
+                    address:    profile.address,
+                    city:       profile.city,
+                    state:      profile.state,
+                    zipcode:    profile.zipcode,
+                    phone:      profile.phone,
+                    emailVisible,
+                    email: emailVisible ? u.emails[0].address : null,
+                    id: u._id,
+                    online: u.status ? u.status.online : true
+                }
             }
         });
         let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
@@ -183,7 +185,7 @@ const mapToProps = (props) => {
             allUsers: mergedUsers,
             announcements,
             currentUser,
-            needsCount
+            needs
         }
     } else {
         return [{}];

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import _ from 'lodash';
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
 import ReactSVG from 'react-svg';
@@ -8,26 +8,38 @@ import Snap from 'snapsvg';
 // import {Map} from './Map.jsx';
 export class Map extends Component {
 
+    clearMarkers(){
+        var myNode = document.getElementById("map");
+        while (myNode.children.length > 1) {
+            myNode.removeChild(myNode.lastChild);
+        }
+    }
+
     constructor(props, context){
         super(props, context);
         this.state = {
             mapLoaded:false
         }
-       this.updateMap = this.updateMap.bind(this)
+       this.updateMapUsers = this.updateMapUsers.bind(this)
+       this.updateMapNeeds = this.updateMapNeeds.bind(this)
     }
 
     componentDidMount() {
-        this.updateMap();
+        window.addEventListener(
+            "resize",
+            _.debounce(
+                this.updateMapNeeds.bind(this),
+                300
+            )
+        );
+        this.updateMapUsers();
+        this.updateMapNeeds();
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        this.updateMap();
+        this.updateMapUsers();
+        this.updateMapNeeds();
     }
-
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     this.updateMap();
-    // }
-
 
     // handleClick(e) {
     //
@@ -38,28 +50,46 @@ export class Map extends Component {
 
     render() {
 
-        // var map = Snap('#map');
-        // Snap.load("images/traditions90250.svg", function(data){
-        //     if (map) {
-        //         map.append(data);
-        //         const a2047 = map.select('#a2047');
-        //         a2047.attr({stroke:'yellow', strokeWidth:'6px'})
-        //     }
-        //
-        // })
-
         return (
+
             <div className="map" id="map">
-                {/*<ReactSVG   path="images/traditions90250.svg"*/}
-                            {/*callback={svg => console.log(svg)}*/}
-                            {/*className="map" />*/}
             </div>
+
         );
     }
 
-    updateMap(){
+    updateMapNeeds(){
+
+        if (!this.props.needs) return;
+        if (this.props.needs.length == 0) return;
+        this.clearMarkers();
+        const mapDiv = document.getElementById('map');
+        const mapRect = document
+            .getElementById('Neighborhood_Map_Outlines')
+            .getBoundingClientRect();
+        this.props.needs.map((n) => {
+            const number = document.getElementById(`n${parseInt(n.address)}`);
+            const numberRect = number.getBoundingClientRect();
+            let left =  numberRect.left + (numberRect.width/2);     // get center pt of address box
+            let top =   numberRect.top - (numberRect.height * 1.5); // get pt right above address box
+            left -= mapRect.left;
+            top -= mapRect.top;
+            left -= numberRect.height / 2;    // to center the circle
+            // top -= numberRect.height / 2;     // to raise circle above number
+
+            const need = document.createElement('div');
+            need.classList.add('need');
+            need.style.height = numberRect.height + 'px';
+            need.style.width =  numberRect.height + 'px';
+            need.style.left =   left + 'px';
+            need.style.top =    top + 'px';
+            mapDiv.appendChild(need);
+        })
+    }
+    
+    updateMapUsers(){
         if (this.state.mapLoaded == false) {
-            // this runs upon ComponentDidMount
+            // this block runs upon ComponentDidMount
             let map = Snap('#map');
             Snap.load("images/traditions90250.svg", function(data){
                 map.append(data);
@@ -67,18 +97,18 @@ export class Map extends Component {
                 this.map = map;
             }.bind(this))
         } else {
-            // this runs upon ComponentDidUpdate
+            // this block runs upon ComponentDidUpdate
             if (!this.map) return;
             if (!this.props.allUsers) return;
-            // const a2047 = this.map.select('#a2047');
-            // a2047.attr({stroke:'yellow', strokeWidth:'6px'})
             this.props.allUsers.map((u) => {
                 const signedUp = `a${parseInt(u.address)}`;
+                // the svg ids are like "a2047" because ids can't begin with a number
                 const house = document.getElementById(signedUp);
                 house.classList.add("signedUp");
                 if (u.online == true) house.classList.add('online');
                 if (u.online == false) house.classList.remove('online');
             })
+
         }
     }
 

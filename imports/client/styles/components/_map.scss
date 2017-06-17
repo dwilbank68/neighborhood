@@ -1,9 +1,10 @@
-.map {
+#map {
     //background-attachment: fixed;
     //background-size: cover;
     //img {
     //  height: 100%;
-      width: 100%;
+    position: relative;
+    width: 100%;
     //  object-fit: contain;
     //  background: rgba(0,0,0,.3);
     //  top: 0;
@@ -12,8 +13,17 @@
     //}
 }
 
+//.map-overlay {
+//    position: absolute;
+//    background-color: rgba(255,0,0,.4);
+//    top: 0;
+//    bottom: 0;
+//    left: 0;
+//    right: 0;
+//}
+
 svg {
-    width: 90%;
+    width: 98%;
     height: auto;
     max-height: 736px;
 }
@@ -55,4 +65,87 @@ path, polygon, rect {
 
 #map:hover .number {
     opacity: 1;
+}
+
+.need {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: yellow;
+    position: absolute;
+    -webkit-animation: yellow 1.5s ease-in-out infinite alternate;
+    -moz-animation: yellow 1.5s ease-in-out infinite alternate;
+    animation: yellow 1.5s ease-in-out infinite alternate;
+}
+
+
+// glows
+
+@-webkit-keyframes yellow {
+    from {
+        box-shadow: 0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px #B6FF00,
+        0 0 70px #B6FF00,
+        0 0 80px #B6FF00,
+        0 0 100px #B6FF00,
+        0 0 150px #B6FF00;
+    }
+    to {
+        box-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #B6FF00,
+        0 0 35px #B6FF00,
+        0 0 40px #B6FF00,
+        0 0 50px #B6FF00,
+        0 0 75px #B6FF00;
+    }
+}
+
+@-moz-keyframes yellow {
+    from {
+        box-shadow: 0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px #B6FF00,
+        0 0 70px #B6FF00,
+        0 0 80px #B6FF00,
+        0 0 100px #B6FF00,
+        0 0 150px #B6FF00;
+    }
+    to {
+        box-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #B6FF00,
+        0 0 35px #B6FF00,
+        0 0 40px #B6FF00,
+        0 0 50px #B6FF00,
+        0 0 75px #B6FF00;
+    }
+}
+
+@keyframes yellow {
+    from {
+        box-shadow: 0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px #B6FF00,
+        0 0 70px #B6FF00,
+        0 0 80px #B6FF00,
+        0 0 100px #B6FF00,
+        0 0 150px #B6FF00;
+    }
+    to {
+        box-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #B6FF00,
+        0 0 35px #B6FF00,
+        0 0 40px #B6FF00,
+        0 0 50px #B6FF00,
+        0 0 75px #B6FF00;
+    }
 }

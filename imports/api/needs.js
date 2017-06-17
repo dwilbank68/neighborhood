@@ -10,6 +10,7 @@ if (Meteor.isServer) {
         return Needs.find(
             {},
             { fields: {
+                address: 1,
                 avatar: 1,
                 body: 1,
                 created: 1,
@@ -52,9 +53,10 @@ Meteor.methods({
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        const {avatar, body, email, screenName, userId} = msg;
+        const {address, avatar, body, email, screenName, userId} = msg;
         return Needs.insert(
             {
+                address,
                 avatar,
                 body,
                 created: new Date().getTime(),
