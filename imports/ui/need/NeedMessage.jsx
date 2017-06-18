@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import gravatar from 'node-gravatar';
-import {convertTime} from '../../utils/convertTime';
+import {convertTime, timeAgo} from '../../utils/convertTime';
 
-// import ChatMessage from './ChatMessage.jsx';
-// const ChatMessage = (props) => {
-const ChatMessage = ({deleteMsg, msg}) => {
+// import NeedMessage from './NeedMessage.jsx';
+// const NeedMessage = (props) => {
+const NeedMessage = ({deleteNeed, need}) => {
     // no lifecycle methods
     // no refs
 
@@ -15,17 +15,17 @@ const ChatMessage = ({deleteMsg, msg}) => {
     //     return momentTime.local().format('MMMM Do YYYY, h:mma');
     // }
 
-    renderAvatar = (msg) => {
-        if (msg.avatar) return msg.avatar;
-        if (msg.email) return gravatar.get(msg.email);
+    renderAvatar = (need) => {
+        if (need.avatar) return need.avatar;
+        if (need.email) return gravatar.get(need.email);
         return 'http://www.gravatar.com/avatar/5a381dfbadb2290a3610e5e114d311c0?r=G&s=96';
     }
 
-    renderDeleteButton = (msg) => {
-        if (msg.userId === Meteor.userId()) {
+    renderDeleteButton = (need) => {
+        if (need.userId === Meteor.userId()) {
             return (
-                <div    className="message-chat-delete"
-                        onClick={()=>deleteMsg(msg._id)}>
+                <div    className="message-need-delete"
+                        onClick={()=>deleteNeed(need._id)}>
                     &#10005;
                 </div>
             )
@@ -36,21 +36,24 @@ const ChatMessage = ({deleteMsg, msg}) => {
 
     return (
 
-        <div className="message-chat">
-            <div    className="message-chat-pic">
-                {/*<img src={msg.avatar ? msg.avatar : msg.email? gravatar.get(msg.email):'none'} />*/}
-                <img src={renderAvatar(msg)} />
+        <div className="need-listing">
+            <div    className="need-pic">
+                {/*<img src={need.avatar ? need.avatar : need.email? gravatar.get(need.email):'none'} />*/}
+                <img src={renderAvatar(need)} />
             </div>
 
-            <div className="message-chat-text">
-                <span className="message-chat-text-sender">
-                    {msg.screenName} - {convertTime(msg.created)}
+            <div className="need-text">
+                <span className="need-details">
+                    {need.screenName} - {need.address}
                 </span>
 
-                <div className="message-chat-text-body">
-                    {msg.body}
+                <div className="need-text-body">
+                    {need.body}
                 </div>
-                {renderDeleteButton(msg)}
+                <p className="need-details need-time">
+                    {convertTime(need.created)} ({timeAgo(need.created)})
+                </p>
+                {renderDeleteButton(need)}
             </div>
 
         </div>
@@ -58,8 +61,8 @@ const ChatMessage = ({deleteMsg, msg}) => {
 };
 
 
-// ChatMessage.defaultProps = {};
-// ChatMessage.propTypes = {
+// NeedMessage.defaultProps = {};
+// NeedMessage.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     hndleIptChg: PropTypes.func,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
@@ -73,4 +76,4 @@ const ChatMessage = ({deleteMsg, msg}) => {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-export default ChatMessage;
+export default NeedMessage;

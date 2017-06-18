@@ -16,7 +16,7 @@ class NeedList extends Component {
     //    this.handleClick = this.handleClick.bind(this)
     }
 
-    deleteMsg(msgId){
+    deleteNeed(msgId){
 
         Meteor.call(
             'needDelete',
@@ -24,10 +24,10 @@ class NeedList extends Component {
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');
-                    console.log('res in deleteMsg',res);
+                    console.log('res in deleteNeed',res);
                     console.log('------------------------------------------');
                 } else {
-                    console.log('err in deleteMsg', err);
+                    console.log('err in deleteNeed', err);
                 }
             }
         )
@@ -46,9 +46,9 @@ class NeedList extends Component {
                         .search(this.props.filterText.toLowerCase()) !== -1
                 )
             });
-            return needs.map((msg) => {
+            return needs.map((need) => {
                 return (
-                    <NeedMessage key={msg._id} msg={msg} deleteMsg={this.deleteMsg}/>
+                    <NeedMessage key={need._id} need={need} deleteNeed={this.deleteNeed}/>
                 )
             });
         } else {

@@ -66,14 +66,6 @@ export class Map extends Component {
 
         this.props.needs.map((n) => {
             const locObj = this.getMarkerLocationAndSize(n);
-            // const number = document.getElementById(`n${parseInt(n.address)}`);
-            // const numberRect = number.getBoundingClientRect();
-            // let left =  numberRect.left + (numberRect.width/2);     // get center pt of address box
-            // let top =   numberRect.top - (numberRect.height * 1.5); // get pt right above address box
-            // left -= mapRect.left;
-            // top -= mapRect.top;
-            // left -= numberRect.height / 2;    // to center the circle
-            // // top -= numberRect.height / 2;     // to raise circle above number
 
             const need = document.createElement('div');
             if (n.body.search('urgent') >=0 || n.body.search('emergency') >= 0) {
@@ -85,6 +77,10 @@ export class Map extends Component {
             need.style.width =  locObj.size + 'px';
             need.style.left =   locObj.left + 'px';
             need.style.top =    locObj.top + 'px';
+            need.addEventListener(
+                "mouseover",
+                () => {console.log(n.body);}
+            );
             mapDiv.appendChild(need);
         })
     }

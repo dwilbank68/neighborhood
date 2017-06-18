@@ -74,6 +74,7 @@ export class Dashboard extends Component {
                             <Tab>Offers</Tab>
                             <Tab>Rules</Tab>
                             <Tab>Announcements</Tab>
+                            <Tab>For Sale / Giveaway ({this.props.offers? this.props.offers.length:null})</Tab>
                             <Tab>Wanted ({this.props.needs? this.props.needs.length:null})</Tab>
                         </TabList>
 
@@ -99,6 +100,9 @@ export class Dashboard extends Component {
                         <TabPanel>
                             <AnnouncementBox announcements={this.props.announcements}
                                              currentUser={currentUser}/>
+                        </TabPanel>
+                        <TabPanel>
+                            <NeedBox        currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel>
                             <NeedBox        currentUser={currentUser}/>
@@ -156,7 +160,6 @@ const mapToProps = (props) => {
                     .fetch();
     const profiles = Profiles.find({}).fetch();
     const needs = Needs.find({}).fetch();
-    const needsCount = needs.length;
     if (profiles.length > 0 && users.length > 0) {
         const profilesObj = _.mapKeys(profiles, 'userId');
         let profile;
