@@ -3,25 +3,36 @@
 @import './glows';
 @import 'components/boxed-view';
 @import 'components/button';
+
 @import 'components/announcement/announcementBox';
 @import 'components/announcement/headlineDisplay';
 @import 'components/announcement/announcementInput';
 @import 'components/announcement/announcementMessage';
+
 @import 'components/chat/chatBox';
 @import 'components/chat/chatInput';
 @import 'components/chat/chatList';
 @import 'components/chat/chatMessage';
+
 @import 'components/need/needBox';
 @import 'components/need/needInput';
 @import 'components/need/needList';
 @import 'components/need/needMessage';
+
+@import 'components/offer/offerBox';
+@import 'components/offer/offerInput';
+@import 'components/offer/offerList';
+@import 'components/offer/offerMessage';
+
 @import 'components/phone_info/phoneInfoBox';
 @import 'components/phone_info/phoneInfoInput';
 @import 'components/phone_info/phoneInfoItem';
+
 @import 'components/service/serviceBox';
 @import 'components/service/serviceInput';
 @import 'components/service/serviceList';
 @import 'components/service/serviceMessage';
+
 @import 'components/checkbox';
 @import 'components/currentUser';
 @import 'components/dashboard';

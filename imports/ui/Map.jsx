@@ -8,8 +8,9 @@ import Snap from 'snapsvg';
 // import {Map} from './Map.jsx';
 export class Map extends Component {
 
-    clearMarkers(){
+    clearMarkers() {
         var myNode = document.getElementById("map");
+        // remove everything except the svg map itself
         while (myNode.children.length > 1) {
             myNode.removeChild(myNode.lastChild);
         }
@@ -22,23 +23,26 @@ export class Map extends Component {
         }
        this.updateMapUsers = this.updateMapUsers.bind(this)
        this.updateMapNeeds = this.updateMapNeeds.bind(this)
+       this.updateMapOffers = this.updateMapOffers.bind(this)
     }
 
     componentDidMount() {
         window.addEventListener(
             "resize",
             _.debounce(
-                this.updateMapNeeds.bind(this),
-                300
+                this.updateMapMarkers.bind(this),
+                500
             )
         );
         this.updateMapUsers();
         this.updateMapNeeds();
+        this.updateMapOffers();
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
+    componentDidUpdate() {
         this.updateMapUsers();
         this.updateMapNeeds();
+        this.updateMapOffers();
     }
 
     // handleClick(e) {
@@ -49,19 +53,21 @@ export class Map extends Component {
     // }
 
     render() {
-
         return (
-
             <div className="map" id="map">
             </div>
-
         );
+    }
+
+    updateMapMarkers(){
+        this.clearMarkers();
+        this.updateMapNeeds();
+        this.updateMapOffers();
     }
 
     updateMapNeeds(){
         if (!this.props.needs) return;
         if (this.props.needs.length == 0) return;
-        this.clearMarkers();
         const mapDiv = document.getElementById('map');
 
         this.props.needs.map((n) => {
@@ -89,6 +95,36 @@ export class Map extends Component {
         })
     }
 
+    updateMapOffers(){
+        if (!this.props.offers) return;
+        if (this.props.offers.length == 0) return;
+        const mapDiv = document.getElementById('map');
+
+        this.props.offers.map((o) => {
+            const locObj = this.getMarkerLocationAndSize(o);
+
+            const offer = document.createElement('div');
+            if (o.body.search(' free ') >=0) {
+                offer.classList.add('offer-free');
+            } else {
+                offer.classList.add('offer');
+            }
+            offer.style.height = locObj.size + 'px';
+            offer.style.width =  locObj.size + 'px';
+            offer.style.left =   locObj.left - (locObj.size * 1.3) + 'px';
+            offer.style.top =    locObj.top + 'px';
+            offer.addEventListener(
+                "mouseover",
+                () => {console.log(o.body);}
+            );
+            const p = document.createElement('p');
+            p.classList.add('marker-text');
+            p.innerText = o.body;
+            offer.appendChild(p);
+            mapDiv.appendChild(offer);
+        })
+    }
+
     getMarkerLocationAndSize(item){
         const mapRect = document
             .getElementById('Neighborhood_Map_Outlines')
@@ -102,7 +138,7 @@ export class Map extends Component {
         let top =   numberRect.top
                     - (numberRect.height * 1.5)     // point right above address box
                     - mapRect.top;                  // adjust for space above the map div
-        let size = (numberRect.height * .8);        // marker will be slightly smaller than address box
+        let size = (numberRect.height * .7);        // marker will be slightly smaller than address box
         return {top, left, size};
     }
 

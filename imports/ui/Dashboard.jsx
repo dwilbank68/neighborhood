@@ -14,15 +14,17 @@ import ChatBox              from './chat/ChatBox';
 import AnnouncementBox      from './announcement/AnnouncementBox';
 import HeadlineDisplay      from './announcement/HeadlineDisplay';
 import NeedBox              from './need/NeedBox';
+import OfferBox             from './offer/OfferBox';
 import PhoneInfoBox         from './phone_info/PhoneInfoBox';
 import ServiceBox           from './service/ServiceBox';
 import Users                from './Users';
 
-import {Announcements} from '../api/announcements';
-import {Messages} from '../api/messages';
-import {Needs} from '../api/needs';
-import {Services} from '../api/services';
-import {Profiles} from '../api/profiles';
+import {Announcements}  from '../api/announcements';
+import {Messages}       from '../api/messages';
+import {Needs}          from '../api/needs';
+import {Offers}         from '../api/offers';
+import {Services}       from '../api/services';
+import {Profiles}       from '../api/profiles';
 
 
 export class Dashboard extends Component {
@@ -63,7 +65,8 @@ export class Dashboard extends Component {
                 <div className="page-content">
                     <Map    className="map"
                             allUsers={this.props.allUsers}
-                            needs={this.props.needs}/>
+                            needs={this.props.needs}
+                            offers={this.props.offers}/>
 
                     <Tabs className='tabs'>
                         <TabList>
@@ -102,10 +105,10 @@ export class Dashboard extends Component {
                                              currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel>
-                            <NeedBox        currentUser={currentUser}/>
+                            <OfferBox        currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel>
-                            <NeedBox        currentUser={currentUser}/>
+                            <NeedBox         currentUser={currentUser}/>
                         </TabPanel>
 
                     </Tabs>
@@ -151,6 +154,7 @@ const mapToProps = (props) => {
     Meteor.subscribe('allUsers');
     Meteor.subscribe('announcements');
     Meteor.subscribe('needs');
+    Meteor.subscribe('offers');
     Meteor.subscribe('profiles');
     
     const announcements = Announcements.find({}).fetch();
@@ -160,6 +164,7 @@ const mapToProps = (props) => {
                     .fetch();
     const profiles = Profiles.find({}).fetch();
     const needs = Needs.find({}).fetch();
+    const offers = Offers.find({}).fetch();
     if (profiles.length > 0 && users.length > 0) {
         const profilesObj = _.mapKeys(profiles, 'userId');
         let profile;
@@ -188,7 +193,8 @@ const mapToProps = (props) => {
             allUsers: mergedUsers,
             announcements,
             currentUser,
-            needs
+            needs,
+            offers
         }
     } else {
         return [{}];
