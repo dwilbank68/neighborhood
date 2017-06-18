@@ -59,34 +59,53 @@ export class Map extends Component {
     }
 
     updateMapNeeds(){
-
         if (!this.props.needs) return;
         if (this.props.needs.length == 0) return;
         this.clearMarkers();
         const mapDiv = document.getElementById('map');
-        const mapRect = document
-            .getElementById('Neighborhood_Map_Outlines')
-            .getBoundingClientRect();
+
         this.props.needs.map((n) => {
-            const number = document.getElementById(`n${parseInt(n.address)}`);
-            const numberRect = number.getBoundingClientRect();
-            let left =  numberRect.left + (numberRect.width/2);     // get center pt of address box
-            let top =   numberRect.top - (numberRect.height * 1.5); // get pt right above address box
-            left -= mapRect.left;
-            top -= mapRect.top;
-            left -= numberRect.height / 2;    // to center the circle
-            // top -= numberRect.height / 2;     // to raise circle above number
+            const locObj = this.getMarkerLocationAndSize(n);
+            // const number = document.getElementById(`n${parseInt(n.address)}`);
+            // const numberRect = number.getBoundingClientRect();
+            // let left =  numberRect.left + (numberRect.width/2);     // get center pt of address box
+            // let top =   numberRect.top - (numberRect.height * 1.5); // get pt right above address box
+            // left -= mapRect.left;
+            // top -= mapRect.top;
+            // left -= numberRect.height / 2;    // to center the circle
+            // // top -= numberRect.height / 2;     // to raise circle above number
 
             const need = document.createElement('div');
-            need.classList.add('need');
-            need.style.height = numberRect.height + 'px';
-            need.style.width =  numberRect.height + 'px';
-            need.style.left =   left + 'px';
-            need.style.top =    top + 'px';
+            if (n.body.search('urgent') >=0 || n.body.search('emergency') >= 0) {
+                need.classList.add('need-urgent');
+            } else {
+                need.classList.add('need');
+            }
+            need.style.height = locObj.size + 'px';
+            need.style.width =  locObj.size + 'px';
+            need.style.left =   locObj.left + 'px';
+            need.style.top =    locObj.top + 'px';
             mapDiv.appendChild(need);
         })
     }
-    
+
+    getMarkerLocationAndSize(item){
+        const mapRect = document
+            .getElementById('Neighborhood_Map_Outlines')
+            .getBoundingClientRect();
+        const number = document.getElementById(`n${parseInt(item.address)}`);
+        const numberRect = number.getBoundingClientRect();
+        let left =  numberRect.left                 // left edge of address box
+                    + (numberRect.width / 2)        // center of address box
+                    - numberRect.height / 2         // move left half the diameter of the marker
+                    - mapRect.left;                 // adjust for space around the map div
+        let top =   numberRect.top
+                    - (numberRect.height * 1.5)     // point right above address box
+                    - mapRect.top;                  // adjust for space above the map div
+        let size = (numberRect.height * .8);        // marker will be slightly smaller than address box
+        return {top, left, size};
+    }
+
     updateMapUsers(){
         if (this.state.mapLoaded == false) {
             // this block runs upon ComponentDidMount

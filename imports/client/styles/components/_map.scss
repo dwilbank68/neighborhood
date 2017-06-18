@@ -68,8 +68,6 @@ path, polygon, rect {
 }
 
 .need {
-    height: 10px;
-    width: 10px;
     border-radius: 50%;
     background-color: yellow;
     position: absolute;
@@ -78,74 +76,20 @@ path, polygon, rect {
     animation: yellow 1.5s ease-in-out infinite alternate;
 }
 
-
-// glows
-
-@-webkit-keyframes yellow {
-    from {
-        box-shadow: 0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff,
-        0 0 40px #B6FF00,
-        0 0 70px #B6FF00,
-        0 0 80px #B6FF00,
-        0 0 100px #B6FF00,
-        0 0 150px #B6FF00;
-    }
-    to {
-        box-shadow: 0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 20px #B6FF00,
-        0 0 35px #B6FF00,
-        0 0 40px #B6FF00,
-        0 0 50px #B6FF00,
-        0 0 75px #B6FF00;
-    }
+.need-urgent {
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    -webkit-animation: red 1.5s ease-in-out infinite alternate;
+    -moz-animation: red 1.5s ease-in-out infinite alternate;
+    animation: red 1.5s ease-in-out infinite alternate;
 }
 
-@-moz-keyframes yellow {
-    from {
-        box-shadow: 0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff,
-        0 0 40px #B6FF00,
-        0 0 70px #B6FF00,
-        0 0 80px #B6FF00,
-        0 0 100px #B6FF00,
-        0 0 150px #B6FF00;
-    }
-    to {
-        box-shadow: 0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 20px #B6FF00,
-        0 0 35px #B6FF00,
-        0 0 40px #B6FF00,
-        0 0 50px #B6FF00,
-        0 0 75px #B6FF00;
-    }
-}
-
-@keyframes yellow {
-    from {
-        box-shadow: 0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff,
-        0 0 40px #B6FF00,
-        0 0 70px #B6FF00,
-        0 0 80px #B6FF00,
-        0 0 100px #B6FF00,
-        0 0 150px #B6FF00;
-    }
-    to {
-        box-shadow: 0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 20px #B6FF00,
-        0 0 35px #B6FF00,
-        0 0 40px #B6FF00,
-        0 0 50px #B6FF00,
-        0 0 75px #B6FF00;
-    }
+.offer {
+    border-radius: 50%;
+    background-color: blue;
+    position: absolute;
+    -webkit-animation: blue .5s ease-in-out infinite alternate;
+    -moz-animation: blue .5s ease-in-out infinite alternate;
+    animation: blue .5s ease-in-out infinite alternate;
 }
