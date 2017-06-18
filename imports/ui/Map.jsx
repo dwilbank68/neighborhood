@@ -81,6 +81,10 @@ export class Map extends Component {
                 "mouseover",
                 () => {console.log(n.body);}
             );
+            const p = document.createElement('p');
+            p.classList.add('marker-text');
+            p.innerText = n.body;
+            need.appendChild(p);
             mapDiv.appendChild(need);
         })
     }

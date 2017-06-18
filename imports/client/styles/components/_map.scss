@@ -85,6 +85,27 @@ path, polygon, rect {
     animation: red 1.5s ease-in-out infinite alternate;
 }
 
+.marker-text {
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    color: white;
+    font-size: .7em;
+    margin-left: 16px;
+    margin-top: -4px;
+    opacity: 0;
+    padding: 5px;
+    transition: opacity 1s ease;
+    width: 70px;
+}
+
+.need:hover .marker-text {
+    opacity: 1;
+}
+
+.need-urgent:hover .marker-text {
+    opacity: 1;
+}
+
 .offer {
     border-radius: 50%;
     background-color: blue;
