@@ -9,7 +9,6 @@ import Toggle from 'react-toggle'
 
 import _ from 'lodash';
 
-import {Profiles} from '../api/profiles';
 import ImageUpload from './ImageUpload';
 import CurrentUser from './CurrentUser';
 
@@ -74,9 +73,7 @@ export class EditProfile extends Component {
     }
 
     handleAvatarChange(avatarUrl, public_id){
-        console.log('------------------------------------------');
-        console.log("public_id for use only if I decide to use cloudinary's react sdk", public_id);
-        console.log('------------------------------------------');
+        // public_id for use only if I decide to use cloudinary's react sdk
         this.setState({
             avatar:avatarUrl,
             public_id
@@ -127,7 +124,8 @@ export class EditProfile extends Component {
 
                 <div    className="edit-profile-click"
                         onClick={this.handleOpenModal}>
-                    <CurrentUser user={this.props.currentUser}/>
+                    <CurrentUser    addressUsers={this.props.addressUsers}
+                                    user={this.props.currentUser}/>
                     <div className="overlay">
                         <div className="overlay-text">
                             Edit

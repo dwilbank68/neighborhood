@@ -78,11 +78,11 @@ path, polygon, rect {
 
 .need-urgent {
     border-radius: 50%;
-    background-color: red;
+    background-color: yellow;
     position: absolute;
-    -webkit-animation: red 1.5s ease-in-out infinite alternate;
-    -moz-animation: red 1.5s ease-in-out infinite alternate;
-    animation: red 1.5s ease-in-out infinite alternate;
+    -webkit-animation: yellowPulse .5s ease-in-out infinite;
+    -moz-animation: yellowPulse .5s ease-in-out infinite;
+    animation: yellowPulse .5s ease-in-out infinite;
 }
 
 .marker-text {

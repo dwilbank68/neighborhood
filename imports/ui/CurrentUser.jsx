@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gravatar from 'node-gravatar';
 
-const CurrentUser = ({user}) => {
+const CurrentUser = ({user, addressUsers}) => {
     if (!user) return <div>...loading</div>;
 
     renderAvatar = (user) => {
@@ -25,7 +25,7 @@ const CurrentUser = ({user}) => {
                     </div>
                     <div className="userbadge-body">
                         <p>{screenName} {fullName ? '(' + fullName + ')' : null}</p>
-                        <p>{address}</p>
+                        <p>{address} ({addressUsers ? addressUsers.length:null})</p>
                         <p>{city}, {state} {zipcode}</p>
                         <p>{phone ? phone : '(phone private)'}</p>
                         <p>{emailVisible ? email : '(email private)'}</p>

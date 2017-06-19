@@ -57,7 +57,8 @@ export class Dashboard extends Component {
             <div className="dashboard">
                 {/*<PrivateHeader title="Dashboard" user={user}/>*/}
 
-                <PrivateHeader  title=""
+                <PrivateHeader  addressUsers={this.props.addressUsers}
+                                title=""
                                 currentUser={currentUser}/>
 
                 <HeadlineDisplay announcements={this.props.announcements}/>
@@ -189,7 +190,12 @@ const mapToProps = (props) => {
             }
         });
         let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
+        let addressUsers = Profiles.find({address:currentUser.address}).fetch();
+        console.log('------------------------------------------');
+        console.log('addressUsers ',addressUsers);
+        console.log('------------------------------------------');
         return {
+            addressUsers,
             allUsers: mergedUsers,
             announcements,
             currentUser,

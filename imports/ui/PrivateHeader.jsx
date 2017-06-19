@@ -37,7 +37,8 @@ class PrivateHeader extends Component {
             <div className="private-header header">
                 <div className="header__content">
                     <h1 className="header__title">{this.props.title}</h1>
-                    <EditProfile currentUser={currentUser}/>
+                    <EditProfile    addressUsers={this.props.addressUsers}
+                                    currentUser={currentUser}/>
                     <button onClick={() => Accounts.logout()}
                             className="button button--link--header">
                         Log Out
