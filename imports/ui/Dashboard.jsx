@@ -75,10 +75,9 @@ export class Dashboard extends Component {
                             <Tab>Users</Tab>
                             <Tab>Chat ({this.props.messageCount})</Tab>
                             <Tab>Services ({this.props.serviceCount})</Tab>
-                            <Tab>Offers</Tab>
                             <Tab>Rules</Tab>
                             <Tab>Announcements</Tab>
-                            <Tab>For Sale / Giveaway ({this.props.offers? this.props.offers.length:null})</Tab>
+                            <Tab>For Sale / Giveaway / Offers {this.props.offers? <span>({this.props.offers.length})</span>:null}</Tab>
                             <Tab>Wanted ({this.props.needs? this.props.needs.length:null})</Tab>
                         </TabList>
 
@@ -99,7 +98,6 @@ export class Dashboard extends Component {
                             <ServiceBox currentUser={currentUser}/>
                         </TabPanel>
 
-                        <TabPanel></TabPanel>
                         <TabPanel></TabPanel>
                         <TabPanel>
                             <AnnouncementBox announcements={this.props.announcements}
@@ -191,9 +189,6 @@ const mapToProps = (props) => {
         });
         let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
         let addressUsers = Profiles.find({address:currentUser.address}).fetch();
-        console.log('------------------------------------------');
-        console.log('addressUsers ',addressUsers);
-        console.log('------------------------------------------');
         return {
             addressUsers,
             allUsers: mergedUsers,

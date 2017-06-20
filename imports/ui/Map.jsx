@@ -9,6 +9,9 @@ import Snap from 'snapsvg';
 export class Map extends Component {
 
     clearMarkers() {
+        console.log('------------------------------------------');
+        console.log('clearMarkers ');
+        console.log('------------------------------------------');
         var myNode = document.getElementById("map");
         // remove everything except the svg map itself
         while (myNode.children.length > 1) {
@@ -35,12 +38,14 @@ export class Map extends Component {
             )
         );
         this.updateMapUsers();
+        this.clearMarkers();
         this.updateMapNeeds();
         this.updateMapOffers();
     }
 
     componentDidUpdate() {
         this.updateMapUsers();
+        this.clearMarkers();
         this.updateMapNeeds();
         this.updateMapOffers();
     }
@@ -60,12 +65,18 @@ export class Map extends Component {
     }
 
     updateMapMarkers(){
+        console.log('------------------------------------------');
+        console.log('updateMapMarkers ');
+        console.log('------------------------------------------');
         this.clearMarkers();
         this.updateMapNeeds();
         this.updateMapOffers();
     }
 
     updateMapNeeds(){
+        console.log('------------------------------------------');
+        console.log('updateMapNeeds ');
+        console.log('------------------------------------------');
         if (!this.props.needs) return;
         if (this.props.needs.length == 0) return;
         const mapDiv = document.getElementById('map');
@@ -96,6 +107,9 @@ export class Map extends Component {
     }
 
     updateMapOffers(){
+        console.log('------------------------------------------');
+        console.log('updateMapOffers ');
+        console.log('------------------------------------------');
         if (!this.props.offers) return;
         if (this.props.offers.length == 0) return;
         const mapDiv = document.getElementById('map');

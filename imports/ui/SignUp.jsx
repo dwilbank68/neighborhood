@@ -73,7 +73,7 @@ class SignUp extends Component {
                                 placeholder="Select Your Address"
                                 options={options}
                                 onChange={ val => this.onAddressChange(val) }/>
-                        <p>{this.state.address}</p>
+                        <p>{this.state.address ? this.state.address : 'for residents only (address is required)'}</p>
                         <button className="button">Create Account</button>
                     </form>
 

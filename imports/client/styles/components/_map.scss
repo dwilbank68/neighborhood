@@ -80,9 +80,9 @@ path, polygon, rect {
     border-radius: 50%;
     background-color: yellow;
     position: absolute;
-    -webkit-animation: yellowPulse .5s ease-in-out infinite;
-    -moz-animation: yellowPulse .5s ease-in-out infinite;
-    animation: yellowPulse .5s ease-in-out infinite;
+    -webkit-animation: yellowPulse 2s ease-out infinite;
+    -moz-animation: yellowPulse 2s ease-out infinite;
+    animation: yellowPulse 2s ease-out infinite;
 }
 
 .marker-text {
@@ -106,18 +106,25 @@ path, polygon, rect {
 
 .offer {
     border-radius: 50%;
-    background-color: blue;
+    background-color: #aaf;
     position: absolute;
-    -webkit-animation: blue 1s ease-in-out infinite alternate;
-    -moz-animation: blue 1s ease-in-out infinite alternate;
-    animation: blue 1s ease-in-out infinite alternate;
+    -webkit-animation: blue-pulse 1s ease-in-out infinite alternate;
+    -moz-animation: blue-pulse 1s ease-in-out infinite alternate;
+    animation: blue-pulse 1s ease-in-out infinite alternate;
 }
 
 .offer-free {
     border-radius: 50%;
-    background-color: blue;
+    background-color: #aaf;
     position: absolute;
-    -webkit-animation: blue .5s ease-in-out infinite alternate;
-    -moz-animation: blue .5s ease-in-out infinite alternate;
-    animation: blue .5s ease-in-out infinite alternate;
+    -webkit-animation: blue-pulse .5s ease-in-out infinite alternate;
+    -moz-animation: blue-pulse .5s ease-in-out infinite alternate;
+    animation: blue-pulse .5s ease-in-out infinite alternate;
+}
+
+.offer-text {
+    color: blue;
+    -webkit-animation: blue-pulse-text 1s ease-in-out infinite alternate;
+    -moz-animation: blue-pulse-text 1s ease-in-out infinite alternate;
+    animation: blue-pulse-text 1s ease-in-out infinite alternate;
 }

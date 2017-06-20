@@ -1,5 +1,10 @@
 .boxed-view {
-  background: $boxed-view-overlay-bg;
+  //background: $boxed-view-overlay-bg;
+  background-image: url('/images/traditions-90250-satellite-tilt-map.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,4 +31,13 @@
 .boxed-view__form {
   display: flex;
   flex-direction: column;
+}
+
+.Select-placeholder {
+    &:active {
+        outline: none;
+    }
+    &:focus {
+        outline: none;
+    }
 }

@@ -36,7 +36,8 @@ class PrivateHeader extends Component {
         return (
             <div className="private-header header">
                 <div className="header__content">
-                    <h1 className="header__title">{this.props.title}</h1>
+                    <img    className="logo-img"
+                            src="/images/traditions-logo.svg" alt=""/>
                     <EditProfile    addressUsers={this.props.addressUsers}
                                     currentUser={currentUser}/>
                     <button onClick={() => Accounts.logout()}
