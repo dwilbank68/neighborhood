@@ -2,6 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 
+const styles = {
+    box: {
+        borderRadius: '15px',
+        background: 'rgba(255,255,255,.9)'
+    }
+}
+
 class LogIn extends Component {
 
     constructor(props, context){
@@ -36,7 +43,8 @@ class LogIn extends Component {
     render() {
         return (
             <div className="log-in boxed-view">
-                <div className="boxed-view__box">
+                <div    className="boxed-view__box"
+                        style={styles.box}>
                     <h1>Login</h1>
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}

@@ -87,6 +87,7 @@ export class Dashboard extends Component {
 
                         <TabPanel>
                             <Users  currentUser={currentUser}
+                                    serviceCategories={this.props.services}
                                     users={this.props.allUsers} />
                         </TabPanel>
 
@@ -155,8 +156,10 @@ const mapToProps = (props) => {
     Meteor.subscribe('needs');
     Meteor.subscribe('offers');
     Meteor.subscribe('profiles');
-    
+    Meteor.subscribe('services');
+
     const announcements = Announcements.find({}).fetch();
+    const services = Services.find({}).fetch();
 
     const users = Meteor
                     .users
@@ -196,7 +199,8 @@ const mapToProps = (props) => {
             announcements,
             currentUser,
             needs,
-            offers
+            offers,
+            services
         }
     } else {
         return [{}];

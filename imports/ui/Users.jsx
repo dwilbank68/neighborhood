@@ -12,11 +12,11 @@ var masonryOptions = {
 };
 // import {createContainer} from 'meteor/react-meteor-data';
 
-// import {Profiles} from '../api/profiles';
+import {Services} from '../api/services';
 // import _ from 'lodash';
 import CurrentUser from './CurrentUser';
 
-const style = {
+const styles = {
     img: {
         borderRadius: '50%',
         height: '30px',
@@ -35,16 +35,37 @@ const style = {
         left: '-90px',
         position: 'absolute',
         transition: 'opacity .5s'
+    },
+    skillsWrapper: {
+        display: 'flex',
+        paddingTop: '3px',
+        paddingBottom: '5px'
+    },
+    skillLeft: {
+        width: '90px',
+        paddingLeft: '15px',
+        paddingTop: '10px'
+    },
+    skillTitle: {
+        color: 'white'
     }
 }
 
 export class Users extends Component {
 
+    componentDidMount() {
+        this.serviceList = this.props.serviceCategories.map((s) => {
+            return {text:s.categories, userId:s.userId}
+        });
+    }
+
+
     constructor(props, context){
         super(props, context);
         this.state = {
             filterText: '',
-            selectedUser: null
+            selectedUser: null,
+            skillsArr:[]
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -62,8 +83,12 @@ export class Users extends Component {
 
     showProfile(userId){
         const selectedUser = this.props.users.find(u => u.id == userId);
+        const skillsArr = this.serviceList
+                                    .filter(s => s.userId == userId)
+                                    .map(s => s.text.replace('\n', ', '));
         this.setState({
-             selectedUser
+            selectedUser,
+            skillsArr
         })
     }
 
@@ -129,7 +154,7 @@ export class Users extends Component {
 
                         <div className="user-img">
                             <img    src={this.renderAvatar(user)}
-                                    style={style.img}/>
+                                    style={styles.img}/>
                         </div>
                         <div className="user-short-name">
                             {user.screenName}
@@ -147,7 +172,7 @@ export class Users extends Component {
     render() {
 
         return (
-            <div className="generic-box" >
+            <div className="user-box" >
 
                 <div className="generic-filter">
                     <input type="text"
@@ -161,17 +186,43 @@ export class Users extends Component {
                     </Masonry>
                 </div>
 
-                <CurrentUser user={
-                    this.state.selectedUser ?
-                        this.state.selectedUser :
-                        this.props.currentUser
-                }/>
+                <div className="current-user-wrapper">
+                    <CurrentUser user={
+                        this.state.selectedUser ?
+                            this.state.selectedUser :
+                            this.props.currentUser }/>
 
+                    <div style={styles.skillsWrapper}>
+                        <div style={styles.skillLeft}>
+                            {this.state.skillsArr.length > 0 ?
+                                <p style={styles.skillTitle} >Skills</p> :
+                                null}
+                        </div>
+
+                        <ul>
+                            {this.renderSkills()}
+                        </ul>
+                    </div>
+
+                </div>
 
             </div>
         );
     }
+
+    renderSkills(){
+        return this.state.skillsArr.map((s,i) => {
+            return (
+                <li className="skill-title"
+                    key={i}>
+                    {s}
+                </li>
+            )
+        })
+    }
+
 }
+
 
 // OnlineUsers.defaultProps = {};
 // OnlineUsers.propTypes = {

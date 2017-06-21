@@ -9,9 +9,20 @@
     width: 50px;
 }
 
+.user-box {
+  background: $shade1;
+  border: 1px solid grey;
+  width: 320px;
+  position: relative;
+}
+
+.current-user-wrapper {
+    background: rgba(0,0,0,.4);
+}
+
 .user-list {
     background-color: $shade1;
-    height:484px;       // different from .generic-list
+    height:430px;       // different from .generic-list
     overflow: auto;
 }
 
@@ -26,4 +37,10 @@
     font-size: .7em;
     text-align: center;
     width: 100%;
+}
+
+.skill-title {
+    color:white;
+    font-size: .75em;
+    list-style: none;
 }
