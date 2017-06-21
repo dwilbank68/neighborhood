@@ -5,6 +5,27 @@ import Select from 'react-select';
 
 import {data} from '../../addresses.js';
 
+const styles = {
+    boxedViewWrapper: {
+        'display': 'flex'
+    },
+    leftBox: {
+        background: 'rgba(255,255,255,.9)',
+        borderBottomLeftRadius: '15px',
+        borderTopLeftRadius: '15px',
+        padding: '2.4rem',
+        width: '24rem'
+    },
+    logo: {
+        'height': '250px',
+        'marginTop': '30px'
+    },
+    rightBox: {
+        borderBottomRightRadius: '15px',
+        borderTopRightRadius: '15px',
+    }
+}
+
 class SignUp extends Component {
 
     constructor(props, context){
@@ -58,29 +79,41 @@ class SignUp extends Component {
 
         return (
             <div className="sign-up boxed-view">
-                <div className="boxed-view__box">
-                    <h1>Join</h1>
+                <div style={styles.boxedViewWrapper}>
+                    <div style={styles.leftBox}>
+                        <img    style={styles.logo}
+                                src="/images/traditions-logo2.svg" alt=""/>
+                        <div>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div    className="boxed-view__box"
+                            style={styles.rightBox}>
+                        <h1>Join</h1>
 
-                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+                        {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                    <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
-                        <input type="text"      ref="screenName"      name="screenName"     placeholder="Screen Name (Short)"/>
-                        <input type="text"      ref="fullName"        name="fullName"       placeholder="Full Name (optional)"/>
-                        <input type="email"     ref="email"     name="email"    placeholder="Email"/>
-                        <input type="password"  ref="password"  name="password" placeholder="Password"/>
-                        <Select className="address"
-                                clearable={false}
-                                placeholder="Select Your Address"
-                                options={options}
-                                onChange={ val => this.onAddressChange(val) }/>
-                        <p>{this.state.address ? this.state.address : 'for residents only (address is required)'}</p>
-                        <button className="button">Create Account</button>
-                    </form>
+                        <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
+                            <input type="text"      ref="screenName"      name="screenName"     placeholder="Screen Name (Short)"/>
+                            <input type="text"      ref="fullName"        name="fullName"       placeholder="Full Name (optional)"/>
+                            <input type="email"     ref="email"     name="email"    placeholder="Email"/>
+                            <input type="password"  ref="password"  name="password" placeholder="Password"/>
+                            <Select className="address"
+                                    clearable={false}
+                                    placeholder="Select Your Address"
+                                    options={options}
+                                    onChange={ val => this.onAddressChange(val) }/>
+                            <p>{this.state.address ? this.state.address : 'for residents only (address is required)'}</p>
+                            <button className="button">Create Account</button>
+                        </form>
 
-                    <Link to="/">
-                        Already have an account?
-                    </Link>
+                        <Link to="/">
+                            Already have an account?
+                        </Link>
+                    </div>
                 </div>
+
 
             </div>
         );

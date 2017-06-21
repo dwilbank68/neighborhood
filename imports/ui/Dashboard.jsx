@@ -44,14 +44,14 @@ export class Dashboard extends Component {
     //    })
     // }
 
-
-    countServices(){
-
-    }
-
     render() {
 
         const currentUser = this.props.currentUser;
+
+        if (this.props.announcements) {
+            this.headlines = this.props.announcements.map((a) => a.title);
+            this.headlines.unshift('HOA Announcements - Click here to visit the full announcements page');
+        }
 
         return (
             <div className="dashboard">
@@ -61,7 +61,7 @@ export class Dashboard extends Component {
                                 title=""
                                 currentUser={currentUser}/>
 
-                <HeadlineDisplay announcements={this.props.announcements}/>
+                <HeadlineDisplay headlines={this.headlines}/>
 
                 <div className="page-content">
                     <Map    className="map"
@@ -157,6 +157,7 @@ const mapToProps = (props) => {
     Meteor.subscribe('profiles');
     
     const announcements = Announcements.find({}).fetch();
+
     const users = Meteor
                     .users
                     .find({},{sort:{"status.online":1}})    // 1

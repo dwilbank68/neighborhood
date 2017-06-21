@@ -6,9 +6,9 @@ class HeadlineDisplay extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props === prevProps) return;
-        if (this.props.announcements) {
-            const annLength = this.props.announcements.length;
-            const rotateAnnouncements = (length) => {
+        if (this.props.headlines) {
+            const headlinesCount = this.props.headlines.length;
+            const cycleHeadlines = (length) => {
                 let idx = 0;
                 setInterval(() => {
 
@@ -16,7 +16,7 @@ class HeadlineDisplay extends Component {
 
                     setTimeout(() => {
                         this.setState({
-                            headline:this.props.announcements[idx].title,
+                            headline:this.props.headlines[idx],
                             fading: false
                         })
                     }, 1000);
@@ -25,7 +25,7 @@ class HeadlineDisplay extends Component {
 
                 }, 6000);
             }
-            rotateAnnouncements(annLength);
+            cycleHeadlines(headlinesCount);
         }
     }
 
@@ -50,7 +50,7 @@ class HeadlineDisplay extends Component {
     render() {
         return (
             <Link to="/announcements" className='announcement-link'>
-                <div className="announcement-display">
+                <div className="headline-display">
                     <div className={`headline ${this.state.fading ? 'faded' : ''}`}>
                         {this.state.headline ? this.state.headline : new Date().toDateString()}
                     </div>

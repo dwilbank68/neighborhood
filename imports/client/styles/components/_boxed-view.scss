@@ -1,6 +1,6 @@
 .boxed-view {
   //background: $boxed-view-overlay-bg;
-  background-image: url('/images/traditions-90250-satellite-tilt-map.jpg');
+  background-image: url('/images/traditions-90250-satellite-tilt-map-grad.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -22,7 +22,8 @@
 }
 
 .boxed-view__box {
-  background-color: $boxed-view-bg;
+  //background-color: $boxed-view-bg;
+  background-color: rgba(255,255,255,.9);
   padding: 2.4rem;
   text-align: center;
   width: 24rem;
