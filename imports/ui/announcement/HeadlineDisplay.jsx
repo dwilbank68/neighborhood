@@ -6,7 +6,8 @@ class HeadlineDisplay extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props === prevProps) return;
-        if (this.props.headlines) {
+
+        if (this.props.headlines.length > 0) {
             const headlinesCount = this.props.headlines.length;
             const cycleHeadlines = (length) => {
                 let idx = 0;
