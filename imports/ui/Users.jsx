@@ -193,12 +193,13 @@ export class Users extends Component {
                             this.props.currentUser }/>
 
                     <div style={styles.skillsWrapper}>
-                        <div style={styles.skillLeft}>
-                            {this.state.skillsArr.length > 0 ?
-                                <p style={styles.skillTitle} >Skills</p> :
-                                null}
-                        </div>
-
+                            {
+                                this.state.skillsArr.length > 0 ?
+                                <div style={styles.skillLeft}>
+                                    <p style={styles.skillTitle} >Skills</p>
+                                </div> :
+                                null
+                            }
                         <ul>
                             {this.renderSkills()}
                         </ul>

@@ -76,7 +76,7 @@ export class Map extends Component {
             const locObj = this.getMarkerLocationAndSize(n);
 
             const need = document.createElement('div');
-            if (n.body.search('urgent') >=0 || n.body.search('emergency') >= 0) {
+            if (n.urgent === true) {
                 need.classList.add('need-urgent');
             } else {
                 need.classList.add('need');

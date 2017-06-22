@@ -165,7 +165,9 @@ export class EditProfile extends Component {
                                 <label>
                                     <Toggle checked={this.state.emailVisible}
                                             icons={false}
-                                            onChange={() => this.setState({emailVisible: !this.state.emailVisible})}/>
+                                            onChange={() => this.setState({
+                                                emailVisible: !this.state.emailVisible
+                                            })}/>
                                     <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
                                 </label>
                             </div>

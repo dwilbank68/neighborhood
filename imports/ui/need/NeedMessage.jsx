@@ -4,16 +4,26 @@ import PropTypes from 'prop-types';
 import gravatar from 'node-gravatar';
 import {convertTime, timeAgo} from '../../utils/convertTime';
 
+const styles = {
+    body: {whiteSpace:'pre-wrap'}
+}
+
 // import NeedMessage from './NeedMessage.jsx';
 // const NeedMessage = (props) => {
 const NeedMessage = ({deleteNeed, need}) => {
-    // no lifecycle methods
-    // no refs
 
-    // convertTime = (ms) => {
-    //     var momentTime = moment.utc(ms);
-    //     return momentTime.local().format('MMMM Do YYYY, h:mma');
-    // }
+    const styles = {
+        needPic: {
+            height: '200px',
+            marginBottom: '5px',
+            marginLeft: '22px',
+            width: '200px'
+        },
+        picsWrapper: {
+            display: 'flex',
+            flexWrap: 'wrap'
+        }
+    }
 
     renderAvatar = (need) => {
         if (need.avatar) return need.avatar;
@@ -24,8 +34,8 @@ const NeedMessage = ({deleteNeed, need}) => {
     renderDeleteButton = (need) => {
         if (need.userId === Meteor.userId()) {
             return (
-                <div    className="message-need-delete"
-                        onClick={()=>deleteNeed(need._id)}>
+                <div className="message-need-delete"
+                     onClick={()=>deleteNeed(need._id)}>
                     &#10005;
                 </div>
             )
@@ -34,12 +44,28 @@ const NeedMessage = ({deleteNeed, need}) => {
         }
     }
 
+    // renderNeedPictures = (need) => {
+    //     // if (!need.needPicture) return;
+    //     const pics = need.needPicture;
+    //     return (
+    //         <div style={styles.picsWrapper}>
+    //             {pics.map((pic,i) => {
+    //                 return (
+    //                     <img    key={i}
+    //                             src={pic}
+    //                             style={styles.needPic}/>
+    //                 )
+    //             })}
+    //         </div>
+    //     )
+    // }
+
     return (
 
         <div className="need-listing">
-            <div    className="need-pic">
+            <div className="need-pic">
                 {/*<img src={need.avatar ? need.avatar : need.email? gravatar.get(need.email):'none'} />*/}
-                <img src={renderAvatar(need)} />
+                <img src={renderAvatar(need)}/>
             </div>
 
             <div className="need-text">
@@ -47,9 +73,15 @@ const NeedMessage = ({deleteNeed, need}) => {
                     {need.screenName} - {need.address}
                 </span>
 
-                <div className="need-text-body">
+                <div    style={styles.body}
+                        className="need-text-body">
                     {need.body}
                 </div>
+
+                {need.needPicture ?
+                    <img    style={styles.needPic}
+                            src={need.needPicture} /> : null}
+
                 <p className="need-details need-time">
                     {convertTime(need.created)} ({timeAgo(need.created)})
                 </p>
