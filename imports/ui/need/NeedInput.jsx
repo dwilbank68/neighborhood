@@ -20,8 +20,10 @@ const styles = {
         marginTop: '5px'
     },
     urgentText: {
+        fontFamily: 'Lato, sans-serif',
+        fontWeight: '400',
         marginLeft: '14px',
-        marginTop: '4px',
+        marginTop: '4px'
     }
 }
 // import NeedInput from './NeedInput.jsx';

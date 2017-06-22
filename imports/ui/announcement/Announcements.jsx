@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import _ from 'lodash';
+
 import Masonry from 'react-masonry-component';
 
 var masonryOptions = {
@@ -17,6 +19,8 @@ import draftToHtml from 'draftjs-to-html';
 import {Announcements as AnnouncementsArray} from '../../api/announcements';
 import AnnouncementHeader from './AnnouncementHeader';
 
+import setBodyBackground from '../../utils/setBodyBackground';
+setBodyBackground();
 export const Announcements = ({announcements}) => {
 
     const draft2html = (saveContent) => {
@@ -29,11 +33,9 @@ export const Announcements = ({announcements}) => {
                 const html = draft2html(JSON.parse(ann.saveContent));
                 return (
 
-
-                        <div    className="announcement"
-                                dangerouslySetInnerHTML={{__html: html}}
-                                key={ann._id}/>
-
+                    <div className="announcement"
+                         dangerouslySetInnerHTML={{__html: '<br/>' + html}}
+                         key={ann._id}/>
 
                 )
             })
@@ -43,7 +45,7 @@ export const Announcements = ({announcements}) => {
 
     return (
         <div className="announcements">
-            <AnnouncementHeader  title=""/>
+            <AnnouncementHeader title=""/>
             <div className="masonry-wrapper">
                 <Masonry options={masonryOptions}>
                     {announcements ? renderAnnouncements() : '...'}
@@ -69,14 +71,14 @@ export const Announcements = ({announcements}) => {
 const mapToProps = (props) => {
     Meteor.subscribe('announcements');
     const announcements = AnnouncementsArray
-                                .find({}, {sort: {created: -1}})
-                                .fetch();
+        .find({}, {sort: {created: -1}})
+        .fetch();
     return {
         announcements
     }
 }
 
-export default createContainer( mapToProps, Announcements );
+export default createContainer(mapToProps, Announcements);
 
 // meteor npm i --save react-addons-pure-render-mixin
 // meteor add react-meteor-data

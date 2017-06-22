@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 
 import {Meteor} from 'meteor/meteor';
 import {createContainer} from 'meteor/react-meteor-data';
@@ -26,8 +26,13 @@ import {Offers}         from '../api/offers';
 import {Services}       from '../api/services';
 import {Profiles}       from '../api/profiles';
 
+import setBodyBackground from '../utils/setBodyBackground';
 
 export class Dashboard extends Component {
+
+    componentDidMount() {
+        setBodyBackground();
+    }
 
     constructor(props, context) {
         super(props, context);
@@ -57,17 +62,17 @@ export class Dashboard extends Component {
             <div className="dashboard">
                 {/*<PrivateHeader title="Dashboard" user={user}/>*/}
 
-                <PrivateHeader  addressUsers={this.props.addressUsers}
-                                title=""
-                                currentUser={currentUser}/>
+                <PrivateHeader addressUsers={this.props.addressUsers}
+                               title=""
+                               currentUser={currentUser}/>
 
                 <HeadlineDisplay headlines={this.headlines}/>
 
                 <div className="page-content">
-                    <Map    className="map"
-                            allUsers={this.props.allUsers}
-                            needs={this.props.needs}
-                            offers={this.props.offers}/>
+                    <Map className="map"
+                         allUsers={this.props.allUsers}
+                         needs={this.props.needs}
+                         offers={this.props.offers}/>
 
                     <Tabs className='tabs'>
                         <TabList>
@@ -77,8 +82,9 @@ export class Dashboard extends Component {
                             <Tab>Services ({this.props.serviceCount})</Tab>
                             <Tab>Rules</Tab>
                             <Tab>Announcements</Tab>
-                            <Tab>For Sale / Giveaway / Offers {this.props.offers? <span>({this.props.offers.length})</span>:null}</Tab>
-                            <Tab>Wanted ({this.props.needs? this.props.needs.length:null})</Tab>
+                            <Tab>For Sale / Giveaway / Offers {this.props.offers ?
+                                <span>({this.props.offers.length})</span> : null}</Tab>
+                            <Tab>Wanted ({this.props.needs ? this.props.needs.length : null})</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -86,9 +92,9 @@ export class Dashboard extends Component {
                         </TabPanel>
 
                         <TabPanel>
-                            <Users  currentUser={currentUser}
-                                    serviceCategories={this.props.services}
-                                    users={this.props.allUsers} />
+                            <Users currentUser={currentUser}
+                                   serviceCategories={this.props.services}
+                                   users={this.props.allUsers}/>
                         </TabPanel>
 
                         <TabPanel>
@@ -105,10 +111,10 @@ export class Dashboard extends Component {
                                              currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel>
-                            <OfferBox        currentUser={currentUser}/>
+                            <OfferBox currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel>
-                            <NeedBox         currentUser={currentUser}/>
+                            <NeedBox currentUser={currentUser}/>
                         </TabPanel>
 
                     </Tabs>
@@ -118,9 +124,6 @@ export class Dashboard extends Component {
         );
 
     }
-
-
-
 
 
 }
@@ -162,9 +165,9 @@ const mapToProps = (props) => {
     const services = Services.find({}).fetch();
 
     const users = Meteor
-                    .users
-                    .find({},{sort:{"status.online":1}})    // 1
-                    .fetch();
+        .users
+        .find({}, {sort: {"status.online": 1}})    // 1
+        .fetch();
     const profiles = Profiles.find({}).fetch();
     const needs = Needs.find({}).fetch();
     const offers = Offers.find({}).fetch();
@@ -177,13 +180,13 @@ const mapToProps = (props) => {
                 const {emailVisible} = profile;
                 return {
                     screenName: profile.screenName,
-                    fullName:   profile.fullName,
-                    avatar:     profile.avatar,
-                    address:    profile.address,
-                    city:       profile.city,
-                    state:      profile.state,
-                    zipcode:    profile.zipcode,
-                    phone:      profile.phone,
+                    fullName: profile.fullName,
+                    avatar: profile.avatar,
+                    address: profile.address,
+                    city: profile.city,
+                    state: profile.state,
+                    zipcode: profile.zipcode,
+                    phone: profile.phone,
                     emailVisible,
                     email: emailVisible ? u.emails[0].address : null,
                     id: u._id,
@@ -192,7 +195,7 @@ const mapToProps = (props) => {
             }
         });
         let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
-        let addressUsers = Profiles.find({address:currentUser.address}).fetch();
+        let addressUsers = Profiles.find({address: currentUser.address}).fetch();
         return {
             addressUsers,
             allUsers: mergedUsers,

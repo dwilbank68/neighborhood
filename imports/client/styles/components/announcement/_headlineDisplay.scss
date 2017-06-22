@@ -7,7 +7,7 @@
 }
 
 .masonry-wrapper {
-    background-color: #408DE7;
+    //background-color: #408DE7;
     height: 2000px;
     padding-left: 10px;
     padding-right: 10px;
@@ -16,11 +16,11 @@
 
 .announcement {
     background: rgba(255,255,255,.7);
-    //outline: 10px solid transparent;
-    box-sizing: border-box;
+    border-radius: 10px;
     width: 450px !important;
-    outline: 10px solid #408DE7;
-    padding: 10px;
+    margin-top: 8px !important;
+    padding-left: 10px;
+    padding-right: 10px;
 
     img {
         max-width: 100% !important;

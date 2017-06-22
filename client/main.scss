@@ -5,20 +5,21 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300);
 
 body {
-  background: #56CCF2;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    //background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+    //background: linear-gradient(to right, #2F80ED, #56CCF2);
+    //background: -webkit-linear-gradient(to bottom, #0B486B, #F56217);
+    //background: linear-gradient(to bottom, #111, #23146D);
+    //background: linear-gradient(to bottom, #77a1d3 0%,#79cbca 50%,#e684ae 100%);
 }
 
 h1,h2,h3,h4,h5,h6, textarea,
 .message-chat-text-sender {
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
 }
 p,a,li,blockquote, input, .headline,
 .message-chat-text-body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
 }
 

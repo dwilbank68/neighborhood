@@ -10,7 +10,7 @@ class HeadlineDisplay extends Component {
             const headlinesCount = this.props.headlines.length;
             const cycleHeadlines = (length) => {
                 let idx = 0;
-                setInterval(() => {
+                this.headlineInterval = setInterval(() => {
 
                     this.setState({fading: true});
 
@@ -28,6 +28,11 @@ class HeadlineDisplay extends Component {
             cycleHeadlines(headlinesCount);
         }
     }
+
+    componentWillUnmount() {
+        clearInterval(this.headlineInterval);
+    }
+
 
     constructor(props, context){
         super(props, context);
