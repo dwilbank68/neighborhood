@@ -6,7 +6,7 @@ class HeadlineDisplay extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props === prevProps) return;
-
+        if (!this.props.headlines) return;
         if (this.props.headlines.length > 0) {
             const headlinesCount = this.props.headlines.length;
             const cycleHeadlines = (length) => {
@@ -15,7 +15,7 @@ class HeadlineDisplay extends Component {
 
                     this.setState({fading: true});
 
-                    setTimeout(() => {
+                    this.headlineTimeout = setTimeout(() => {
                         this.setState({
                             headline:this.props.headlines[idx],
                             fading: false
@@ -32,6 +32,7 @@ class HeadlineDisplay extends Component {
 
     componentWillUnmount() {
         clearInterval(this.headlineInterval);
+        clearTimeout(this.headlineTimeout);
     }
 
 

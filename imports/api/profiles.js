@@ -12,6 +12,7 @@ if (Meteor.isServer) {
             { fields: {
                 userId: 1,
                 address: 1, city: 1, state: 1, zipcode: 1,
+                admin: 1,
                 avatar: 1,
                 screenName: 1, fullName: 1,
                 phone: 1,
@@ -26,6 +27,7 @@ if (Meteor.isServer) {
                 userId: 1,
                 address: 1, city: 1, state: 1, zipcode: 1,
                 avatar: 1,
+                admin: 1,
                 screenName: 1, fullName: 1,
                 phone: 1,
                 emailVisible: 1
@@ -41,6 +43,7 @@ export const validateProfile = (userId, profileObj) => {
         address: {
             type: String, min: 4
         },
+        admin: {type: Boolean, optional:true},
         avatar: {type: String},
         emailVisible: {type: Boolean},
         screenName: {
@@ -51,7 +54,7 @@ export const validateProfile = (userId, profileObj) => {
         },
         phone: {type: String, optional: true}
     })
-    .validate({address, avatar, emailVisible, fullName, screenName, userId, phone});
+    .validate({address, admin, avatar, emailVisible, fullName, screenName, userId, phone});
     return true;
 }
 

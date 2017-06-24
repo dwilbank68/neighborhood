@@ -69,20 +69,20 @@ path, polygon, rect {
 
 .need {
     border-radius: 50%;
-    background-color: yellow;
+    //background-color: red;
     position: absolute;
-    -webkit-animation: yellow 1.5s ease-in-out infinite alternate;
-    -moz-animation: yellow 1.5s ease-in-out infinite alternate;
-    animation: yellow 1.5s ease-in-out infinite alternate;
+
+    -webkit-animation: red 3s ease-in-out infinite alternate;
+    -moz-animation: red 3s ease-in-out infinite alternate;
+    animation: red 3s ease-in-out infinite alternate;
 }
 
 .need-urgent {
     border-radius: 50%;
-    background-color: yellow;
     position: absolute;
-    -webkit-animation: yellowPulse 2s ease-out infinite;
-    -moz-animation: yellowPulse 2s ease-out infinite;
-    animation: yellowPulse 2s ease-out infinite;
+    -webkit-animation: redPulse 2s ease-out infinite;
+    -moz-animation: redPulse 2s ease-out infinite;
+    animation: redPulse 2s ease-out infinite;
 }
 
 .need-message-urgent {
@@ -91,7 +91,7 @@ path, polygon, rect {
     box-shadow: 0px 0px 27px 2px rgba(255,255,0,1);
 }
 
-.marker-text {
+.marker-text-request {
     background: rgba(0,0,0,.5);
     border-radius: 3px;
     color: white;
@@ -104,33 +104,43 @@ path, polygon, rect {
     width: 70px;
 }
 
-.need:hover .marker-text { opacity: 1; }
-.offer:hover .marker-text { opacity: 1; }
+.marker-text-offer {
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    color: white;
+    font-size: .7em;
+    margin-left: -87px;
+    margin-top: -4px;
+    opacity: 0;
+    padding: 5px;
+    transition: opacity 1s ease;
+    width: 70px;
+}
 
-.need-urgent:hover .marker-text { opacity: 1; }
-.offer-free:hover .marker-text { opacity: 1; }
+.need:hover         .marker-text-request { opacity: 1; }
+.need-urgent:hover  .marker-text-request { opacity: 1; }
+.offer:hover        .marker-text-offer { opacity: 1; }
+.offer-free:hover   .marker-text-offer { opacity: 1; }
 
 .offer {
     border-radius: 50%;
-    background-color: #aaf;
     position: absolute;
-    -webkit-animation: blue-pulse 1s ease-in-out infinite alternate;
-    -moz-animation: blue-pulse 1s ease-in-out infinite alternate;
-    animation: blue-pulse 1s ease-in-out infinite alternate;
+    -webkit-animation: green 2s ease-in-out infinite alternate;
+    -moz-animation: green 2s ease-in-out infinite alternate;
+    animation: green 2s ease-in-out infinite alternate;
 }
 
 .offer-free {
     border-radius: 50%;
-    background-color: #aaf;
     position: absolute;
-    -webkit-animation: blue-pulse .5s ease-in-out infinite alternate;
-    -moz-animation: blue-pulse .5s ease-in-out infinite alternate;
-    animation: blue-pulse .5s ease-in-out infinite alternate;
+    -webkit-animation: green-pulse 2s ease-out infinite;
+    -moz-animation: green-pulse 2s ease-out infinite;
+    animation: green-pulse 2s ease-out infinite;
 }
 
-.offer-text {
-    color: blue;
-    -webkit-animation: blue-pulse-text 1s ease-in-out infinite alternate;
-    -moz-animation: blue-pulse-text 1s ease-in-out infinite alternate;
-    animation: blue-pulse-text 1s ease-in-out infinite alternate;
-}
+//.offer-text {
+//    color: blue;
+//    -webkit-animation: green-pulse-text 1s ease-in-out infinite alternate;
+//    -moz-animation: green-pulse-text 1s ease-in-out infinite alternate;
+//    animation: green-pulse-text 1s ease-in-out infinite alternate;
+//}

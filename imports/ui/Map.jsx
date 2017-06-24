@@ -47,13 +47,6 @@ export class Map extends Component {
         this.updateMapOffers();
     }
 
-    // handleClick(e) {
-    //
-    //    this.setState({
-    //
-    //    })
-    // }
-
     render() {
         return (
             <div className="map" id="map">
@@ -83,14 +76,10 @@ export class Map extends Component {
             }
             need.style.height = locObj.size + 'px';
             need.style.width =  locObj.size + 'px';
-            need.style.left =   locObj.left + 'px';
+            need.style.left =   locObj.left + (locObj.size * 1.3) + 'px';
             need.style.top =    locObj.top + 'px';
-            need.addEventListener(
-                "mouseover",
-                () => {console.log(n.body);}
-            );
             const p = document.createElement('p');
-            p.classList.add('marker-text');
+            p.classList.add('marker-text-request');
             p.innerText = n.body;
             need.appendChild(p);
             mapDiv.appendChild(need);
@@ -98,9 +87,6 @@ export class Map extends Component {
     }
 
     updateMapOffers(){
-        console.log('------------------------------------------');
-        console.log('updateMapOffers ');
-        console.log('------------------------------------------');
         if (!this.props.offers) return;
         if (this.props.offers.length == 0) return;
         const mapDiv = document.getElementById('map');
@@ -118,12 +104,8 @@ export class Map extends Component {
             offer.style.width =  locObj.size + 'px';
             offer.style.left =   locObj.left - (locObj.size * 1.3) + 'px';
             offer.style.top =    locObj.top + 'px';
-            offer.addEventListener(
-                "mouseover",
-                () => {console.log(o.body);}
-            );
             const p = document.createElement('p');
-            p.classList.add('marker-text');
+            p.classList.add('marker-text-offer');
             p.innerText = o.body;
             offer.appendChild(p);
             mapDiv.appendChild(offer);

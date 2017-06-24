@@ -42,13 +42,6 @@ export class Dashboard extends Component {
         // this.handleClick = this.handleClick.bind(this)
     }
 
-    // handleClick(e) {
-    //
-    //    this.setState({
-    //
-    //    })
-    // }
-
     render() {
 
         const currentUser = this.props.currentUser;
@@ -60,7 +53,6 @@ export class Dashboard extends Component {
 
         return (
             <div className="dashboard">
-                {/*<PrivateHeader title="Dashboard" user={user}/>*/}
 
                 <PrivateHeader addressUsers={this.props.addressUsers}
                                title=""
@@ -81,7 +73,7 @@ export class Dashboard extends Component {
                             <Tab>Chat ({this.props.messageCount})</Tab>
                             <Tab>Services ({this.props.serviceCount})</Tab>
                             <Tab>Rules</Tab>
-                            <Tab>Announcements</Tab>
+                            { this.renderAnnouncementTab(currentUser) }
                             <Tab>For Sale / Giveaway / Offers {this.props.offers ?
                                 <span>({this.props.offers.length})</span> : null}</Tab>
                             <Tab>Wanted ({this.props.needs ? this.props.needs.length : null})</Tab>
@@ -106,10 +98,9 @@ export class Dashboard extends Component {
                         </TabPanel>
 
                         <TabPanel></TabPanel>
-                        <TabPanel>
-                            <AnnouncementBox announcements={this.props.announcements}
-                                             currentUser={currentUser}/>
-                        </TabPanel>
+
+                        { this.renderAnnouncementComponent(currentUser) }
+
                         <TabPanel>
                             <OfferBox currentUser={currentUser}/>
                         </TabPanel>
@@ -125,6 +116,26 @@ export class Dashboard extends Component {
 
     }
 
+    renderAnnouncementTab(currentUser){
+        if (!currentUser) return;
+        if (currentUser.admin) {
+            return (
+                <Tab>Manage Announcements</Tab>
+            )
+        }
+    }
+
+    renderAnnouncementComponent(currentUser){
+        if (!currentUser) return;
+        if (currentUser.admin) {
+            return (
+                <TabPanel>
+                    <AnnouncementBox announcements={this.props.announcements}
+                                     currentUser={currentUser}/>
+                </TabPanel>
+            )
+        }
+    }
 
 }
 
@@ -164,10 +175,9 @@ const mapToProps = (props) => {
     const announcements = Announcements.find({}).fetch();
     const services = Services.find({}).fetch();
 
-    const users = Meteor
-        .users
-        .find({}, {sort: {"status.online": 1}})    // 1
-        .fetch();
+    const users = Meteor.users
+                            .find({}, {sort: {"status.online": 1}})    // 1
+                            .fetch();
     const profiles = Profiles.find({}).fetch();
     const needs = Needs.find({}).fetch();
     const offers = Offers.find({}).fetch();
@@ -177,39 +187,35 @@ const mapToProps = (props) => {
         let mergedUsers = users.map(u => {
             profile = profilesObj[u._id];
             if (profile) {
-                const {emailVisible} = profile;
+                const {screenName, fullName, avatar,
+                    address, city, state, zipcode,
+                    phone, admin, emailVisible} = profile;
                 return {
-                    screenName: profile.screenName,
-                    fullName: profile.fullName,
-                    avatar: profile.avatar,
-                    address: profile.address,
-                    city: profile.city,
-                    state: profile.state,
-                    zipcode: profile.zipcode,
-                    phone: profile.phone,
-                    emailVisible,
+                    screenName, fullName, avatar,
+                    address, city, state, zipcode,
+                    phone, admin, emailVisible,
                     email: emailVisible ? u.emails[0].address : null,
                     id: u._id,
                     online: u.status ? u.status.online : true
                 }
             }
         });
-        let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
-        let addressUsers = Profiles.find({address: currentUser.address}).fetch();
-        return {
-            addressUsers,
-            allUsers: mergedUsers,
-            announcements,
-            currentUser,
-            needs,
-            offers,
-            services
-        }
+        try {
+            let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
+            let addressUsers = Profiles.find({address: currentUser.address}).fetch();
+            return {
+                addressUsers,
+                allUsers: mergedUsers,
+                announcements,
+                currentUser,
+                needs,
+                offers,
+                services
+            }
+        } catch (e) { }
     } else {
         return [{}];
     }
-//
-//
 }
 
 export default createContainer(mapToProps, Dashboard);
