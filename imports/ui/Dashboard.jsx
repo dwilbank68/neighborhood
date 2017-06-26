@@ -11,6 +11,7 @@ import _ from 'lodash';
 import PrivateHeader        from './PrivateHeader';
 import Map                  from './Map';
 import ChatBox              from './chat/ChatBox';
+import AllEmailsBox         from './emails/AllUsersBox'
 import AnnouncementBox      from './announcement/AnnouncementBox';
 import HeadlineDisplay      from './announcement/HeadlineDisplay';
 import NeedBox              from './need/NeedBox';
@@ -74,6 +75,7 @@ export class Dashboard extends Component {
                             <Tab>Services ({this.props.serviceCount})</Tab>
                             <Tab>Rules</Tab>
                             { this.renderAnnouncementTab(currentUser) }
+                            { this.getUsersTab(currentUser) }
                             <Tab>For Sale / Giveaway / Offers {this.props.offers ?
                                 <span>({this.props.offers.length})</span> : null}</Tab>
                             <Tab>Wanted ({this.props.needs ? this.props.needs.length : null})</Tab>
@@ -101,6 +103,8 @@ export class Dashboard extends Component {
 
                         { this.renderAnnouncementComponent(currentUser) }
 
+                        { this.getUsersComponent(currentUser) }
+
                         <TabPanel>
                             <OfferBox currentUser={currentUser}/>
                         </TabPanel>
@@ -114,6 +118,26 @@ export class Dashboard extends Component {
             </div>
         );
 
+    }
+
+    getUsersTab(currentUser){
+        if (!currentUser) return;
+        if (currentUser.admin) {
+            return (
+                <Tab>Get All Emails</Tab>
+            )
+        }
+    }
+
+    getUsersComponent(currentUser){
+        if (!currentUser) return;
+        if (currentUser.admin) {
+            return (
+                <TabPanel>
+                    <AllEmailsBox   emails={this.props.emails}/>
+                </TabPanel>
+            )
+        }
     }
 
     renderAnnouncementTab(currentUser){
@@ -184,12 +208,17 @@ const mapToProps = (props) => {
     if (profiles.length > 0 && users.length > 0) {
         const profilesObj = _.mapKeys(profiles, 'userId');
         let profile;
+        const usersUnfiltered = [];
         let mergedUsers = users.map(u => {
             profile = profilesObj[u._id];
             if (profile) {
                 const {screenName, fullName, avatar,
                     address, city, state, zipcode,
                     phone, admin, emailVisible} = profile;
+                usersUnfiltered.push({
+                    screenName, fullName, address,
+                    email: u.emails[0].address
+                })
                 return {
                     screenName, fullName, avatar,
                     address, city, state, zipcode,
@@ -200,6 +229,7 @@ const mapToProps = (props) => {
                 }
             }
         });
+
         try {
             let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
             let addressUsers = Profiles.find({address: currentUser.address}).fetch();
@@ -210,7 +240,8 @@ const mapToProps = (props) => {
                 currentUser,
                 needs,
                 offers,
-                services
+                services,
+                usersUnfiltered
             }
         } catch (e) { }
     } else {
