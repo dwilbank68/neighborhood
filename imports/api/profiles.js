@@ -37,7 +37,7 @@ if (Meteor.isServer) {
 }
 
 export const validateProfile = (userId, profileObj) => {
-    const {address, avatar, emailVisible, fullName, screenName, phone} = profileObj;
+    const {address, admin, avatar, emailVisible, fullName, screenName, phone} = profileObj;
     new SimpleSchema({
         userId: {type: String},
         address: {

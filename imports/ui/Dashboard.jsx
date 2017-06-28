@@ -11,7 +11,7 @@ import _ from 'lodash';
 import PrivateHeader        from './PrivateHeader';
 import Map                  from './Map';
 import ChatBox              from './chat/ChatBox';
-import AllEmailsBox         from './emails/AllUsersBox'
+import AllUsersBox          from './all_users/AllUsersBox'
 import AnnouncementBox      from './announcement/AnnouncementBox';
 import HeadlineDisplay      from './announcement/HeadlineDisplay';
 import NeedBox              from './need/NeedBox';
@@ -70,12 +70,12 @@ export class Dashboard extends Component {
                     <Tabs className='tabs'>
                         <TabList>
                             <Tab>Phone & Info</Tab>
-                            <Tab>Users</Tab>
-                            <Tab>Chat ({this.props.messageCount})</Tab>
-                            <Tab>Services ({this.props.serviceCount})</Tab>
+                            <Tab>Users ({this.props.allUsers ? this.props.allUsers.length:0})</Tab>
+                            <Tab>Chat</Tab>
+                            <Tab>Services</Tab>
                             <Tab>Rules</Tab>
                             { this.renderAnnouncementTab(currentUser) }
-                            { this.getUsersTab(currentUser) }
+                            { this.allUsersTab(currentUser) }
                             <Tab>For Sale / Giveaway / Offers {this.props.offers ?
                                 <span>({this.props.offers.length})</span> : null}</Tab>
                             <Tab>Wanted ({this.props.needs ? this.props.needs.length : null})</Tab>
@@ -103,7 +103,7 @@ export class Dashboard extends Component {
 
                         { this.renderAnnouncementComponent(currentUser) }
 
-                        { this.getUsersComponent(currentUser) }
+                        { this.allUsersComponent(currentUser) }
 
                         <TabPanel>
                             <OfferBox currentUser={currentUser}/>
@@ -120,7 +120,7 @@ export class Dashboard extends Component {
 
     }
 
-    getUsersTab(currentUser){
+    allUsersTab(currentUser){
         if (!currentUser) return;
         if (currentUser.admin) {
             return (
@@ -129,12 +129,12 @@ export class Dashboard extends Component {
         }
     }
 
-    getUsersComponent(currentUser){
+    allUsersComponent(currentUser){
         if (!currentUser) return;
         if (currentUser.admin) {
             return (
                 <TabPanel>
-                    <AllEmailsBox   emails={this.props.emails}/>
+                    <AllUsersBox   allUsers={this.props.allUsers}/>
                 </TabPanel>
             )
         }
@@ -208,22 +208,17 @@ const mapToProps = (props) => {
     if (profiles.length > 0 && users.length > 0) {
         const profilesObj = _.mapKeys(profiles, 'userId');
         let profile;
-        const usersUnfiltered = [];
         let mergedUsers = users.map(u => {
             profile = profilesObj[u._id];
             if (profile) {
                 const {screenName, fullName, avatar,
                     address, city, state, zipcode,
                     phone, admin, emailVisible} = profile;
-                usersUnfiltered.push({
-                    screenName, fullName, address,
-                    email: u.emails[0].address
-                })
                 return {
                     screenName, fullName, avatar,
                     address, city, state, zipcode,
                     phone, admin, emailVisible,
-                    email: emailVisible ? u.emails[0].address : null,
+                    email: u.emails[0].address,
                     id: u._id,
                     online: u.status ? u.status.online : true
                 }
@@ -240,8 +235,7 @@ const mapToProps = (props) => {
                 currentUser,
                 needs,
                 offers,
-                services,
-                usersUnfiltered
+                services
             }
         } catch (e) { }
     } else {

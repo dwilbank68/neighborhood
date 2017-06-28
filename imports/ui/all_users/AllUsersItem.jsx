@@ -4,28 +4,39 @@ import PropTypes from 'prop-types';
 // import gravatar from 'node-gravatar';
 // import FontAwesome from 'react-fontawesome';
 // import {convertTime} from '../../utils/convertTime';
-// import UserInfoItem from './UserInfoItem.jsx';
+// import AllUsersItem from './AllUsersItem.jsx';
 // const PhoneInfoItem = (props) => {
-const UserInfoItem = ({num}) => {
+const styles = {
+    p: {
+        marginBottom: '2px'
+    },
+    wrapper: {
+        color: 'white',
+        fontSize: '.75em',
+        marginLeft: '10px'
+    }
+}
+
+const AllUsersItem = ({user}) => {
 
     return (
 
         <li className="info-msg">
-            <div className="info-wrapper">
-                <div>
-                    {num.name}
-                </div>
-                <div>
-                    {num.number}
-                </div>
+            <div style={styles.wrapper}>
+                <p style={styles.p}>
+                    {user.fullName ? user.fullName : user.screenName}
+                </p>
+                <p style={styles.p}>{user.address}</p>
+                <p style={styles.p}>{user.city}, {user.state} {user.zipcode}</p>
+                <p style={styles.p}>{user.phone} {user.email}</p>
             </div>
         </li>
     );
 };
 
 
-// UserInfoItem.defaultProps = {};
-// UserInfoItem.propTypes = {
+// AllUsersItem.defaultProps = {};
+// AllUsersItem.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     hndleIptChg: PropTypes.func,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
@@ -39,4 +50,4 @@ const UserInfoItem = ({num}) => {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-export default UserInfoItem;
+export default AllUsersItem;
