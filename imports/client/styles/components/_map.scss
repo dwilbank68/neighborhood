@@ -38,13 +38,21 @@ path, polygon, rect {
 
 // states
 
-.online {
+.signedUp {
     stroke: rgba(255,255,255,.8);
-    stroke-width: 6px;
+    stroke-width: 4px;
 }
 
-.signedUp {
-    fill: rgba(0,0,0,.1);
+.online {
+    //stroke: rgba(255,255,255,.8);
+    //stroke: white;
+    //stroke-width: 6px;
+    animation: onlinePulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes onlinePulse {
+    from { stroke:white; stroke-width: 5; }
+    to { stroke:lightyellow; stroke-width: 7; }
 }
 
 .number, .street {

@@ -45,6 +45,7 @@ export class Dashboard extends Component {
 
     render() {
 
+        const allUsers = this.props.allUsers;
         const currentUser = this.props.currentUser;
 
         if (this.props.announcements) {
@@ -63,22 +64,22 @@ export class Dashboard extends Component {
 
                 <div className="page-content">
                     <Map className="map"
-                         allUsers={this.props.allUsers}
+                         allUsers={allUsers}
                          needs={this.props.needs}
                          offers={this.props.offers}/>
 
                     <Tabs className='tabs'>
                         <TabList>
                             <Tab>Phone & Info</Tab>
-                            <Tab>Users ({this.props.allUsers ? this.props.allUsers.length:0})</Tab>
+                            <Tab>Users ({allUsers ? allUsers.length:0})</Tab>
                             <Tab>Chat</Tab>
                             <Tab>Services</Tab>
                             <Tab>Rules</Tab>
                             { this.renderAnnouncementTab(currentUser) }
                             { this.allUsersTab(currentUser) }
-                            <Tab>For Sale / Giveaway / Offers {this.props.offers ?
+                            <Tab>Offers {this.props.offers ?
                                 <span>({this.props.offers.length})</span> : null}</Tab>
-                            <Tab>Wanted ({this.props.needs ? this.props.needs.length : null})</Tab>
+                            <Tab>Requests ({this.props.needs ? this.props.needs.length : null})</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -88,7 +89,7 @@ export class Dashboard extends Component {
                         <TabPanel>
                             <Users currentUser={currentUser}
                                    serviceCategories={this.props.services}
-                                   users={this.props.allUsers}/>
+                                   users={allUsers}/>
                         </TabPanel>
 
                         <TabPanel>
@@ -109,7 +110,8 @@ export class Dashboard extends Component {
                             <OfferBox currentUser={currentUser}/>
                         </TabPanel>
                         <TabPanel>
-                            <NeedBox currentUser={currentUser}/>
+                            <NeedBox    currentUser={currentUser}
+                                        allUsers={allUsers}/>
                         </TabPanel>
 
                     </Tabs>
@@ -129,12 +131,12 @@ export class Dashboard extends Component {
         }
     }
 
-    allUsersComponent(currentUser){
+    allUsersComponent(currentUser, allUsers){
         if (!currentUser) return;
         if (currentUser.admin) {
             return (
                 <TabPanel>
-                    <AllUsersBox   allUsers={this.props.allUsers}/>
+                    <AllUsersBox   allUsers={allUsers}/>
                 </TabPanel>
             )
         }
@@ -144,7 +146,7 @@ export class Dashboard extends Component {
         if (!currentUser) return;
         if (currentUser.admin) {
             return (
-                <Tab>Manage Announcements</Tab>
+                <Tab>Announcements</Tab>
             )
         }
     }
@@ -203,6 +205,7 @@ const mapToProps = (props) => {
                             .find({}, {sort: {"status.online": 1}})    // 1
                             .fetch();
     const profiles = Profiles.find({}).fetch();
+
     const needs = Needs.find({}).fetch();
     const offers = Offers.find({}).fetch();
     if (profiles.length > 0 && users.length > 0) {
@@ -213,18 +216,21 @@ const mapToProps = (props) => {
             if (profile) {
                 const {screenName, fullName, avatar,
                     address, city, state, zipcode,
-                    phone, admin, emailVisible} = profile;
+                    phone, admin, emailVisible,
+                    offerNotify, requestNotify,
+                } = profile;
                 return {
                     screenName, fullName, avatar,
                     address, city, state, zipcode,
                     phone, admin, emailVisible,
+                    offerNotify, requestNotify,
                     email: u.emails[0].address,
                     id: u._id,
                     online: u.status ? u.status.online : true
                 }
             }
         });
-
+        mergedUsers = mergedUsers.filter(u => u!== undefined);
         try {
             let currentUser = mergedUsers.find(m => m.id == Meteor.userId());
             let addressUsers = Profiles.find({address: currentUser.address}).fetch();
@@ -237,7 +243,9 @@ const mapToProps = (props) => {
                 offers,
                 services
             }
-        } catch (e) { }
+        } catch (err) {
+            console.log('Dashboard.jsx - mapToProps',err);
+        }
     } else {
         return [{}];
     }

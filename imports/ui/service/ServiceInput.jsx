@@ -40,11 +40,13 @@ class ServiceInput extends Component {
 
     handleOpenModal(){
         const {
-            address, avatar, city, email, emailVisible,
+            address, avatar, city, email,
+            emailVisible, offerNotify, requestNotify,
             fullName, phone, screenName, state, zipcode
         } = this.props.currentUser;
         this.setState({
-            address, avatar, city, email, emailVisible,
+            address, avatar, city, email,
+            emailVisible, offerNotify, requestNotify,
             fullName, phone, screenName, state, zipcode,
             modalOpen: true
         });

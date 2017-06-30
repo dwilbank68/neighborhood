@@ -12,11 +12,20 @@ import {Needs} from '../../api/needs';
 // import {NeedBox} from './NeedBox.jsx';
 export class NeedBox extends Component {
 
+    componentDidMount() {
+        const requestRecipients = this.props.allUsers
+            .filter(u => u.requestNotify === true)
+            .map(u => u.email);
+        this.setState({ requestRecipients });
+    }
+
+
     constructor(props, context){
         super(props, context);
             this.state = {
                 input:'',
-                filterText: ''
+                filterText: '',
+                requestRecipients: []
             }
         this.handleChange = this.handleChange.bind(this)
         this.handleNeedSubmit = this.handleNeedSubmit.bind(this)
@@ -32,6 +41,7 @@ export class NeedBox extends Component {
         Meteor.call(
             'needCreate',
             need,
+            this.state.requestRecipients,
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');
@@ -89,9 +99,8 @@ const mapToProps = (props) => {
     Meteor.subscribe('needs');
     // const {binId} = props.params;
     return {
-        needs: Needs
-                .find({}, {sort:{created:-1}})
-                .fetch(),
+        needs: Needs.find({}, {sort:{created:-1}})
+                    .fetch(),
     }
 }
 

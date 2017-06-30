@@ -14,7 +14,7 @@ const CurrentUser = ({user, addressUsers}) => {
     if (user) {
         const {address, city, state, zipcode,
             fullName, screenName, avatar,
-            emailVisible, email, phone} = user;
+            emailVisible, email, offerNotify, requestNotify, phone} = user;
 
 
         return (

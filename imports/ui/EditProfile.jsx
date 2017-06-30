@@ -12,6 +12,19 @@ import _ from 'lodash';
 import ImageUpload from './ImageUpload';
 import CurrentUser from './CurrentUser';
 
+const styles = {
+    toggleLabel: {
+        fontFamily: 'Lato, sans-serif',
+        fontWeight: '400',
+        marginLeft: '14px',
+        marginTop: '4px'
+    },
+    toggleWrapper: {
+        display: 'flex',
+        marginBottom: '5px'
+    }
+}
+
 // import EditProfile from './EditProfile.jsx';
 // import {EditProfile} from './EditProfile.jsx';
 export class EditProfile extends Component {
@@ -52,10 +65,12 @@ export class EditProfile extends Component {
             {
                 address:        this.state.address,
                 avatar:         this.state.avatar,
+                emailVisible:   this.state.emailVisible,
                 fullName:       this.state.fullName,
+                offerNotify:    this.state.offerNotify,
+                requestNotify:  this.state.requestNotify,
                 phone:          this.state.phone,
-                screenName:     this.state.screenName,
-                emailVisible:   this.state.emailVisible
+                screenName:     this.state.screenName
             },
             (err, res) => {
                 if (!err) {
@@ -88,11 +103,11 @@ export class EditProfile extends Component {
     handleOpenModal(){
         const {
             address, avatar, city, email, emailVisible,
-            fullName, phone, screenName, state, zipcode
+            fullName, offerNotify, phone, requestNotify, screenName, state, zipcode
         } = this.props.currentUser;
         this.setState({
             address, avatar, city, email, emailVisible,
-            fullName, phone, screenName, state, zipcode,
+            fullName, offerNotify, phone, requestNotify, screenName, state, zipcode,
             modalOpen: true
         });
     }
@@ -162,13 +177,43 @@ export class EditProfile extends Component {
                                         value={this.state.phone}/>
                             </div>
                             <div className="row">
-                                <label>
+                                <label style={styles.toggleWrapper}>
                                     <Toggle checked={this.state.emailVisible}
                                             icons={false}
                                             onChange={() => this.setState({
                                                 emailVisible: !this.state.emailVisible
                                             })}/>
-                                    <span>{this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}</span>
+                                    <div style={styles.toggleLabel}>
+                                        {this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="row">
+                                <label style={styles.toggleWrapper}>
+                                    <Toggle checked={this.state.offerNotify}
+                                            icons={false}
+                                            onChange={() => this.setState({
+                                                offerNotify: !this.state.offerNotify
+                                            })}/>
+                                    <div style={styles.toggleLabel}>
+                                        {this.state.offerNotify ?   'Send me email for each new offer' :
+                                                                    'Do not send me email for each new offer'}
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="row">
+                                <label style={styles.toggleWrapper}>
+                                    <Toggle checked={this.state.requestNotify}
+                                            icons={false}
+                                            onChange={() => this.setState({
+                                                requestNotify: !this.state.requestNotify
+                                            })}/>
+                                    <div style={styles.toggleLabel}>
+                                        {this.state.requestNotify ? 'Send me email for each new request' :
+                                                                    'Do not send me email for each new request'}
+                                    </div>
                                 </label>
                             </div>
 
@@ -177,12 +222,13 @@ export class EditProfile extends Component {
                                 <CurrentUser user={this.state}/>
                             </div>
 
-                            <button className="btn btn-lg btn-primary btn-block"
-                                    type="submit"
-                                    onClick={this.formSubmit}>
-                                Update Profile
-                            </button>
-
+                            <div style={{marginTop:'20px', textAlign:'center'}}>
+                                <button className="button"
+                                        type="submit"
+                                        onClick={this.formSubmit}>
+                                    Update Profile
+                                </button>
+                            </div>
                         </form>
 
                         <div className='button-cancel'

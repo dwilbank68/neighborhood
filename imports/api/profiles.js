@@ -16,6 +16,7 @@ if (Meteor.isServer) {
                 avatar: 1,
                 screenName: 1, fullName: 1,
                 phone: 1,
+                offerNotify: 1, requestNotify: 1,
                 emailVisible: 1
             }}
         );
@@ -30,6 +31,7 @@ if (Meteor.isServer) {
                 admin: 1,
                 screenName: 1, fullName: 1,
                 phone: 1,
+                offerNotify: 1, requestNotify: 1,
                 emailVisible: 1
             }}
         )
@@ -37,7 +39,9 @@ if (Meteor.isServer) {
 }
 
 export const validateProfile = (userId, profileObj) => {
-    const {address, admin, avatar, emailVisible, fullName, screenName, phone} = profileObj;
+    const {address, admin, avatar,
+        emailVisible, offerNotify, requestNotify,
+        fullName, screenName, phone} = profileObj;
     new SimpleSchema({
         userId: {type: String},
         address: {
@@ -46,6 +50,8 @@ export const validateProfile = (userId, profileObj) => {
         admin: {type: Boolean, optional:true},
         avatar: {type: String},
         emailVisible: {type: Boolean},
+        offerNotify: {type: Boolean},
+        requestNotify: {type: Boolean},
         screenName: {
             type: String, min: 2, max: 12
         },
@@ -54,7 +60,10 @@ export const validateProfile = (userId, profileObj) => {
         },
         phone: {type: String, optional: true}
     })
-    .validate({address, admin, avatar, emailVisible, fullName, screenName, userId, phone});
+    .validate({
+        address, admin, avatar,
+        emailVisible, offerNotify, requestNotify,
+        fullName, screenName, userId, phone});
     return true;
 }
 
@@ -64,6 +73,8 @@ export const createProfile = (userId, options) => {
     const {address, screenName, fullName} = options;
     options.avatar = '';
     options.emailVisible = false;
+    options.offerNotify = false;
+    options.requestNotify = false;
     options.phone = '';
 
     validateProfile(userId, options);
@@ -74,7 +85,9 @@ export const createProfile = (userId, options) => {
         address, city, state, zipcode,
         avatar: options.avatar,
         phone: options.phone,
-        emailVisible: options.emailVisible
+        emailVisible: options.emailVisible,
+        offerNotify: options.offerNotify,
+        requestNotify: options.requestNotify
     })
 }
 
