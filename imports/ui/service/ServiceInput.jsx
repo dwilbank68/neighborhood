@@ -13,7 +13,7 @@ const placeholderText = `You can either:
 
 The hope for this feature is that you advertise your services either for barter, or for considerably less cost than providers outside the neighborhood.
 
-If there is a service category not included here, choose Miscellaneous, notify the webmaster, and the category will be added.`;
+If there is a service category you want that is not included here, 1. choose Miscellaneous, 2. write the category inside your message so that it will appear when other users search for it, 3. notify the webmaster, and the category will be added.`;
 
 // import ServiceInput from './ServiceInput.jsx';
 class ServiceInput extends Component {
@@ -40,13 +40,13 @@ class ServiceInput extends Component {
 
     handleOpenModal(){
         const {
-            address, avatar, city, email,
-            emailVisible, offerNotify, requestNotify,
+            address, avatar, city, email, emailVisible,
+            offerNotify, requestNotify, offerNotifySMS, requestNotifySMS,
             fullName, phone, screenName, state, zipcode
         } = this.props.currentUser;
         this.setState({
-            address, avatar, city, email,
-            emailVisible, offerNotify, requestNotify,
+            address, avatar, city, email, emailVisible,
+            offerNotify, requestNotify, offerNotifySMS, requestNotifySMS,
             fullName, phone, screenName, state, zipcode,
             modalOpen: true
         });

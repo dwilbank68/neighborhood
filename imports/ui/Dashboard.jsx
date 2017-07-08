@@ -218,12 +218,14 @@ const mapToProps = (props) => {
                     address, city, state, zipcode,
                     phone, admin, emailVisible,
                     offerNotify, requestNotify,
+                    offerNotifySMS, requestNotifySMS,
                 } = profile;
                 return {
                     screenName, fullName, avatar,
                     address, city, state, zipcode,
                     phone, admin, emailVisible,
                     offerNotify, requestNotify,
+                    offerNotifySMS, requestNotifySMS,
                     email: u.emails[0].address,
                     id: u._id,
                     online: u.status ? u.status.online : true

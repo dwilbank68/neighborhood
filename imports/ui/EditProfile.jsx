@@ -15,9 +15,9 @@ import CurrentUser from './CurrentUser';
 const styles = {
     toggleLabel: {
         fontFamily: 'Lato, sans-serif',
+        fontSize: '.9em',
         fontWeight: '400',
-        marginLeft: '14px',
-        marginTop: '4px'
+        marginLeft: '14px'
     },
     toggleWrapper: {
         display: 'flex',
@@ -63,14 +63,16 @@ export class EditProfile extends Component {
             'profileUpdate',
             userId,
             {
-                address:        this.state.address,
-                avatar:         this.state.avatar,
-                emailVisible:   this.state.emailVisible,
-                fullName:       this.state.fullName,
-                offerNotify:    this.state.offerNotify,
-                requestNotify:  this.state.requestNotify,
-                phone:          this.state.phone,
-                screenName:     this.state.screenName
+                address:            this.state.address,
+                avatar:             this.state.avatar,
+                emailVisible:       this.state.emailVisible,
+                fullName:           this.state.fullName,
+                offerNotify:        this.state.offerNotify,
+                offerNotifySMS:     this.state.offerNotifySMS,
+                requestNotify:      this.state.requestNotify,
+                requestNotifySMS:   this.state.requestNotifySMS,
+                phone:              this.state.phone,
+                screenName:         this.state.screenName
             },
             (err, res) => {
                 if (!err) {
@@ -103,11 +105,13 @@ export class EditProfile extends Component {
     handleOpenModal(){
         const {
             address, avatar, city, email, emailVisible,
-            fullName, offerNotify, phone, requestNotify, screenName, state, zipcode
+            fullName, offerNotify, offerNotifySMS, phone,
+            requestNotify, requestNotifySMS, screenName, state, zipcode
         } = this.props.currentUser;
         this.setState({
             address, avatar, city, email, emailVisible,
-            fullName, offerNotify, phone, requestNotify, screenName, state, zipcode,
+            fullName, offerNotify, offerNotifySMS ,phone,
+            requestNotify, requestNotifySMS, screenName, state, zipcode,
             modalOpen: true
         });
     }
@@ -184,10 +188,12 @@ export class EditProfile extends Component {
                                                 emailVisible: !this.state.emailVisible
                                             })}/>
                                     <div style={styles.toggleLabel}>
-                                        {this.state.emailVisible ? 'Email is visible' : 'Email is hidden'}
+                                        {this.state.emailVisible ? 'My email address is visible to my neighbors' : 'My email address is hidden'}
                                     </div>
                                 </label>
                             </div>
+
+                            <br/>
 
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
@@ -197,11 +203,27 @@ export class EditProfile extends Component {
                                                 offerNotify: !this.state.offerNotify
                                             })}/>
                                     <div style={styles.toggleLabel}>
-                                        {this.state.offerNotify ?   'Send me email for each new offer' :
-                                                                    'Do not send me email for each new offer'}
+                                        {this.state.offerNotify ?   'Email notifications for each new offer - on' :
+                                                                    'Email notifications for each new offer - off'}
                                     </div>
                                 </label>
                             </div>
+
+                            <div className="row">
+                                <label style={styles.toggleWrapper}>
+                                    <Toggle checked={this.state.offerNotifySMS}
+                                            icons={false}
+                                            onChange={() => this.setState({
+                                                offerNotifySMS: !this.state.offerNotifySMS
+                                            })}/>
+                                    <div style={styles.toggleLabel}>
+                                        {this.state.offerNotifySMS ?    'Text (SMS) notifications for each new offer - on' :
+                                                                        'Text (SMS) notifications for each new offer - off'}
+                                    </div>
+                                </label>
+                            </div>
+
+                            <br/>
 
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
@@ -211,8 +233,22 @@ export class EditProfile extends Component {
                                                 requestNotify: !this.state.requestNotify
                                             })}/>
                                     <div style={styles.toggleLabel}>
-                                        {this.state.requestNotify ? 'Send me email for each new request' :
-                                                                    'Do not send me email for each new request'}
+                                        {this.state.requestNotify ? 'Email notifications for each new request - on' :
+                                                                    'Email notifications for each new request - off'}
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="row">
+                                <label style={styles.toggleWrapper}>
+                                    <Toggle checked={this.state.requestNotifySMS}
+                                            icons={false}
+                                            onChange={() => this.setState({
+                                                requestNotifySMS: !this.state.requestNotifySMS
+                                            })}/>
+                                    <div style={styles.toggleLabel}>
+                                        {this.state.requestNotifySMS ?  'Text (SMS) notifications for each new request - on' :
+                                                                        'Text (SMS) notifications for each new request - off'}
                                     </div>
                                 </label>
                             </div>

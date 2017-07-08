@@ -12,11 +12,28 @@ import {Offers} from '../../api/offers';
 // import {OfferBox} from './OfferBox.jsx';
 export class OfferBox extends Component {
 
+    componentDidMount() {
+        const offerEmailRecipients = this.props.allUsers
+            .filter(u => u.offerNotify === true)
+            .map(u => u.email);
+
+        const offerSMSRecipients = this.props.allUsers
+            .filter(u => u.offerNotifySMS === true)
+            .map(u => u.phone);
+
+        this.setState({
+            offerEmailRecipients,
+            offerSMSRecipients
+        });
+    }
+
     constructor(props, context){
         super(props, context);
             this.state = {
                 input:'',
-                filterText: ''
+                filterText: '',
+                offerEmailRecipients: [],
+                offerSMSRecipients: []
             }
         this.handleChange = this.handleChange.bind(this)
         this.handleOfferSubmit = this.handleOfferSubmit.bind(this)
@@ -32,6 +49,8 @@ export class OfferBox extends Component {
         Meteor.call(
             'offerCreate',
             offer,
+            this.state.offerEmailRecipients,
+            this.state.offerSMSRecipients,
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');

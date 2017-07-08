@@ -4,8 +4,6 @@ import {Mongo} from 'meteor/mongo';
 // import {data} from '../../addresses.js';
 
 import { Email } from 'meteor/email';
-// var Mailgun = require('mailgun').Mailgun;
-// var mg = new Mailgun('5d68bdd723f4f3ce0b1e46cb28d6797f');
 
 export const Needs = new Mongo.Collection('needs');
 //
@@ -53,20 +51,26 @@ if (Meteor.isServer) {
 // }
 
 Meteor.methods({
-    'needCreate'(msg, recipients){
+    'needCreate'(msg, emailRecipients, smsRecipients){
+        console.log('------------------------------------------');
+        console.log('emailRecipients ',emailRecipients);
+        console.log('------------------------------------------');
         // validateMessage(userId, updatesObj);
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
         const {address, avatar, body, email, needPicture, screenName, urgent, userId} = msg;
-        // if (Meteor.isServer) {
-        //     Email.send({
-        //         subject: 'test for 2 emails',
-        //         text: body,
-        //         from: 'dwilbank@hotmail.com',
-        //         to: recipients
-        //     });
-        // }
+        if (Meteor.isServer) {
+            console.log('------------------------------------------');
+            console.log('process.env.MAIL_URL ',process.env.MAIL_URL);
+            console.log('------------------------------------------');
+            Email.send({
+                subject: 'test for 2 emails',
+                text: body,
+                from: 'noreply@traditions90250.com',
+                to: emailRecipients
+            });
+        }
 
         // mg.sendText('traditions90250@noreply.com', 'dwilbank@gmail.com', 'new request', body, (err) => {
         //     console.log('------------------------------------------');

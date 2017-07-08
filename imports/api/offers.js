@@ -3,6 +3,8 @@ import SimpleSchema from 'simpl-schema';
 import {Mongo} from 'meteor/mongo';
 // import {data} from '../../addresses.js';
 
+// import { Email } from 'meteor/email';
+
 export const Offers = new Mongo.Collection('offers');
 //
 if (Meteor.isServer) {
@@ -48,12 +50,20 @@ if (Meteor.isServer) {
 // }
 
 Meteor.methods({
-    'offerCreate'(msg){
+    'offerCreate'(msg, emailRecipients, smsRecipients){
         // validateMessage(userId, updatesObj);
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
         const {address, avatar, body, email, screenName, userId} = msg;
+        // if (Meteor.isServer) {
+        //     Email.send({
+        //         subject: 'test for 2 emails',
+        //         text: body,
+        //         from: 'dwilbank@hotmail.com',
+        //         to: emailRecipients
+        //     });
+        // }
         return Offers.insert(
             {
                 address,

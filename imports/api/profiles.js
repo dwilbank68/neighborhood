@@ -17,6 +17,7 @@ if (Meteor.isServer) {
                 screenName: 1, fullName: 1,
                 phone: 1,
                 offerNotify: 1, requestNotify: 1,
+                offerNotifySMS: 1, requestNotifySMS: 1,
                 emailVisible: 1
             }}
         );
@@ -32,6 +33,7 @@ if (Meteor.isServer) {
                 screenName: 1, fullName: 1,
                 phone: 1,
                 offerNotify: 1, requestNotify: 1,
+                offerNotifySMS: 1, requestNotifySMS: 1,
                 emailVisible: 1
             }}
         )
@@ -40,7 +42,7 @@ if (Meteor.isServer) {
 
 export const validateProfile = (userId, profileObj) => {
     const {address, admin, avatar,
-        emailVisible, offerNotify, requestNotify,
+        emailVisible, offerNotify, requestNotify, offerNotifySMS, requestNotifySMS,
         fullName, screenName, phone} = profileObj;
     new SimpleSchema({
         userId: {type: String},
@@ -52,6 +54,8 @@ export const validateProfile = (userId, profileObj) => {
         emailVisible: {type: Boolean},
         offerNotify: {type: Boolean},
         requestNotify: {type: Boolean},
+        offerNotifySMS: {type: Boolean},
+        requestNotifySMS: {type: Boolean},
         screenName: {
             type: String, min: 2, max: 12
         },
@@ -62,7 +66,7 @@ export const validateProfile = (userId, profileObj) => {
     })
     .validate({
         address, admin, avatar,
-        emailVisible, offerNotify, requestNotify,
+        emailVisible, offerNotify, requestNotify, offerNotifySMS, requestNotifySMS,
         fullName, screenName, userId, phone});
     return true;
 }
@@ -75,6 +79,8 @@ export const createProfile = (userId, options) => {
     options.emailVisible = false;
     options.offerNotify = false;
     options.requestNotify = false;
+    options.offerNotifySMS = false;
+    options.requestNotifySMS = false;
     options.phone = '';
 
     validateProfile(userId, options);
@@ -87,7 +93,9 @@ export const createProfile = (userId, options) => {
         phone: options.phone,
         emailVisible: options.emailVisible,
         offerNotify: options.offerNotify,
-        requestNotify: options.requestNotify
+        requestNotify: options.requestNotify,
+        offerNotifySMS: options.offerNotifySMS,
+        requestNotifySMS: options.requestNotifySMS
     })
 }
 

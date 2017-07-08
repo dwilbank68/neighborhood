@@ -13,10 +13,18 @@ import {Needs} from '../../api/needs';
 export class NeedBox extends Component {
 
     componentDidMount() {
-        const requestRecipients = this.props.allUsers
+        const requestEmailRecipients = this.props.allUsers
             .filter(u => u.requestNotify === true)
             .map(u => u.email);
-        this.setState({ requestRecipients });
+
+        const requestSMSRecipients = this.props.allUsers
+            .filter(u => u.requestNotifySMS === true)
+            .map(u => u.phone);
+
+        this.setState({
+            requestEmailRecipients,
+            requestSMSRecipients
+        });
     }
 
 
@@ -25,7 +33,8 @@ export class NeedBox extends Component {
             this.state = {
                 input:'',
                 filterText: '',
-                requestRecipients: []
+                requestEmailRecipients: [],
+                requestESMSRecipients: []
             }
         this.handleChange = this.handleChange.bind(this)
         this.handleNeedSubmit = this.handleNeedSubmit.bind(this)
@@ -41,7 +50,8 @@ export class NeedBox extends Component {
         Meteor.call(
             'needCreate',
             need,
-            this.state.requestRecipients,
+            this.state.requestEmailRecipients,
+            this.state.requestSMSRecipients,
             (err, res) => {
                 if (res) {
                     console.log('------------------------------------------');

@@ -13,9 +13,10 @@ const CurrentUser = ({user, addressUsers}) => {
 
     if (user) {
         const {address, city, state, zipcode,
-            fullName, screenName, avatar,
-            emailVisible, email, offerNotify, requestNotify, phone} = user;
-
+            fullName, screenName, avatar, phone,
+            emailVisible, email, offerNotify, requestNotify,
+            offerNotifySMS, requestNotifySMS
+        } = user;
 
         return (
             <div className="user-display">
