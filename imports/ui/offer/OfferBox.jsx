@@ -45,17 +45,20 @@ export class OfferBox extends Component {
         })
     }
 
-    handleOfferSubmit(offer) {
+    handleOfferSubmit(offerObj) {
         Meteor.call(
             'offerCreate',
-            offer,
-            this.state.offerEmailRecipients,
-            this.state.offerSMSRecipients,
+            offerObj,
             (err, res) => {
                 if (res) {
-                    console.log('------------------------------------------');
-                    console.log('res ',res);
-                    console.log('------------------------------------------');
+                    let subject = `${offerObj.screenName} has posted an offer on traditions90250`;
+                    Meteor.call(
+                        'sendEmail',
+                        this.state.offerEmailRecipients, subject, offerObj,
+                        (err,res) => {
+                            if (err) {console.log('err in sending email', err);}
+                        }
+                    )
                 } else {
                     console.log('err', err);
                 }

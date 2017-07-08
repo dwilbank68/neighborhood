@@ -107,7 +107,8 @@ export class Dashboard extends Component {
                         { this.allUsersComponent(currentUser) }
 
                         <TabPanel>
-                            <OfferBox currentUser={currentUser}/>
+                            <OfferBox   currentUser={currentUser}
+                                        allUsers={allUsers}/>
                         </TabPanel>
                         <TabPanel>
                             <NeedBox    currentUser={currentUser}

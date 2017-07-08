@@ -43,6 +43,7 @@ class OfferInput extends Component {
                 <div className="chat-input-box">
                     <input      className="chat-input-input"
                                 onChange={this.handleInputChange}
+                                placeholder="Don't forget to include contact info"
                                 value={this.state.input}/>
                     <button   className="chat-input-button"
                             onClick={this.prepMessage}>
