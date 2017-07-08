@@ -14,6 +14,6 @@ import '../imports/startup/simpl-schema-configuration.js';
 
 Meteor.startup(() => {
     if (Meteor.settings.MAIL_URL) {
-        process.env.MAIL_URL = "smtp://postmaster%40mg.traditions90250.com:d5baecfc568c697fa8b7499f4ae48b35@smtp.mailgun.org:587";
+        process.env.MAIL_URL = Meteor.settings.MAIL_URL;
     }
 });
