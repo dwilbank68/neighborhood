@@ -104,11 +104,9 @@ class NeedInput extends Component {
 
                 <Modal  closeTimeoutMS={200}
                         isOpen={this.state.modalOpen}
-                        contentLabel="Post Your Request"
                         style={modalStyle}>
                     <div className="modal-content-wrapper">
                         <h2 className="modal-title">Post Your Request</h2>
-
                         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
                         <form onSubmit={this.onSubmit}>
@@ -116,6 +114,7 @@ class NeedInput extends Component {
                             <div className="row">
                                 <div>
                                     <textarea   onChange={this.handleInputChange}
+                                                placeholder="Don't forget to include contact information (email or phone number) in your request"
                                                 style={styles.textArea}
                                                 value={this.state.input} />
                                 </div>

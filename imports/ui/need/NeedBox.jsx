@@ -46,17 +46,19 @@ export class NeedBox extends Component {
         })
     }
 
-    handleNeedSubmit(need) {
+    handleNeedSubmit(needObj) {
         Meteor.call(
             'needCreate',
-            need,
-            this.state.requestEmailRecipients,
-            this.state.requestSMSRecipients,
+            needObj,
             (err, res) => {
                 if (res) {
-                    console.log('------------------------------------------');
-                    console.log('res ',res);
-                    console.log('------------------------------------------');
+                    Meteor.call(
+                        'sendEmail',
+                        this.state.requestEmailRecipients, `${needObj.screenName} has posted a request on traditions90250`, needObj,
+                        (err,res) => {
+                            if (err) {console.log('err in sending email', err);}
+                        }
+                    )
                 } else {
                     console.log('err', err);
                 }

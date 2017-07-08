@@ -51,33 +51,12 @@ if (Meteor.isServer) {
 // }
 
 Meteor.methods({
-    'needCreate'(msg, emailRecipients, smsRecipients){
-        console.log('------------------------------------------');
-        console.log('emailRecipients ',emailRecipients);
-        console.log('------------------------------------------');
+    'needCreate'(msg){
         // validateMessage(userId, updatesObj);
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
         const {address, avatar, body, email, needPicture, screenName, urgent, userId} = msg;
-        if (Meteor.isServer) {
-            console.log('------------------------------------------');
-            console.log('process.env.MAIL_URL ',process.env.MAIL_URL);
-            console.log('------------------------------------------');
-            Email.send({
-                subject: 'test for 2 emails',
-                text: body,
-                from: 'noreply@traditions90250.com',
-                to: emailRecipients
-            });
-        }
-
-        // mg.sendText('traditions90250@noreply.com', 'dwilbank@gmail.com', 'new request', body, (err) => {
-        //     console.log('------------------------------------------');
-        //     console.log('err ',err);
-        //     console.log('------------------------------------------');
-        // })
-
         return Needs.insert(
             {
                 address,
