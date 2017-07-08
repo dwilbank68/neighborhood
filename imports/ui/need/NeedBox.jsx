@@ -52,9 +52,11 @@ export class NeedBox extends Component {
             needObj,
             (err, res) => {
                 if (res) {
+                    const urgent = needObj.urgent ? 'an urgent' : 'a';
+                    let subject = `${needObj.screenName} has posted ${urgent} request on traditions90250`;
                     Meteor.call(
                         'sendEmail',
-                        this.state.requestEmailRecipients, `${needObj.screenName} has posted a request on traditions90250`, needObj,
+                        this.state.requestEmailRecipients, subject, needObj,
                         (err,res) => {
                             if (err) {console.log('err in sending email', err);}
                         }

@@ -12,13 +12,16 @@ Meteor.methods({
             throw new Meteor.Error('missing arguments for email');
         }
         if (Meteor.isServer) {
-            let {body, needPicture} = needObj;
-            if (needPicture.length > 0) body += ` [${needPicture}]`
+            let {body, email, address, needPicture} = needObj;
+            body = body +'\n\n'+ '----- Contact Information -----' +'\n\n'+ address +'\n'+ email;
+            if (needPicture.length > 0) {
+                body = body +'\n\n----- Picture Attached -----\n\n'+ needPicture
+            }
             Email.send({
                 subject,
                 text: body,
                 from: 'noreply@traditions90250.com',
-                to: emailRecipients
+                bcc: emailRecipients
             });
         }
 
