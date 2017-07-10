@@ -1046,7 +1046,7 @@ react-copy-to-clipboard@^5.0.0:
     copy-to-clipboard "^3"
     prop-types "^15.5.8"
 
-react-dom@^15.4.1:
+react-dom@^15.2.1, react-dom@^15.4.1:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
@@ -1145,6 +1145,14 @@ react-select@^1.0.0-rc.4:
     prop-types "^15.5.8"
     react-input-autosize "^1.1.3"
 
+react-skycons@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-skycons/-/react-skycons-0.3.0.tgz#f9256e7b3db3adc0cd2caa46d1f798e1d94289d8"
+  dependencies:
+    react "^15.2.1"
+    react-dom "^15.2.1"
+    skycons "^1.0.0"
+
 react-slick@^0.14.11:
   version "0.14.11"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.14.11.tgz#c2cbdbe3728c66a2ff4929be96d457e3ea0d80f3"
@@ -1176,7 +1184,7 @@ react-toggle@^3.0.1:
   dependencies:
     classnames "^2.2.5"
 
-react@^15.4.1:
+react@^15.2.1, react@^15.4.1:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
@@ -1241,6 +1249,10 @@ simpl-schema@^0.2.3:
     message-box "0.0.2"
     mongo-object "0.0.1"
     underscore "1.8.3"
+
+skycons@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/skycons/-/skycons-1.0.0.tgz#afb160c5901470aae84676fbc38bbd7dd5b69d8f"
 
 slick-carousel@^1.6.0:
   version "1.6.0"

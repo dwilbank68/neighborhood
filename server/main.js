@@ -11,10 +11,15 @@ import '../imports/api/offers';
 import '../imports/api/phone_numbers';
 import '../imports/api/services';
 import '../imports/api/users';
+import '../imports/api/weather';
 import '../imports/startup/simpl-schema-configuration.js';
 
 Meteor.startup(() => {
+
     if (Meteor.settings.MAIL_URL) {
         process.env.MAIL_URL = Meteor.settings.MAIL_URL;
+    }
+    if (Meteor.settings.DARKSKY_KEY) {
+        process.env.DARKSKY_KEY = Meteor.settings.DARKSKY_KEY;
     }
 });

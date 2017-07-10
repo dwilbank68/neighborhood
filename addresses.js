@@ -2,6 +2,7 @@ export const data = {
     "city": "Hawthorne",
     "state": "California",
     "zipcode": "90250",
+    "lat_long": '33.917021,-118.3175701',
     "addresses": [
         "2173 St Augusta Lane",
         "2165 St Augusta Lane",

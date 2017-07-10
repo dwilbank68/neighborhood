@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import {Accounts} from 'meteor/accounts-base';
 
 import EditProfile from './EditProfile';
+import Weather from './Weather.jsx';
 
 import CurrentUser from './CurrentUser';
 
@@ -36,14 +36,19 @@ class PrivateHeader extends Component {
         return (
             <div className="private-header header">
                 <div className="header__content">
-                    <img    className="logo-img"
-                            src="/images/traditions-logo.svg" alt=""/>
-                    <EditProfile    addressUsers={this.props.addressUsers}
-                                    currentUser={currentUser}/>
-                    <button onClick={() => Accounts.logout()}
-                            className="button button--link--header">
-                        Log Out
-                    </button>
+                    <div style={{display:'flex', justifyContent:'space-between'}}>
+                        <img    className="logo-img"
+                                src="/images/traditions-logo.svg" alt=""/>
+                        <Weather/>
+                    </div>
+                    <div style={{display:'flex', justifyContent:'space-between'}}>
+                        <EditProfile    addressUsers={this.props.addressUsers}
+                                        currentUser={currentUser}/>
+                        <button onClick={() => Accounts.logout()}
+                                className="button button--link--header">
+                            Log Out
+                        </button>
+                    </div>
                 </div>
 
             </div>

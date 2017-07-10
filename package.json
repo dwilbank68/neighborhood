@@ -28,6 +28,7 @@
     "react-router": "^3.0.0",
     "react-scrollbar": "^0.5.1",
     "react-select": "^1.0.0-rc.4",
+    "react-skycons": "^0.3.0",
     "react-slick": "^0.14.11",
     "react-svg": "^2.1.21",
     "react-tabs": "^1.0.0",
