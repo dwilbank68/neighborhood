@@ -9,7 +9,6 @@ Meteor.methods({
             .get(DARKSKY_URL)
             .then(
                 function(res){
-                    console.log('res.data ',res.data);
                     return res.data;
                 },
                 function(err){ console.log('err ',err); return err; }

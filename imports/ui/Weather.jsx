@@ -40,16 +40,26 @@ class Weather extends Component {
     render() {
         if (this.state.currently && this.state.daily) {
             const currentIcon = this.state.currently.icon.toUpperCase().replace(/-/g,'_');
+            const temp = this.state.currently.temperature;
             const msg = this.state.daily.summary;
+            const {temperatureMin, temperatureMax} = this.state.daily.data[0];
             return (
                 <div className='weather' style={s.weather}>
-                    <div>
+                    <div style={{display: 'flex'}}>
                         <div className="currently">
                             <Skycons    color="white"
                                         icon={currentIcon}/>
+                            <div className="nowTemp">
+                                <div className="currentTemp">
+                                    {Math.round(temp)}
+                                </div>
+                                <div className="minMaxTemp">
+                                    {Math.round(temperatureMin)}/{Math.round(temperatureMax)}
+                                </div>
+                            </div>
                         </div>
-                        <div className="forecast">
-
+                        <div className="forecast" style={{display:'flex'}}>
+                            {this.renderForecast()}
                         </div>
                     </div>
                     <div className="weather-msg">
@@ -60,8 +70,34 @@ class Weather extends Component {
         } else {
             return <span>Loading...</span>
         }
+    }
+
+    renderForecast(){
+        const forecastArr = [];
+        for(var i = 1; i < 4; i++){
+            forecastArr.push({
+                low: Math.round(this.state.daily.data[i].temperatureMin),
+                high: Math.round(this.state.daily.data[i].temperatureMax),
+                icon: this.state.daily.data[i].icon,
+                summary: this.state.daily.data[i].summary
+            });
+        };
+
+        return forecastArr.map((day, i) => {
+            const icon = day.icon.toUpperCase().replace(/-/g,'_');
+            return (
+                <div key={i}>
+                    <Skycons    color="white"
+                                icon={icon}/>
+                    <div className="weather-msg">
+                        {day.low} / {day.high}
+                    </div>
+                </div>
+            )
+        })
 
     }
+
 }
 
 // Weather.defaultProps = {};
