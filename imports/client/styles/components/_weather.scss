@@ -11,7 +11,6 @@
     .nowTemp {
         font-family: "Lato", sans-serif;
         font-weight: 400;
-        margin-left: -10px;
         .currentTemp {
             font-size: 2em;
             text-align: center;
@@ -27,15 +26,25 @@
 
 .forecast {
     canvas {
-        height: 30px !important;
-        width: 60px !important;
+        height: 20px !important;
+        width: 40px !important;
     }
 }
 
 .weather-msg {
     font-family: "Lato", sans-serif;
-    font-size: .75em;
+    font-size: .65em;
     font-weight: 400;
-    margin-top: 7px;
+    margin-top: 4px;
+    margin-bottom:2px;
 }
 
+.darksky-link-wrapper {
+    text-align: right;
+    margin-top: -7px;
+    a {
+        color: rgba(255, 255, 255, .3);
+        font-size: .5em;
+        text-decoration: none;
+    }
+}

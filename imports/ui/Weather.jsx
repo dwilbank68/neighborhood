@@ -4,7 +4,6 @@ import Skycons from 'react-skycons';
 
 const s = {
     weather: {
-        border: '1px solid green',
         height: '70px',
         marginLeft: '15px'
     }
@@ -45,7 +44,7 @@ class Weather extends Component {
             const {temperatureMin, temperatureMax} = this.state.daily.data[0];
             return (
                 <div className='weather' style={s.weather}>
-                    <div style={{display: 'flex'}}>
+                    <div style={{display: 'flex', justifyContent:'space-between'}}>
                         <div className="currently">
                             <Skycons    color="white"
                                         icon={currentIcon}/>
@@ -65,6 +64,12 @@ class Weather extends Component {
                     <div className="weather-msg">
                         {msg}
                     </div>
+                    <div  className="darksky-link-wrapper">
+                        <a href="https://darksky.net/poweredby/">
+                            Powered By Dark Sky
+                        </a>
+                    </div>
+
                 </div>
             );
         } else {
@@ -79,17 +84,23 @@ class Weather extends Component {
                 low: Math.round(this.state.daily.data[i].temperatureMin),
                 high: Math.round(this.state.daily.data[i].temperatureMax),
                 icon: this.state.daily.data[i].icon,
-                summary: this.state.daily.data[i].summary
+                summary: this.state.daily.data[i].summary,
+                time: this.state.daily.data[i].time
             });
         };
 
         return forecastArr.map((day, i) => {
             const icon = day.icon.toUpperCase().replace(/-/g,'_');
+            const dayIndex = new Date(day.time*1000).getDay();
+            const dayArray = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
             return (
-                <div key={i}>
+                <div key={i} style={{textAlign: 'center'}}>
+                    <div style={{fontSize:'.5em', marginTop:'12px', textAlign: 'center'}}>
+                        {dayArray[dayIndex]}
+                    </div>
                     <Skycons    color="white"
                                 icon={icon}/>
-                    <div className="weather-msg">
+                    <div style={{fontSize:'.5em', textAlign: 'center'}}>
                         {day.low} / {day.high}
                     </div>
                 </div>
