@@ -62,3 +62,15 @@
     }
 }
 
+
+.need-tab {
+    -webkit-animation: red-text 3s ease-in-out infinite alternate;
+    -moz-animation: red-text 3s ease-in-out infinite alternate;
+    animation: red-text 3s ease-in-out infinite alternate;
+}
+
+.offer-tab {
+    -webkit-animation: green-text 2s ease-in-out infinite alternate;
+    -moz-animation: green-text 2s ease-in-out infinite alternate;
+    animation: green-text 2s ease-in-out infinite alternate;
+}

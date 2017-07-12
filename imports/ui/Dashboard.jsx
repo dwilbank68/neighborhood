@@ -74,12 +74,18 @@ export class Dashboard extends Component {
                             <Tab>Users ({allUsers ? allUsers.length:0})</Tab>
                             <Tab>Chat</Tab>
                             <Tab>Services</Tab>
-                            <Tab>Rules</Tab>
                             { this.renderAnnouncementTab(currentUser) }
                             { this.allUsersTab(currentUser) }
-                            <Tab>Offers {this.props.offers ?
-                                <span>({this.props.offers.length})</span> : null}</Tab>
-                            <Tab>Requests ({this.props.needs ? this.props.needs.length : null})</Tab>
+                            <Tab>Offers {this.props.offers && this.props.offers.length > 0 ?
+                                <span className="offer-tab">
+                                    ({this.props.offers.length})
+                                </span> : null}
+                            </Tab>
+                            <Tab>Requests {this.props.needs && this.props.needs.length > 0 ?
+                                <span className="need-tab">
+                                    ({this.props.needs.length})
+                                </span> : null }
+                            </Tab>
                         </TabList>
 
                         <TabPanel>
@@ -100,11 +106,9 @@ export class Dashboard extends Component {
                             <ServiceBox currentUser={currentUser}/>
                         </TabPanel>
 
-                        <TabPanel></TabPanel>
-
                         { this.renderAnnouncementComponent(currentUser) }
 
-                        { this.allUsersComponent(currentUser) }
+                        { this.allUsersComponent(currentUser, allUsers) }
 
                         <TabPanel>
                             <OfferBox   currentUser={currentUser}

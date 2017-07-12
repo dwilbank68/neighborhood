@@ -52,6 +52,12 @@
   100% { background-color: #C00; box-shadow: 0 0 3px #C00; }
 }
 
+@keyframes red-text {
+  0% { color: #F99; text-shadow: 0 0 3px #C00; }
+  50% { color: #F00; text-shadow: 0 0 20px #F00; }
+  100% { color: #F99; text-shadow: 0 0 3px #C00; }
+}
+
 @keyframes redPulse {
   0% {
     -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0, 0.4);
@@ -75,6 +81,17 @@
   to {
     background-color: #8F8;
     box-shadow: 0 0 5px #bfb, 0 0 10px #9fb, 0 0 15px #7fb, 0 0 20px #4F4, 0 0 35px #3F3, 0 0 40px #2F2, 0 0 50px #1F1, 0 0 75px #0F0;
+  }
+}
+
+@keyframes green-text {
+  from {
+    color: #9F9;
+    text-shadow: 0 0 10px #bfb, 0 0 20px #9fb, 0 0 30px #7fb, 0 0 40px #4F4, 0 0 70px #3F3, 0 0 80px #2F2, 0 0 100px #1F1, 0 0 150px #0F0;
+  }
+  to {
+    color: #0F0;
+    text-shadow: 0 0 5px #bfb, 0 0 10px #9fb, 0 0 15px #7fb, 0 0 20px #4F4, 0 0 35px #3F3, 0 0 40px #2F2, 0 0 50px #1F1, 0 0 75px #0F0;
   }
 }
 

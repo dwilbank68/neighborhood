@@ -69,11 +69,11 @@ class AllUsersBox extends Component {
 
                     <ScrollArea className='phone-info-list'
                                 stopScrollPropagation={true}>
-                        {this.props.allUsers.map((user, i) => {
+                        {this.props.allUsers ? this.props.allUsers.map((user, i) => {
                             return (
                                 <AllUsersItem key={user.id} user={user}/>
                             )
-                        })}
+                        }) : null}
                     </ScrollArea>
 
                 </div>

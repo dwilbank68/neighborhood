@@ -5,7 +5,7 @@ import Skycons from 'react-skycons';
 const s = {
     weather: {
         height: '70px',
-        marginLeft: '15px'
+        marginLeft: '35px'
     }
 }
 
