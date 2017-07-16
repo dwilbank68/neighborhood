@@ -54,13 +54,24 @@ export class NeedBox extends Component {
                 if (res) {
                     const urgent = needObj.urgent ? 'an urgent' : 'a';
                     let subject = `${needObj.screenName} has posted ${urgent} request on traditions90250`;
-                    Meteor.call(
-                        'sendEmail',
-                        this.state.requestEmailRecipients, subject, needObj,
-                        (err,res) => {
-                            if (err) {console.log('err in sending email', err);}
-                        }
-                    )
+                    if (this.state.requestEmailRecipients.length > 0) {
+                        Meteor.call(
+                            'sendEmail',
+                            this.state.requestEmailRecipients, subject, needObj,
+                            (err,res) => {
+                                if (err) {console.log('err in sending email', err);}
+                            }
+                        )
+                    }
+                    if (this.state.requestSMSRecipients.length > 0) {
+                        Meteor.call(
+                            'sendSMS',
+                            this.state.requestEmailRecipients, subject, needObj,
+                            (err,res) => {
+                                if (err) {console.log('err in sending email', err);}
+                            }
+                        )
+                    }
                 } else {
                     console.log('err', err);
                 }

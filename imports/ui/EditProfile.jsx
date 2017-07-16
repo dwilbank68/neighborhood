@@ -212,14 +212,22 @@ export class EditProfile extends Component {
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
                                     <Toggle checked={this.state.offerNotifySMS}
+                                            disabled={!this.state.phone.length > 0}
                                             icons={false}
                                             onChange={() => this.setState({
                                                 offerNotifySMS: !this.state.offerNotifySMS
                                             })}/>
-                                    <div style={styles.toggleLabel}>
-                                        {this.state.offerNotifySMS ?    'Text (SMS) notifications for each new offer - on' :
-                                                                        'Text (SMS) notifications for each new offer - off'}
-                                    </div>
+                                    {
+                                        this.state.phone.length > 0 ?
+                                            <div style={styles.toggleLabel}>
+                                                {this.state.offerNotifySMS ?    'Text (SMS) notifications for each new offer - on' :
+                                                    'Text (SMS) notifications for each new offer - off'}
+                                            </div> :
+                                            <div style={styles.toggleLabel}>
+                                                To receive text messages, you must have a phone number
+                                            </div>
+                                    }
+
                                 </label>
                             </div>
 
@@ -242,14 +250,22 @@ export class EditProfile extends Component {
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
                                     <Toggle checked={this.state.requestNotifySMS}
+                                            disabled={!this.state.phone.length > 0}
                                             icons={false}
                                             onChange={() => this.setState({
                                                 requestNotifySMS: !this.state.requestNotifySMS
                                             })}/>
-                                    <div style={styles.toggleLabel}>
-                                        {this.state.requestNotifySMS ?  'Text (SMS) notifications for each new request - on' :
-                                                                        'Text (SMS) notifications for each new request - off'}
-                                    </div>
+                                    {
+                                        this.state.phone.length > 0 ?
+                                            <div style={styles.toggleLabel}>
+                                                {this.state.requestNotifySMS ?  'Text (SMS) notifications for each new request - on' :
+                                                    'Text (SMS) notifications for each new request - off'}
+                                            </div> :
+                                            <div style={styles.toggleLabel}>
+                                                To receive text messages, you must have a phone number
+                                            </div>
+                                    }
+
                                 </label>
                             </div>
 

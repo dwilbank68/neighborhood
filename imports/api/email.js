@@ -8,10 +8,11 @@ Meteor.methods({
         if (!emailRecipients || !subject || !postObj) {
             throw new Meteor.Error('missing arguments for email');
         }
-        if (emailRecipients.length === 0) {console.log('no email recipients');return;}
         if (Meteor.isServer) {
             let {body, email, address, needPicture=''} = postObj;
+            // append contact info to the email body
             body = body +'\n\n'+ '----- Contact Information -----' +'\n\n'+ address +'\n'+ email;
+            // if there is a picture url, append it to email body too
             if (needPicture.length > 0) {
                 body = body +'\n\n----- Picture Attached -----\n\n'+ needPicture
             }

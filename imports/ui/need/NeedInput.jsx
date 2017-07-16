@@ -59,7 +59,8 @@ class NeedInput extends Component {
 
     handleOpenModal(){
         this.setState({
-            modalOpen: true
+            modalOpen: true,
+            needPicture: ''
         });
     }
 
@@ -103,6 +104,7 @@ class NeedInput extends Component {
                 </div>
 
                 <Modal  closeTimeoutMS={200}
+                        contentLabel="Post Your Request"
                         isOpen={this.state.modalOpen}
                         style={modalStyle}>
                     <div className="modal-content-wrapper">
