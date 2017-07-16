@@ -66,9 +66,9 @@ export class NeedBox extends Component {
                     if (this.state.requestSMSRecipients.length > 0) {
                         Meteor.call(
                             'sendSMS',
-                            this.state.requestEmailRecipients, subject, needObj,
+                            this.state.requestSMSRecipients, subject, needObj,
                             (err,res) => {
-                                if (err) {console.log('err in sending email', err);}
+                                if (err) {console.log('err in sending SMS', err);}
                             }
                         )
                     }

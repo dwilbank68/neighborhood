@@ -165,7 +165,7 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   dependencies:
     inherits "^2.0.1"
 
-classnames@^2.2.0, classnames@^2.2.4, classnames@^2.2.5:
+classnames@^2.1.5, classnames@^2.2.0, classnames@^2.2.4, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -1114,6 +1114,12 @@ react-motion@^0.4.3:
     performance-now "^0.2.0"
     prop-types "^15.5.8"
     raf "^3.1.0"
+
+react-phone-input@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-phone-input/-/react-phone-input-1.2.1.tgz#252ffdb0c6c3b3c9baf3f7fefa00c8a78a897428"
+  dependencies:
+    classnames "^2.1.5"
 
 react-router@^3.0.0:
   version "3.0.5"

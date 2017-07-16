@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import Toggle from 'react-toggle'
+import ReactPhoneInput from 'react-phone-input';
 
 import {Meteor} from 'meteor/meteor';
-// import {createContainer} from 'meteor/react-meteor-data';
-
-import Toggle from 'react-toggle'
 
 import _ from 'lodash';
 
@@ -110,15 +109,14 @@ export class EditProfile extends Component {
         } = this.props.currentUser;
         this.setState({
             address, avatar, city, email, emailVisible,
-            fullName, offerNotify, offerNotifySMS ,phone,
+            fullName, offerNotify, offerNotifySMS, phone,
             requestNotify, requestNotifySMS, screenName, state, zipcode,
             modalOpen: true
         });
     }
 
     handlePhoneChange(e){
-        const phone = e.target.value;
-        this.setState({phone});
+        this.setState({phone: e});
     }
 
     handleScreenNameChange(e){
@@ -175,11 +173,18 @@ export class EditProfile extends Component {
                                         value={this.state.fullName}/>
                             </div>
                             <div className="row">
-                                <input  type="text" ref="phone" name="phone"
-                                        onChange={this.handlePhoneChange}
-                                        placeholder="Phone (Optional)"
-                                        value={this.state.phone}/>
+                                <ReactPhoneInput    ref="phone" name="phone"
+                                                    defaultCountry={'us'}
+                                                    onChange={this.handlePhoneChange}
+                                                    onlyCountries={['us']}
+                                                    placeholder="Phone (Optional)"
+                                                    value={this.state.phone}/>
+                                {/*<input  type="text" ref="phone" name="phone"*/}
+                                        {/*onChange={this.handlePhoneChange}*/}
+                                        {/*placeholder="Phone (Optional)"*/}
+                                        {/*value={this.state.phone}/>*/}
                             </div>
+                            <br/>
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
                                     <Toggle checked={this.state.emailVisible}
@@ -212,13 +217,13 @@ export class EditProfile extends Component {
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
                                     <Toggle checked={this.state.offerNotifySMS}
-                                            disabled={!this.state.phone.length > 0}
+                                            disabled={this.state.phone.length < 17}
                                             icons={false}
                                             onChange={() => this.setState({
                                                 offerNotifySMS: !this.state.offerNotifySMS
                                             })}/>
                                     {
-                                        this.state.phone.length > 0 ?
+                                        this.state.phone.length > 16 ?
                                             <div style={styles.toggleLabel}>
                                                 {this.state.offerNotifySMS ?    'Text (SMS) notifications for each new offer - on' :
                                                     'Text (SMS) notifications for each new offer - off'}
@@ -250,13 +255,13 @@ export class EditProfile extends Component {
                             <div className="row">
                                 <label style={styles.toggleWrapper}>
                                     <Toggle checked={this.state.requestNotifySMS}
-                                            disabled={!this.state.phone.length > 0}
+                                            disabled={this.state.phone.length < 17}
                                             icons={false}
                                             onChange={() => this.setState({
                                                 requestNotifySMS: !this.state.requestNotifySMS
                                             })}/>
                                     {
-                                        this.state.phone.length > 0 ?
+                                        this.state.phone.length > 16 ?
                                             <div style={styles.toggleLabel}>
                                                 {this.state.requestNotifySMS ?  'Text (SMS) notifications for each new request - on' :
                                                     'Text (SMS) notifications for each new request - off'}
